@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: consumer
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+server:
+  port: 8000
+dubbo:
+  application:
+    name: consumer
+  consumer:
+    check: false
+    timeout: 20000
+  registry:
+    protocol: zookeeper
+    address: localhost:2181
+    client: curator
+# 单元测试
+test:
+  # 当前用户
+  user-name: admin

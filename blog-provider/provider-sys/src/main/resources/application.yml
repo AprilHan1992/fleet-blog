@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: provider-sys
+  profiles:
+    active: dev
+server:
+  port: 9082
+dubbo:
+  application:
+    name: provider-sys
+  scan:
+    base-packages:
+      - com.fleet.provider.sys.service.impl
+  registry:
+    protocol: zookeeper
+    address: localhost:2181
+    client: curator
+  protocol:
+    name: dubbo
+    port: 20880
+  provider:
+    filter: -exception
