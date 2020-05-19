@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fleet.provider.sys.dao.LogDao">
+    <resultMap id="BaseResultMap" type="com.fleet.common.entity.log.Log">
+        <id column="log_id" property="logId"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="type" property="type"/>
+        <result column="log" property="log"/>
+        <result column="url" property="url"/>
+        <result column="http_method" property="httpMethod"/>
+        <result column="method" property="method"/>
+        <result column="params" property="params"/>
+        <result column="ip" property="ip"/>
+        <result column="agent" property="agent"/>
+        <result column="os" property="os"/>
+        <result column="browser" property="browser"/>
+        <result column="state" property="state"/>
+        <result column="error" property="error"/>
+        <result column="millis" property="millis"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		`log_id`, `user_id`, `type`, `log`, `url`, `http_method`, `method`, `params`, `ip`, `agent`, os, browser, state, error, `millis`, `create_time`
+	</sql>
+
+    <insert id="insert" parameterType="com.fleet.common.entity.log.Log" useGeneratedKeys="true" keyProperty="logId">
+        insert into `log` (
+        <trim suffixOverrides=",">
+            <if test="userId != null">`user_id`,</if>
+            <if test="userName != null">`user_name`,</if>
+            <if test="type != null">`type`,</if>
+            <if test="log != null">`log`,</if>
+            <if test="url != null">`url`,</if>
+            <if test="httpMethod != null">`http_method`,</if>
+            <if test="method != null">`method`,</if>
+            <if test="params != null">`params`,</if>
+            <if test="ip != null">`ip`,</if>
+            <if test="agent != null">`agent`,</if>
+            <if test="os != null">`os`,</if>
+            <if test="browser != null">`browser`,</if>
+            <if test="state != null">`state`,</if>
+            <if test="error != null">`error`,</if>
+            <if test="millis != null">`millis`,</if>
+            <if test="createTime != null">`create_time`,</if>
+        </trim>
+        ) values (
+        <trim suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="type != null">#{type},</if>
+            <if test="log != null">#{log},</if>
+            <if test="url != null">#{url},</if>
+            <if test="httpMethod != null">#{httpMethod},</if>
+            <if test="method != null">#{method},</if>
+            <if test="params != null">#{params},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="agent != null">#{agent},</if>
+            <if test="os != null">#{os},</if>
+            <if test="browser != null">#{browser},</if>
+            <if test="state != null">#{state},</if>
+            <if test="error != null">#{error},</if>
+            <if test="millis != null">#{millis},</if>
+            <if test="createTime != null">#{createTime},</if>
+        </trim>
+        )
+    </insert>
+
+    <update id="delete" parameterType="com.fleet.common.entity.log.Log">
+        update `log` set `millis` = 1
+        <where>
+            <if test="logId != null">and `log_id` = #{logId}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
+            <if test="userName != null">and `user_name` = #{userName}</if>
+            <if test="type != null">and `type` = #{type}</if>
+            <if test="log != null">and `log` = #{log}</if>
+            <if test="url != null">and `url` = #{url}</if>
+            <if test="httpMethod != null">and `http_method` = #{httpMethod}</if>
+            <if test="method != null">and `method` = #{method}</if>
+            <if test="params != null">and `params` = #{params}</if>
+            <if test="ip != null">and `ip` = #{ip}</if>
+            <if test="agent != null">and `agent` = #{agent}</if>
+            <if test="os != null">and `os` = #{os}</if>
+            <if test="browser != null">and `browser` = #{browser}</if>
+            <if test="state != null">and `state` = #{state}</if>
+            <if test="error != null">and `error` = #{error}</if>
+            <if test="createTime != null">and `create_time` = #{createTime}</if>
+        </where>
+    </update>
+
+    <update id="update" parameterType="com.fleet.common.entity.log.Log">
+        update `log`
+        <set>
+            <if test="userId != null">`user_id` = #{userId},</if>
+            <if test="userName != null">`user_name` = #{userName},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="log != null">`log` = #{log},</if>
+            <if test="url != null">`url` = #{url},</if>
+            <if test="httpMethod != null">`http_method` = #{httpMethod},</if>
+            <if test="method != null">`method` = #{method},</if>
+            <if test="params != null">`params` = #{params},</if>
+            <if test="ip != null">`ip` = #{ip},</if>
+            <if test="os != null">`os` = #{os},</if>
+            <if test="browser != null">`browser` = #{browser},</if>
+            <if test="state != null">`state` = #{state},</if>
+            <if test="error != null">`error` = #{error},</if>
+            <if test="millis != null">`millis` = #{millis},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+        </set>
+        where log_id = #{logId}
+    </update>
+
+    <select id="get" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `log`
+        <where>
+            <if test="logId != null">and `log_id` = #{logId}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
+            <if test="userName != null">and `user_name` = #{userName}</if>
+            <if test="type != null">and `type` = #{type}</if>
+            <if test="log != null">and `log` = #{log}</if>
+            <if test="url != null">and `url` = #{url}</if>
+            <if test="httpMethod != null">and `http_method` = #{httpMethod}</if>
+            <if test="method != null">and `method` = #{method}</if>
+            <if test="params != null">and `params` = #{params}</if>
+            <if test="ip != null">and `ip` = #{ip}</if>
+            <if test="agent != null">and `agent` = #{agent}</if>
+            <if test="os != null">and `os` = #{os}</if>
+            <if test="browser != null">and `browser` = #{browser}</if>
+            <if test="state != null">and `state` = #{state}</if>
+            <if test="error != null">and `error` = #{error}</if>
+            <if test="millis != null">and `millis` = #{millis}</if>
+            <if test="createTime != null">and `create_time` = #{createTime}</if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `log`
+        <where>
+            <if test="logId != null">and `log_id` = #{logId}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
+            <if test="userName != null">and `user_name` = #{userName}</if>
+            <if test="type != null">and `type` = #{type}</if>
+            <if test="log != null">and `log` = #{log}</if>
+            <if test="url != null">and `url` = #{url}</if>
+            <if test="httpMethod != null">and `http_method` = #{httpMethod}</if>
+            <if test="method != null">and `method` = #{method}</if>
+            <if test="params != null">and `params` = #{params}</if>
+            <if test="ip != null">and `ip` = #{ip}</if>
+            <if test="agent != null">and `agent` = #{agent}</if>
+            <if test="os != null">and `os` = #{os}</if>
+            <if test="browser != null">and `browser` = #{browser}</if>
+            <if test="state != null">and `state` = #{state}</if>
+            <if test="error != null">and `error` = #{error}</if>
+            <if test="millis != null">and `millis` = #{millis}</if>
+            <if test="createTime != null">and `create_time` = #{createTime}</if>
+        </where>
+    </select>
+
+    <select id="logIdList" resultType="java.lang.Integer">
+        select `log_id` from `log`
+        <where>
+            <if test="logId != null">and `log_id` = #{logId}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
+            <if test="userName != null">and `user_name` = #{userName}</if>
+            <if test="type != null">and `type` = #{type}</if>
+            <if test="log != null">and `log` = #{log}</if>
+            <if test="url != null">and `url` = #{url}</if>
+            <if test="httpMethod != null">and `http_method` = #{httpMethod}</if>
+            <if test="method != null">and `method` = #{method}</if>
+            <if test="params != null">and `params` = #{params}</if>
+            <if test="ip != null">and `ip` = #{ip}</if>
+            <if test="agent != null">and `agent` = #{agent}</if>
+            <if test="os != null">and `os` = #{os}</if>
+            <if test="browser != null">and `browser` = #{browser}</if>
+            <if test="state != null">and `state` = #{state}</if>
+            <if test="error != null">and `error` = #{error}</if>
+            <if test="millis != null">and `millis` = #{millis}</if>
+            <if test="createTime != null">and `create_time` = #{createTime}</if>
+        </where>
+    </select>
+</mapper>
+

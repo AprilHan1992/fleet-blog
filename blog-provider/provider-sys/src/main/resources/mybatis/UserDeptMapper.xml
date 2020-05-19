@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fleet.provider.sys.dao.UserDeptDao">
+    <resultMap id="BaseResultMap" type="com.fleet.common.entity.user.UserDept">
+        <result column="user_id" property="userId"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <resultMap id="DeptResultMap" type="com.fleet.common.entity.dept.Dept">
+        <id column="dept_id" property="deptId"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="dept_state" property="deptState"/>
+        <result column="sort_value" property="sortValue"/>
+        <result column="create_time" property="createTime"/>
+        <result column="edit_time" property="editTime"/>
+        <result column="upper_id" property="upperId"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		`user_id`, `dept_id`, `deleted`
+	</sql>
+
+    <insert id="insert" parameterType="com.fleet.common.entity.user.UserDept">
+		insert into `user_dept`(`user_id`, `dept_id`, `deleted`) values (#{userId}, #{deptId}, #{deleted})
+		ON DUPLICATE KEY UPDATE user_id = #{userId}, dept_id = #{deptId}, deleted = #{deleted}
+	</insert>
+
+    <delete id="delete" parameterType="com.fleet.common.entity.user.UserDept">
+        update `user_dept` set `deleted` = 1
+        <where>
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="deptId != null">and `dept_id` = #{deptId}</if>
+        </where>
+    </delete>
+
+    <update id="update" parameterType="com.fleet.common.entity.user.UserDept">
+		insert into `user_dept`(`user_id`, `dept_id`, `deleted`) values (#{userId}, #{deptId}, #{deleted})
+		ON DUPLICATE KEY UPDATE user_id = #{userId}, dept_id = #{deptId}, deleted = #{deleted}
+	</update>
+
+    <select id="get" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `user_dept`
+        <where>
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="deptId != null">and `dept_id` = #{deptId}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `user_dept`
+        <where>
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="deptId != null">and `dept_id` = #{deptId}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+    </select>
+
+    <select id="deptIdList" resultType="java.lang.Integer">
+        select dept_id from `user_dept`
+        <where>
+            <if test="userId != null">and user_id = #{userId}</if>
+            <if test="deptId != null">and `dept_id` = #{deptId}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+    </select>
+
+    <select id="userDept" parameterType="java.lang.Integer" resultMap="DeptResultMap">
+		select d.`dept_id`, d.`dept_name`, d.`dept_state`, d.`sort_value`, d.`create_time`, d.`edit_time`, d.`upper_id`, d.`deleted`
+		from `user_dept` as ud
+		left join `dept` as d on ud.dept_id = d.dept_id
+		where ud.user_id = #{userId} and ud.deleted = 0 and d.deleted = 0
+		limit 1
+	</select>
+</mapper>
+

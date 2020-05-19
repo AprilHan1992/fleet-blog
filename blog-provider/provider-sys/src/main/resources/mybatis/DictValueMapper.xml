@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fleet.provider.sys.dao.DictValueDao">
+    <resultMap id="BaseResultMap" type="com.fleet.common.entity.dict.DictValue">
+        <id column="dict_value_id" property="dictValueId"/>
+        <result column="dict_id" property="dictId"/>
+        <result column="dict_value_code" property="dictValueCode"/>
+        <result column="dict_value" property="dictValue"/>
+        <result column="dict_value_remark" property="dictValueRemark"/>
+        <result column="sort_value" property="sortValue"/>
+        <result column="is_default" property="isDefault"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		`dict_value_id`, `dict_id`, `dict_value_code`, `dict_value`, `dict_value_remark`, `sort_value`, `is_default`, `deleted`
+	</sql>
+
+    <insert id="insert" parameterType="com.fleet.common.entity.dict.DictValue" useGeneratedKeys="true"
+            keyProperty="dictValueId">
+        insert into `dict_value` (
+        <trim suffixOverrides=",">
+            <if test="dictId != null">`dict_id`,</if>
+            <if test="dictValueCode != null">`dict_value_code`,</if>
+            <if test="dictValue != null">`dict_value`,</if>
+            <if test="dictValueRemark != null">`dict_value_remark`,</if>
+            <if test="sortValue != null">`sort_value`,</if>
+            <if test="isDefault != null">`is_default`,</if>
+            <if test="deleted != null">`deleted`,</if>
+        </trim>
+        ) values (
+        <trim suffixOverrides=",">
+            <if test="dictId != null">#{dictId},</if>
+            <if test="dictValueCode != null">#{dictValueCode},</if>
+            <if test="dictValue != null">#{dictValue},</if>
+            <if test="dictValueRemark != null">#{dictValueRemark},</if>
+            <if test="sortValue != null">#{sortValue},</if>
+            <if test="isDefault != null">#{isDefault},</if>
+            <if test="deleted != null">#{deleted},</if>
+        </trim>
+        )
+    </insert>
+
+    <update id="delete" parameterType="com.fleet.common.entity.dict.DictValue">
+        update `dict_value` set `deleted` = 1
+        <where>
+            <if test="dictValueId != null">and `dict_value_id` = #{dictValueId}</if>
+            <if test="dictId != null">and `dict_id` = #{dictId}</if>
+            <if test="dictValueCode != null">and `dict_value_code` = #{dictValueCode}</if>
+            <if test="dictValue != null">and `dict_value` = #{dictValue}</if>
+            <if test="dictValueRemark != null">and `dict_value_remark` = #{dictValueRemark}</if>
+            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="remark != null">and `remark` = #{remark}</if>
+            <if test="isDefault != null">and `is_default` = #{isDefault}</if>
+        </where>
+    </update>
+
+    <update id="update" parameterType="com.fleet.common.entity.dict.DictValue">
+        update `dict_value`
+        <set>
+            <if test="dictId != null">`dict_id` = #{dictId},</if>
+            <if test="dictValueCode != null">`dict_value_code` = #{dictValueCode},</if>
+            <if test="dictValue != null">`dict_value` = #{dictValue},</if>
+            <if test="dictValueRemark != null">`dict_value_remark` = #{dictValueRemark},</if>
+            <if test="sortValue != null">`sort_value` = #{sortValue},</if>
+            <if test="isDefault != null">`is_default` = #{isDefault},</if>
+            <if test="deleted != null">`deleted` = #{deleted},</if>
+        </set>
+        where dict_value_id = #{dictValueId}
+    </update>
+
+    <select id="get" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `dict_value`
+        <where>
+            <if test="dictValueId != null">and `dict_value_id` = #{dictValueId}</if>
+            <if test="dictId != null">and `dict_id` = #{dictId}</if>
+            <if test="dictValueCode != null">and `dict_value_code` = #{dictValueCode}</if>
+            <if test="dictValue != null">and `dict_value` = #{dictValue}</if>
+            <if test="dictValueRemark != null">and `dict_value_remark` = #{dictValueRemark}</if>
+            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="isDefault != null">and `is_default` = #{isDefault}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `dict_value`
+        <where>
+            <if test="dictValueId != null">and `dict_value_id` = #{dictValueId}</if>
+            <if test="dictId != null">and `dict_id` = #{dictId}</if>
+            <if test="dictValueCode != null">and `dict_value_code` = #{dictValueCode}</if>
+            <if test="dictValue != null">and `dict_value` = #{dictValue}</if>
+            <if test="dictValueRemark != null">and `dict_value_remark` = #{dictValueRemark}</if>
+            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="isDefault != null">and `is_default` = #{isDefault}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+    </select>
+
+    <select id="getDefaultValue" parameterType="java.lang.String" resultType="java.lang.String">
+		select v.dict_value
+		from `dict` as d
+		left join `dict_value` as v on d.dict_id = v.dict_id
+		where d.`dict_group` = #{dictGroup} and d.`deleted` = 0 and v.`is_default` = 1 and v.`deleted` = 0
+	</select>
+
+    <select id="getValue" parameterType="java.lang.String" resultType="java.lang.String">
+		select v.dict_value
+		from `dict` as d
+		left join `dict_value` as v on d.dict_id = v.dict_id
+		where d.`dict_group` = #{dictGroup} and d.`deleted` = 0 and v.`dict_value_code` = #{dictValueCode} and v.`deleted` = 0
+	</select>
+</mapper>
