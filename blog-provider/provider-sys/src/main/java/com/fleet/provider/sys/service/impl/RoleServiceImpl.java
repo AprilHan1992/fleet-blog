@@ -6,8 +6,8 @@ import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.service.role.RoleService;
 import com.fleet.provider.sys.dao.RoleDao;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Map;
 @Service
 public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleService {
 
-    @Autowired
+    @Resource
     private RoleDao roleDao;
 
     @Override

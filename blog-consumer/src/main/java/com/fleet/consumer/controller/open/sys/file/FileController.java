@@ -3,10 +3,10 @@ package com.fleet.consumer.controller.open.sys.file;
 import com.fleet.common.json.R;
 import com.fleet.common.util.file.FileUtil;
 import com.fleet.consumer.config.FileConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 
@@ -14,7 +14,7 @@ import java.io.File;
 @RequestMapping("/open/file")
 public class FileController {
 
-    @Autowired
+    @Resource
     FileConfig fileConfig;
 
     /**

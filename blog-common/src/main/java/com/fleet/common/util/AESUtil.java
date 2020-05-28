@@ -72,5 +72,4 @@ public class AESUtil {
         byte[] bytes = Hex.decodeHex(content);
         return new String(cipher.doFinal(bytes));
     }
-
 }

@@ -18,5 +18,4 @@ public class CurUser {
 	public static User getUser() {
 		return context.get();
 	}
-
 }

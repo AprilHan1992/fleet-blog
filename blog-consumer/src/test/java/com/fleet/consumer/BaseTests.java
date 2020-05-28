@@ -14,7 +14,6 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -42,13 +41,13 @@ public class BaseTests {
 
     private MockHttpServletRequestBuilder builder;
 
-    @Autowired
+    @Resource
     private TestConfig testConfig;
 
     @Reference
     private UserService userService;
 
-    @Autowired
+    @Resource
     private RedisUtil redisUtil;
 
     private Integer userId;

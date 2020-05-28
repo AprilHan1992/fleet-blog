@@ -9,11 +9,11 @@ import com.fleet.common.util.token.entity.Token;
 import com.fleet.common.util.token.entity.UserToken;
 import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
 
@@ -22,7 +22,7 @@ import java.util.Set;
 @RequestMapping
 public class LogoutController {
 
-    @Autowired
+    @Resource
     RedisUtil redisUtil;
 
     @Log(value = "登出", type = 3)

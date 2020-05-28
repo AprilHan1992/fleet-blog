@@ -6,16 +6,16 @@ import com.fleet.common.service.quartz.QuartzJobLogService;
 import com.fleet.common.util.SpringContextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.JobExecutionContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.Date;
 
 public class ExecutionJob extends QuartzJobBean {
 
-    @Autowired
+    @Resource
     private QuartzJobLogService quartzJobLogService;
 
     @Override
@@ -58,5 +58,4 @@ public class ExecutionJob extends QuartzJobBean {
         quartzJobLog.setCreateTime(new Date());
         quartzJobLogService.insert(quartzJobLog);
     }
-
 }

@@ -18,12 +18,12 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Set;
 
 @Api(tags = "用户登录api")
@@ -34,7 +34,7 @@ public class LoginController {
     @Reference
     UserService userService;
 
-    @Autowired
+    @Resource
     RedisUtil redisUtil;
 
     /**

@@ -9,9 +9,9 @@ import com.fleet.common.util.quartz.QuartzUtil;
 import org.apache.dubbo.config.annotation.Reference;
 import org.quartz.CronExpression;
 import org.quartz.Scheduler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +19,7 @@ import java.util.Map;
 @RequestMapping("/quartz/job")
 public class QuartzJobController {
 
-    @Autowired
+    @Resource
     private Scheduler scheduler;
 
     @Reference

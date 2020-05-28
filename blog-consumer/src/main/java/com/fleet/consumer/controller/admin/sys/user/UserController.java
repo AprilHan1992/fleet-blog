@@ -18,9 +18,9 @@ import com.fleet.common.util.cache.RedisUtil;
 import com.fleet.common.util.jdbc.PageUtil;
 import com.fleet.common.util.jdbc.entity.Page;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +44,7 @@ public class UserController extends BaseController<User> {
     @Reference
     private DeptService deptService;
 
-    @Autowired
+    @Resource
     RedisUtil redisUtil;
 
     @Override

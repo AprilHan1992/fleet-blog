@@ -6,12 +6,13 @@ import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.service.msg.MsgToService;
 import com.fleet.provider.sys.dao.MsgToDao;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 @Service
 public class MsgToServiceImpl extends BaseServiceImpl<MsgTo> implements MsgToService {
 
-    @Autowired
+    @Resource
     private MsgToDao msgToDao;
 
     @Override

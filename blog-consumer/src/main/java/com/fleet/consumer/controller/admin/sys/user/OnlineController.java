@@ -11,9 +11,9 @@ import com.fleet.common.util.token.TokenUtil;
 import com.fleet.common.util.token.entity.Token;
 import com.fleet.common.util.token.entity.UserToken;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -26,7 +26,7 @@ public class OnlineController {
     @Reference
     private UserService userService;
 
-    @Autowired
+    @Resource
     RedisUtil redisUtil;
 
     @RequestMapping(value = "/listPage", method = RequestMethod.POST)

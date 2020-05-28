@@ -6,15 +6,15 @@ import com.fleet.common.service.article.TagService;
 import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.provider.article.dao.TagDao;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
 
-    @Autowired
+    @Resource
     private TagDao tagDao;
 
     @Override

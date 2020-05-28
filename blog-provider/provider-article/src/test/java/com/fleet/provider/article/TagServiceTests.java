@@ -4,16 +4,17 @@ import com.fleet.common.entity.article.Tag;
 import com.fleet.common.service.article.TagService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.annotation.Resource;
 
 //@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TagServiceTests {
 
-    @Autowired
+    @Resource
     private TagService tagService;
 
     @Test

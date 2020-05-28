@@ -8,15 +8,15 @@ import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.service.user.UserRoleService;
 import com.fleet.provider.sys.dao.UserRoleDao;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class UserRoleServiceImpl extends BaseServiceImpl<UserRole> implements UserRoleService {
 
-    @Autowired
+    @Resource
     private UserRoleDao userRoleDao;
 
     @Override

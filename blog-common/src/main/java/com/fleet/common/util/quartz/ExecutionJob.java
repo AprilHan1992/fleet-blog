@@ -59,5 +59,4 @@ public class ExecutionJob extends QuartzJobBean {
         quartzJobLog.setCreateTime(new Date());
         quartzJobLogService.insert(quartzJobLog);
     }
-
 }

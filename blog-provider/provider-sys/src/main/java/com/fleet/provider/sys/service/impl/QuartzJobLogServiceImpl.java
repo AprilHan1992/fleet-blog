@@ -6,12 +6,13 @@ import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.service.quartz.QuartzJobLogService;
 import com.fleet.provider.sys.dao.QuartzJobLogDao;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 @Service
 public class QuartzJobLogServiceImpl extends BaseServiceImpl<QuartzJobLog> implements QuartzJobLogService {
 
-    @Autowired
+    @Resource
     private QuartzJobLogDao quartzJobLogDao;
 
     @Override

@@ -6,12 +6,13 @@ import com.fleet.common.service.article.ArticleService;
 import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.provider.article.dao.ArticleDao;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 @Service
 public class ArticleServiceImpl extends BaseServiceImpl<Article> implements ArticleService {
 
-    @Autowired
+    @Resource
     private ArticleDao articleDao;
 
     @Override

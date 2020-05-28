@@ -5,11 +5,11 @@ import com.fleet.common.service.dept.DeptService;
 import com.fleet.common.service.dict.DictService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Transactional
@@ -17,10 +17,10 @@ import java.util.List;
 @SpringBootTest
 public class SysApplicationTests {
 
-    @Autowired
+    @Resource
     private DeptService deptService;
 
-    @Autowired
+    @Resource
     private DictService dictService;
 
     @Test

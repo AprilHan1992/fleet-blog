@@ -7,14 +7,14 @@ import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.service.role.RoleMenuService;
 import com.fleet.provider.sys.dao.RoleMenuDao;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements RoleMenuService {
 
-    @Autowired
+    @Resource
     private RoleMenuDao roleMenuDao;
 
     @Override

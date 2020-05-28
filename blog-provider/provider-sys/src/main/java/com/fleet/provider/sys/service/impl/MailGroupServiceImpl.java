@@ -6,12 +6,13 @@ import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.service.mail.MailGroupService;
 import com.fleet.provider.sys.dao.MailGroupDao;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 @Service
 public class MailGroupServiceImpl extends BaseServiceImpl<MailGroup> implements MailGroupService {
 
-    @Autowired
+    @Resource
     private MailGroupDao mailGroupDao;
 
     @Override

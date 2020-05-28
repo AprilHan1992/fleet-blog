@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.Around;
 /**
  * 自动分页AOP拦截器（service方法名要带后缀Page，参数中要带Page page，否则会按照正常处理）
  */
-public class PageAspect {
+public class BasePageAspect {
 
     @Around("execution(* com.fleet.common.service..*.*Page(..))")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {

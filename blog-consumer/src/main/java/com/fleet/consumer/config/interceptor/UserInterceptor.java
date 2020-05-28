@@ -7,15 +7,15 @@ import com.fleet.common.util.cache.RedisUtil;
 import com.fleet.common.util.token.entity.Token;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class UserInterceptor implements HandlerInterceptor {
 
-    @Autowired
+    @Resource
     RedisUtil redisUtil;
 
     @Reference

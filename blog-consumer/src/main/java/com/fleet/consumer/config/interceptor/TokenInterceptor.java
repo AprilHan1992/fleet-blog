@@ -11,9 +11,9 @@ import com.fleet.common.util.token.entity.Token;
 import com.fleet.common.util.token.entity.UserToken;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.Set;
 
 public class TokenInterceptor implements HandlerInterceptor {
 
-    @Autowired
+    @Resource
     private RedisUtil redisUtil;
 
     @Reference

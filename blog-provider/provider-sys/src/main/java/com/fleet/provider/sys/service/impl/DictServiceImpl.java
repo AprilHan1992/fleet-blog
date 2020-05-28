@@ -11,8 +11,8 @@ import com.fleet.common.util.jdbc.entity.Page;
 import com.fleet.provider.sys.dao.DictDao;
 import com.fleet.provider.sys.dao.DictValueDao;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +20,10 @@ import java.util.Map;
 @Service
 public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictService {
 
-    @Autowired
+    @Resource
     private DictDao dictDao;
 
-    @Autowired
+    @Resource
     private DictValueDao dictValueDao;
 
     @Override

@@ -10,9 +10,9 @@ import com.fleet.provider.sys.dao.QuartzJobDao;
 import org.apache.dubbo.config.annotation.Service;
 import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +20,10 @@ import java.util.Map;
 @Service
 public class QuartzJobServiceImpl extends BaseServiceImpl<QuartzJob> implements QuartzJobService {
 
-    @Autowired
+    @Resource
     private QuartzJobDao jobDao;
 
-    @Autowired
+    @Resource
     private Scheduler scheduler;
 
     @Override

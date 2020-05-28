@@ -6,15 +6,16 @@ import com.fleet.common.entity.user.UserDept;
 import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.service.user.UserDeptService;
 import com.fleet.provider.sys.dao.UserDeptDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 @Transactional
 @Service
 public class UserDeptServiceImpl extends BaseServiceImpl<UserDept> implements UserDeptService {
 
-    @Autowired
+    @Resource
     private UserDeptDao userDeptDao;
 
     @Override

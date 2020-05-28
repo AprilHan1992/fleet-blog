@@ -4,10 +4,10 @@ import com.fleet.common.entity.article.Article;
 import com.fleet.common.service.article.ArticleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 //@Transactional
@@ -15,7 +15,7 @@ import java.util.Date;
 @SpringBootTest
 public class ArticleServiceTests {
 
-    @Autowired
+    @Resource
     private ArticleService articleService;
 
     @Test
