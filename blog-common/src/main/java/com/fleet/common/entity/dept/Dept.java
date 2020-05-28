@@ -127,5 +127,4 @@ public class Dept extends Base {
     public void setDeptList(List<Dept> deptList) {
         this.deptList = deptList;
     }
-
 }

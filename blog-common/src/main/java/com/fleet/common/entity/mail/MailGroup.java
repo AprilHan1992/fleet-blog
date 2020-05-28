@@ -44,5 +44,4 @@ public class MailGroup extends Base {
 	public void setMailGroupTo(String mailGroupTo) {
 		this.mailGroupTo = mailGroupTo;
 	}
-
 }

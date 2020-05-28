@@ -52,6 +52,7 @@ public class UserController extends BaseController<User> {
         return userService;
     }
 
+    @Override
     @AuthCheck(permits = {"aaa", "bbb"})
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public R insert(@RequestBody User user) {
@@ -88,6 +89,7 @@ public class UserController extends BaseController<User> {
         return R.ok();
     }
 
+    @Override
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R update(@RequestBody User user) {
         if (user.getUserPwd() != null) {
@@ -110,6 +112,7 @@ public class UserController extends BaseController<User> {
         return R.ok(get(user));
     }
 
+    @Override
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public R get(@RequestBody User user) {
         user = userService.get(user);
@@ -123,6 +126,7 @@ public class UserController extends BaseController<User> {
         return R.ok(user);
     }
 
+    @Override
     @RequestMapping(value = "/listPage", method = RequestMethod.POST)
     public PageUtil<User> listPage(@RequestBody Page page) {
         if (page.containsKey("deptId") && page.get("deptId") != null) {

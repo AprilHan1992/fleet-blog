@@ -35,5 +35,4 @@ public @interface ExcelColumn {
      * 是否导出数据，应对需求：有些列不导出数据
      */
     boolean isExport() default true;
-
 }

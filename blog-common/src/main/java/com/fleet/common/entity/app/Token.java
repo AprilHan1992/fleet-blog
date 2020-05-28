@@ -31,5 +31,4 @@ public class Token implements Serializable {
 	public void setExpires(Long expires) {
 		this.expires = expires;
 	}
-
 }

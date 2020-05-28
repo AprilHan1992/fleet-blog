@@ -114,5 +114,4 @@ public class QuartzJob extends Base {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-
 }

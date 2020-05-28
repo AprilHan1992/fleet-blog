@@ -70,5 +70,4 @@ public abstract class BaseController<T> {
     public PageUtil<T> listPage(@RequestBody Page page) {
         return baseService().listPage(page);
     }
-
 }

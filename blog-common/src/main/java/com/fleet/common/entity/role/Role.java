@@ -79,5 +79,4 @@ public class Role extends Base {
     public void setRoleList(List<Role> roleList) {
         this.roleList = roleList;
     }
-
 }

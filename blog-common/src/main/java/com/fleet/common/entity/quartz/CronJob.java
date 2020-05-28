@@ -109,5 +109,4 @@ public class CronJob extends Base {
 	public void setEnabledd(Integer enabled) {
 		this.enabled = enabled;
 	}
-
 }

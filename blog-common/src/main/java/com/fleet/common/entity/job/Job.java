@@ -112,5 +112,4 @@ public class Job extends Base {
     public void setJobList(List<Job> jobList) {
         this.jobList = jobList;
     }
-
 }

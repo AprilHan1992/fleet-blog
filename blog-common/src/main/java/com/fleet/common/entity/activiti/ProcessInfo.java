@@ -196,5 +196,4 @@ public class ProcessInfo<T> implements Serializable {
 	public void setState(Integer state) {
 		this.state = state;
 	}
-
 }

@@ -96,5 +96,4 @@ public class DictValue extends Base {
     public void setIsDefault(Integer isDefault) {
         this.isDefault = isDefault;
     }
-
 }

@@ -42,5 +42,4 @@ public class UserDept extends Base {
     public void setDept(Dept dept) {
         this.dept = dept;
     }
-
 }

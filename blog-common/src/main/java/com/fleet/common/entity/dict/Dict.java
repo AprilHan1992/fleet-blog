@@ -56,5 +56,4 @@ public class Dict extends Base {
     public void setDictValueList(List<DictValue> dictValueList) {
         this.dictValueList = dictValueList;
     }
-
 }

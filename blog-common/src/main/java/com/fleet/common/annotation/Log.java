@@ -18,5 +18,4 @@ public @interface Log {
      * 信息
      */
     String value() default "";
-
 }

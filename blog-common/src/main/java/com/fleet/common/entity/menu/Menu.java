@@ -203,5 +203,4 @@ public class Menu extends Base {
     public void setMenuList(List<Menu> menuList) {
         this.menuList = menuList;
     }
-
 }

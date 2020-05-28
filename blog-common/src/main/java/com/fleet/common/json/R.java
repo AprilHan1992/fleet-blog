@@ -76,7 +76,7 @@ public class R implements Serializable {
      * 错误
      *
      * @param resultState 成功枚举
-     * @param data         数据
+     * @param data        数据
      * @return R
      */
     public static R ok(ResultState resultState, Object data) {
@@ -127,7 +127,7 @@ public class R implements Serializable {
      * 错误
      *
      * @param resultState 错误枚举
-     * @param data         数据
+     * @param data        数据
      * @return R
      */
     public static R error(ResultState resultState, Object data) {
@@ -156,5 +156,4 @@ public class R implements Serializable {
         }
         return false;
     }
-
 }

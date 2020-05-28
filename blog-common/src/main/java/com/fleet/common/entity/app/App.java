@@ -111,5 +111,4 @@ public class App extends Base {
 	public void setAppCreateTime(Date appCreateTime) {
 		this.appCreateTime = appCreateTime;
 	}
-
 }

@@ -2,44 +2,43 @@ package com.fleet.common.entity.activiti.modeler;
 
 public class ActivitiModel {
 
-	String key;
+    String key;
 
-	Integer vision;
+    Integer vision;
 
-	String name;
+    String name;
 
-	String description;
+    String description;
 
-	public String getKey() {
-		return key;
-	}
+    public String getKey() {
+        return key;
+    }
 
-	public void setKey(String key) {
-		this.key = key;
-	}
+    public void setKey(String key) {
+        this.key = key;
+    }
 
-	public Integer getVision() {
-		return vision;
-	}
+    public Integer getVision() {
+        return vision;
+    }
 
-	public void setVision(Integer vision) {
-		this.vision = vision;
-	}
+    public void setVision(Integer vision) {
+        this.vision = vision;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

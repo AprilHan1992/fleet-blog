@@ -104,5 +104,4 @@ public class Table extends Base {
 	public void setTableEditTime(Date tableEditTime) {
 		this.tableEditTime = tableEditTime;
 	}
-
 }

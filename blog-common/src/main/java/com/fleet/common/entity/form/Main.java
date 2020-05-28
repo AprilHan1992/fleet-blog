@@ -104,5 +104,4 @@ public class Main extends Base {
 	public void setMainEditTime(Date mainEditTime) {
 		this.mainEditTime = mainEditTime;
 	}
-
 }

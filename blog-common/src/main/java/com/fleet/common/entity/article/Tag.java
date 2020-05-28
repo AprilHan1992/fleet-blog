@@ -39,7 +39,6 @@ public class Tag extends Base {
         this.tagId = tagId;
     }
 
-
     public Integer getTagType() {
         return tagType;
     }
@@ -47,7 +46,6 @@ public class Tag extends Base {
     public void setTagType(Integer tagType) {
         this.tagType = tagType;
     }
-
 
     public String getTag() {
         return tag;
@@ -57,7 +55,6 @@ public class Tag extends Base {
         this.tag = tag;
     }
 
-
     public Integer getSortValue() {
         return sortValue;
     }
@@ -65,7 +62,6 @@ public class Tag extends Base {
     public void setSortValue(Integer sortValue) {
         this.sortValue = sortValue;
     }
-
 
     public Integer getUpperId() {
         return upperId;

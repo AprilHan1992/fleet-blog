@@ -16,26 +16,17 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     @Override
     public Boolean insert(T t) {
-        if (baseDao().insert(t) == 0) {
-            return false;
-        }
-        return true;
+        return baseDao().insert(t) != 0;
     }
 
     @Override
     public Boolean delete(T t) {
-        if (baseDao().delete(t) == 0) {
-            return false;
-        }
-        return true;
+        return baseDao().delete(t) != 0;
     }
 
     @Override
     public Boolean update(T t) {
-        if (baseDao().update(t) == 0) {
-            return false;
-        }
-        return true;
+        return baseDao().update(t) != 0;
     }
 
     @Override

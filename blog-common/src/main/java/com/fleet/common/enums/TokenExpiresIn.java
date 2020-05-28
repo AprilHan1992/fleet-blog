@@ -18,5 +18,4 @@ public enum TokenExpiresIn {
     public void setMsec(Long msec) {
         this.msec = msec;
     }
-
 }

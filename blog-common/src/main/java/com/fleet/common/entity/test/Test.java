@@ -31,5 +31,4 @@ public class Test extends Base {
 	public void setTestName(String testName) {
 		this.testName = testName;
 	}
-
 }

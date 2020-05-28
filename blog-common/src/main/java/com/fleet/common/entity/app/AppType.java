@@ -55,5 +55,4 @@ public class AppType implements Serializable {
 	public void setAppTypeList(List<AppType> appTypeList) {
 		this.appTypeList = appTypeList;
 	}
-
 }

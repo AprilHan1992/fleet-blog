@@ -73,5 +73,4 @@ public class RoleController {
         pageUtil.setPage(page);
         return pageUtil;
     }
-
 }

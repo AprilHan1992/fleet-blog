@@ -44,5 +44,4 @@ public class RoleMenu extends Base {
     public void setMenuIdList(List<Integer> menuIdList) {
         this.menuIdList = menuIdList;
     }
-
 }

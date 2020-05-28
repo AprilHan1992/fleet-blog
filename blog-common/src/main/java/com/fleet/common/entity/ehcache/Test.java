@@ -4,26 +4,25 @@ import com.fleet.common.entity.Base;
 
 public class Test extends Base {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Integer id;
+    private Integer id;
 
-	private String test;
+    private String test;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getTest() {
-		return test;
-	}
+    public String getTest() {
+        return test;
+    }
 
-	public void setTest(String test) {
-		this.test = test;
-	}
-
+    public void setTest(String test) {
+        this.test = test;
+    }
 }

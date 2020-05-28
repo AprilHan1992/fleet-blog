@@ -14,5 +14,4 @@ public interface BaseDao<T> {
     T get(T t);
 
     List<T> list(Map<String, Object> map);
-
 }

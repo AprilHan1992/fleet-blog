@@ -66,5 +66,4 @@ public class BigFileController {
         }
         return R.ok(ResultState.FILE_UPLOAD_SUCCESS);
     }
-
 }
