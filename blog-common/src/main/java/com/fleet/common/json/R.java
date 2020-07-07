@@ -99,7 +99,7 @@ public class R implements Serializable {
      * @return R
      */
     public static R error() {
-        return r(ResultState.FAILED.getCode(), ResultState.FAILED.getMsg());
+        return r(ResultState.ERROR.getCode(), ResultState.ERROR.getMsg());
     }
 
     /**
@@ -141,7 +141,7 @@ public class R implements Serializable {
      * @return R
      */
     public static R error(Object data) {
-        return r(ResultState.FAILED.getCode(), data);
+        return r(ResultState.ERROR.getCode(), data);
     }
 
     /**

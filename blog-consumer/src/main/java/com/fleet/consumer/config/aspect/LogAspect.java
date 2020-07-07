@@ -1,6 +1,5 @@
 package com.fleet.consumer.config.aspect;
 
-import com.fleet.common.annotation.Log;
 import com.fleet.common.entity.user.User;
 import com.fleet.common.service.log.LogService;
 import com.fleet.common.util.CurUser;
@@ -16,7 +15,6 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -43,7 +41,11 @@ public class LogAspect {
         Object object = pjp.proceed();
         long millis = System.currentTimeMillis() - times.get();
         times.remove();
-        saveLog(pjp, millis, 1, null);
+        try {
+            saveLog(pjp, millis, 1, null);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return object;
     }
 
@@ -51,16 +53,19 @@ public class LogAspect {
     public void doAfterThrowing(JoinPoint jp, Throwable e) {
         long millis = System.currentTimeMillis() - times.get();
         times.remove();
-        saveLog((ProceedingJoinPoint) jp, millis, 0, e.getMessage());
+        try {
+            saveLog((ProceedingJoinPoint) jp, millis, 0, e.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
-    @Async
-    void saveLog(ProceedingJoinPoint pjp, long millis, Integer state, String error) {
+    public void saveLog(ProceedingJoinPoint pjp, long millis, Integer state, String error) {
         com.fleet.common.entity.log.Log opLog = new com.fleet.common.entity.log.Log();
         User user = CurUser.getUser();
         if (user != null) {
-            opLog.setUserId(user.getUserId());
-            opLog.setUserName(user.getUserName());
+            opLog.setId(user.getId());
+            opLog.setName(user.getName());
         }
 
         // 获取request
@@ -68,7 +73,7 @@ public class LogAspect {
 
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Method method = signature.getMethod();
-        Log log = method.getAnnotation(Log.class);
+        com.fleet.common.annotation.Log log = method.getAnnotation(com.fleet.common.annotation.Log.class);
         if (log != null) {
             opLog.setType(log.type());
             opLog.setLog(log.value());
@@ -85,13 +90,13 @@ public class LogAspect {
         List<String> paramList = new ArrayList<>();
         if (argNames != null) {
             for (int i = 0; i < argNames.length; i++) {
-                if (argNames[i].equals("userPwd") || argNames[i].equals("oldPwd") || argNames[i].equals("newPwd")) {
+                if (argNames[i].equals("pwd") || argNames[i].equals("oldPwd") || argNames[i].equals("newPwd")) {
                     argValues[i] = "密码不能明文显示";
                 }
-                // 获取登录用户输入用户名
+                // 获取登录用户输入账户
                 if (signature.getName().equals("login")) {
-                    if (argNames[i].equals("userName")) {
-                        opLog.setUserName(argValues[i].toString());
+                    if (argNames[i].equals("name")) {
+                        opLog.setName(argValues[i].toString());
                     }
                 }
                 paramList.add(argNames[i] + ": " + argValues[i]);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface JobService extends BaseService<Job> {
 
-    List<Job> listByUserId(Integer userId);
+    List<Job> listById(Integer id);
 
     List<Job> buildTree(List<Job> jobList);
 }

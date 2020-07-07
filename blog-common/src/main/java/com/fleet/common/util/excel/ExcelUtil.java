@@ -477,12 +477,12 @@ public class ExcelUtil<T> {
             startWith = excelSheet.startWith();
         }
         if (StringUtils.isEmpty(template.trim())) {
-            throw new BaseException(ResultState.TEMPLATE_FILE_NOT_FOUND);
+            throw new BaseException(ResultState.ERROR);
         }
 
         InputStream in = this.getClass().getResourceAsStream(template);
         if (in == null) {
-            throw new BaseException(ResultState.TEMPLATE_FILE_NOT_FOUND);
+            throw new BaseException(ResultState.ERROR);
         }
 
         Workbook workbook = getWorkbook(in);

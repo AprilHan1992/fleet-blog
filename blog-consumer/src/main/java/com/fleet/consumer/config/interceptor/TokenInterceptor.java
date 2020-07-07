@@ -6,9 +6,6 @@ import com.fleet.common.exception.BaseException;
 import com.fleet.common.service.user.UserService;
 import com.fleet.common.util.CurUser;
 import com.fleet.common.util.cache.RedisUtil;
-import com.fleet.common.util.token.TokenUtil;
-import com.fleet.common.util.token.entity.Token;
-import com.fleet.common.util.token.entity.UserToken;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
+/**
+ * @author April Han
+ */
 public class TokenInterceptor implements HandlerInterceptor {
 
     @Resource
@@ -29,55 +28,50 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Reference
     private UserService userService;
 
-    private List<String> refreshTokenPathPatterns = new ArrayList<>();
-
     /**
      * 设置 refreshToken 验证，refreshToken 验证后不再验证 accessToken
      */
-    public void setRefreshTokenPathPatterns(String... patterns) {
-        this.refreshTokenPathPatterns.addAll(Arrays.asList(patterns));
+    private List<String> refreshTokenPatterns = new ArrayList<>();
+
+    public TokenInterceptor() {
+    }
+
+    public TokenInterceptor(List<String> patternList) {
+        this.refreshTokenPatterns.addAll(patternList);
+    }
+
+    public void setRefreshTokenPatterns(List<String> patternList) {
+        this.refreshTokenPatterns.addAll(patternList);
+    }
+
+    public void setRefreshTokenPatterns(String... patterns) {
+        this.refreshTokenPatterns.addAll(Arrays.asList(patterns));
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String uri = request.getRequestURI();
-        if (this.refreshTokenPathPatterns.size() != 0) {
-            if (this.refreshTokenPathPatterns.contains("/**") || this.refreshTokenPathPatterns.contains(uri)) {
+        if (this.refreshTokenPatterns.size() != 0) {
+            if (this.refreshTokenPatterns.contains("/**") || this.refreshTokenPatterns.contains(uri)) {
                 String refreshToken = request.getHeader("refreshToken");
                 if (StringUtils.isEmpty(refreshToken)) {
                     refreshToken = request.getParameter("refreshToken");
                 }
                 if (StringUtils.isEmpty(refreshToken)) {
-                    throw new BaseException(ResultState.REFRESH_TOKEN_MISSING);
+                    throw new BaseException(ResultState.ERROR, "缺少 refreshToken");
                 }
-                Token userRefreshToken = (Token) redisUtil.get("token:refresh:" + refreshToken);
-                if (userRefreshToken != null) {
-                    Integer userId = userRefreshToken.getUserId();
-                    if (!TokenUtil.isExpired(userRefreshToken.getIssuedAt(), userRefreshToken.getExpiresIn())) {
-                        if (CurUser.getUser() == null) {
-                            User user = new User();
-                            user.setUserId(userId);
-                            user = userService.get(user);
-                            CurUser.setUser(user);
-                        }
-                        return true;
-                    } else {
-                        Set<String> keys = redisUtil.keys("token:user:" + userId + ":refresh:" + refreshToken + ":*");
-                        if (keys != null) {
-                            for (String key : keys) {
-                                UserToken userToken = (UserToken) redisUtil.get(key);
-                                if (userToken != null) {
-                                    String accessToken = userToken.getAccessToken();
-                                    redisUtil.delete("token:access:" + accessToken);
-                                }
-                                redisUtil.delete(key);
-                            }
-                        }
-                        redisUtil.delete("token:refresh:" + refreshToken);
-                        throw new BaseException(ResultState.REFRESH_TOKEN_EXPIRE);
+
+                Integer id = (Integer) redisUtil.get("refreshToken:user:" + refreshToken);
+                if (id != null) {
+                    if (CurUser.getUser() == null) {
+                        User user = new User();
+                        user.setId(id);
+                        user = userService.get(user);
+                        CurUser.setUser(user);
                     }
+                    return true;
                 } else {
-                    throw new BaseException(ResultState.REFRESH_TOKEN_INVALID);
+                    throw new BaseException("refreshToken 无效或已过期");
                 }
             }
         }
@@ -87,24 +81,20 @@ public class TokenInterceptor implements HandlerInterceptor {
             accessToken = request.getParameter("accessToken");
         }
         if (StringUtils.isEmpty(accessToken)) {
-            throw new BaseException(ResultState.ACCESS_TOKEN_MISSING);
+            throw new BaseException(ResultState.ERROR, "缺少 accessToken");
         }
-        Token userAccessToken = (Token) redisUtil.get("token:access:" + accessToken);
-        if (userAccessToken != null) {
-            Integer userId = userAccessToken.getUserId();
-            if (!TokenUtil.isExpired(userAccessToken.getIssuedAt(), userAccessToken.getExpiresIn())) {
-                if (CurUser.getUser() == null) {
-                    User user = new User();
-                    user.setUserId(userId);
-                    user = userService.get(user);
-                    CurUser.setUser(user);
-                }
-                return true;
-            } else {
-                throw new BaseException(ResultState.ACCESS_TOKEN_EXPIRE);
+
+        Integer id = (Integer) redisUtil.get("accessToken:user:" + accessToken);
+        if (id != null) {
+            if (CurUser.getUser() == null) {
+                User user = new User();
+                user.setId(id);
+                user = userService.get(user);
+                CurUser.setUser(user);
             }
+            return true;
         } else {
-            throw new BaseException(ResultState.ACCESS_TOKEN_INVALID);
+            throw new BaseException("accessToken 无效或已过期");
         }
     }
 }

@@ -7,7 +7,7 @@ public class UserRole extends Base {
     /**
      * 用户id
      */
-    private Integer userId;
+    private Integer id;
 
     /**
      * 角色id
@@ -19,12 +19,12 @@ public class UserRole extends Base {
      */
     private String role;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getRoleId() {

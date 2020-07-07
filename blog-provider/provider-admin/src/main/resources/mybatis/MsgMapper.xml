@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fleet.provider.admin.dao.MsgDao">
+    <resultMap id="BaseResultMap" type="com.fleet.common.entity.msg.Msg">
+        <id column="msg_id" property="msgId"/>
+        <result column="msg_title" property="msgTitle"/>
+        <result column="msg_excerpt" property="msgExcerpt"/>
+        <result column="msg_url" property="msgUrl"/>
+        <result column="msg_state" property="msgState"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		`msg_id`, `msg_title`, `msg_excerpt`, `msg_url`, msg_state, creator_id, create_time, `deleted`
+	</sql>
+
+    <insert id="insert" parameterType="com.fleet.common.entity.msg.Msg" useGeneratedKeys="true" keyProperty="msgId">
+        insert into `msg` (
+        <trim suffixOverrides=",">
+            <if test="msgTitle != null">`msg_title`,</if>
+            <if test="msgExcerpt != null">`msg_excerpt`,</if>
+            <if test="msgUrl != null">`msg_url`,</if>
+            <if test="msgState != null">`msg_state`,</if>
+            <if test="creatorId != null">`creator_id`,</if>
+            <if test="createTime != null">`create_time`,</if>
+            <if test="deleted != null">`deleted`,</if>
+        </trim>
+        ) values (
+        <trim suffixOverrides=",">
+            <if test="msgTitle != null">#{msgTitle},</if>
+            <if test="msgExcerpt != null">#{msgExcerpt},</if>
+            <if test="msgUrl != null">#{msgUrl},</if>
+            <if test="msgState != null">#{msgState},</if>
+            <if test="creatorId != null">#{creatorId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="deleted != null">#{deleted},</if>
+        </trim>
+        )
+    </insert>
+
+    <update id="delete" parameterType="com.fleet.common.entity.msg.Msg">
+        update `msg` set `deleted` = 1
+        <where>
+            <if test="msgId != null">and `msg_id` = #{msgId}</if>
+            <if test="msgTitle != null">and `msg_title` = #{msgTitle}</if>
+            <if test="msgExcerpt != null">and `msg_excerpt` = #{msgExcerpt}</if>
+            <if test="msgUrl != null">and `msg_url` = #{msgUrl}</if>
+            <if test="msgState != null">and `msg_state` = #{msgState}</if>
+            <if test="creatorId != null">and `creator_id` = #{creatorId}</if>
+            <if test="createTime != null">and `create_time` = #{createTime}</if>
+        </where>
+    </update>
+
+    <update id="update" parameterType="com.fleet.common.entity.msg.Msg">
+        update `msg`
+        <set>
+            <if test="msgTitle != null">`msg_title` = #{msgTitle},</if>
+            <if test="msgExcerpt != null">`msg_excerpt` = #{msgExcerpt},</if>
+            <if test="msgUrl != null">`msg_url` = #{msgUrl},</if>
+            <if test="msgState != null">`msg_state` = #{msgState},</if>
+            <if test="creatorId != null">`creator_id` = #{creatorId},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="deleted != null">`deleted` = #{deleted},</if>
+        </set>
+        where msg_id = #{msgId}
+    </update>
+
+    <select id="get" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `msg`
+        <where>
+            <if test="msgId != null">and `msg_id` = #{msgId}</if>
+            <if test="msgTitle != null">and `msg_title` = #{msgTitle}</if>
+            <if test="msgExcerpt != null">and `msg_excerpt` = #{msgExcerpt}</if>
+            <if test="msgUrl != null">and `msg_url` = #{msgUrl}</if>
+            <if test="msgState != null">and `msg_state` = #{msgState}</if>
+            <if test="creatorId != null">and `creator_id` = #{creatorId}</if>
+            <if test="createTime != null">and `create_time` = #{createTime}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `msg`
+        <where>
+            <if test="msgId != null">and `msg_id` = #{msgId}</if>
+            <if test="msgTitle != null">and `msg_title` = #{msgTitle}</if>
+            <if test="msgExcerpt != null">and `msg_excerpt` = #{msgExcerpt}</if>
+            <if test="msgUrl != null">and `msg_url` = #{msgUrl}</if>
+            <if test="msgState != null">and `msg_state` = #{msgState}</if>
+            <if test="creatorId != null">and `creator_id` = #{creatorId}</if>
+            <if test="createTime != null">and `create_time` = #{createTime}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+    </select>
+
+    <select id="userMsgList" resultMap="BaseResultMap">
+        select m.`msg_id`, m.`msg_title`, m.`msg_excerpt`, m.`msg_url`, m.msg_state, m.creator_id, m.create_time,
+        m.`deleted`
+        from `msg` as m left join msg_to as t on m.msg_id = t.msg_id
+        <where>
+            <if test="readState != null">and t.read_state = #{readState}</if>
+            <if test="deleted != null">and t.deleted = #{deleted}</if>
+            and m.deleted = 0 and m.msg_state = 1 and t.msg_to = #{msgTo}
+        </where>
+    </select>
+</mapper>

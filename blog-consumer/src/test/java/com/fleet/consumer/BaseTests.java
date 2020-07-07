@@ -50,7 +50,7 @@ public class BaseTests {
     @Resource
     private RedisUtil redisUtil;
 
-    private Integer userId;
+    private Integer id;
 
     private String accessToken;
 
@@ -141,41 +141,41 @@ public class BaseTests {
 
     public void initToken() {
         User user = new User();
-        user.setUserName(testConfig.getUserName());
+        user.setName(testConfig.getName());
         user = userService.get(user);
         if (user == null) {
             throw new BaseException("test fail：测试账户不存在");
         }
 
-        Integer userId = user.getUserId();
+        Integer id = user.getId();
 
         Long issuedAt = System.currentTimeMillis();
         String accessToken = UUIDUtil.getUUID();
         String refreshToken = UUIDUtil.getUUID();
 
-        // 设置用户 accessToken 信息
-        Token userAccessToken = new Token();
-        userAccessToken.setUserId(userId);
-        userAccessToken.setToken(accessToken);
-        userAccessToken.setIssuedAt(issuedAt);
-        userAccessToken.setExpiresIn(TokenExpiresIn.EXPIRES_IN.getMsec());
-        redisUtil.set("token:access:" + accessToken, userAccessToken);
-
-        // 设置用户 refreshToken 信息
-        Token userRefreshToken = new Token();
-        userRefreshToken.setUserId(userId);
-        userRefreshToken.setToken(refreshToken);
-        userRefreshToken.setIssuedAt(issuedAt);
-        userRefreshToken.setExpiresIn(TokenExpiresIn.REFRESH_EXPIRES_IN.getMsec());
-        redisUtil.set("token:refresh:" + refreshToken, userRefreshToken);
+//        // 设置用户 accessToken 信息
+//        Token userAccessToken = new Token();
+//        userAccessToken.setId(id);
+//        userAccessToken.setToken(accessToken);
+//        userAccessToken.setIssuedAt(issuedAt);
+//        userAccessToken.setExpiresIn(TokenExpiresIn.EXPIRES_IN.getMsec());
+//        redisUtil.set("token:access:" + accessToken, userAccessToken);
+//
+//        // 设置用户 refreshToken 信息
+//        Token userRefreshToken = new Token();
+//        userRefreshToken.setId(id);
+//        userRefreshToken.setToken(refreshToken);
+//        userRefreshToken.setIssuedAt(issuedAt);
+//        userRefreshToken.setExpiresIn(TokenExpiresIn.REFRESH_EXPIRES_IN.getMsec());
+//        redisUtil.set("token:refresh:" + refreshToken, userRefreshToken);
 
         // 设置用户 token 关联信息
         UserToken userToken = new UserToken();
         userToken.setAccessToken(accessToken);
         userToken.setRefreshToken(refreshToken);
-        redisUtil.set("token:user:" + userId + ":refresh:" + refreshToken + ":access:" + accessToken, userToken);
+        redisUtil.set("token:user:" + id + ":refresh:" + refreshToken + ":access:" + accessToken, userToken);
 
-        this.userId = userId;
+        this.id = id;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
@@ -183,6 +183,6 @@ public class BaseTests {
     public void deleteToken() {
         redisUtil.delete("token:access:" + this.accessToken);
         redisUtil.delete("token:refresh:" + this.refreshToken);
-        redisUtil.delete("token:user:" + this.userId + ":refresh:" + this.refreshToken + ":access:" + this.accessToken);
+        redisUtil.delete("token:user:" + this.id + ":refresh:" + this.refreshToken + ":access:" + this.accessToken);
     }
 }

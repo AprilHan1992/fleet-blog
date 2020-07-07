@@ -10,7 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author April Han
+ */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -18,15 +20,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(userInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(tokenInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/**/v2/api-docs", "/swagger-ui.html/**", "/csrf", "/error", "/") //放行swagger接口文档地址
                 .excludePathPatterns(excludePathPatterns());
     }
 
     @Bean
-    TokenInterceptor tokenInterceptor() {
-        TokenInterceptor tokenInterceptor = new TokenInterceptor();
-        tokenInterceptor.setRefreshTokenPathPatterns("/token/refresh");
-        return tokenInterceptor;
+    public TokenInterceptor tokenInterceptor() {
+        List<String> patternList = new ArrayList<>();
+        patternList.add("/token/refresh");
+        return new TokenInterceptor(patternList);
     }
 
     @Bean

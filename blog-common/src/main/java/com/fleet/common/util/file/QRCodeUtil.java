@@ -169,7 +169,7 @@ public class QRCodeUtil {
      */
     private static void insertLogoImage(BufferedImage bufferedImage, File logoImage) throws Exception {
         if (!logoImage.exists()) {
-            throw new BaseException(ResultState.NOT_FOUND, "logo文件不存在");
+            throw new BaseException("logo文件不存在");
         }
 
         Image srcLogoImage = ImageIO.read(logoImage);

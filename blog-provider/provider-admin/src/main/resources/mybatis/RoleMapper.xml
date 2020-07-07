@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fleet.provider.admin.dao.RoleDao">
+    <resultMap id="BaseResultMap" type="com.fleet.common.entity.role.Role">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="role"/>
+        <result column="sort_value" property="sortValue"/>
+        <result column="upper_id" property="upperId"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		`role_id`, `role_name`, `sort_value`, `upper_id`, `deleted`
+	</sql>
+
+    <insert id="insert" parameterType="com.fleet.common.entity.role.Role" useGeneratedKeys="true" keyProperty="roleId">
+        insert into `role` (
+        <trim suffixOverrides=",">
+            <if test="role != null">`role_name`,</if>
+            <if test="sortValue != null">`sort_value`,</if>
+            <if test="upperId != null">`upper_id`,</if>
+            <if test="deleted != null">`deleted`,</if>
+        </trim>
+        ) values (
+        <trim suffixOverrides=",">
+            <if test="role != null">#{role},</if>
+            <if test="sortValue != null">#{sortValue},</if>
+            <if test="upperId != null">#{upperId},</if>
+            <if test="deleted != null">#{deleted},</if>
+        </trim>
+        )
+    </insert>
+
+    <update id="delete" parameterType="com.fleet.common.entity.role.Role">
+        update `role` set `deleted` = 1
+        <where>
+            <if test="roleId != null">and `role_id` = #{roleId}</if>
+            <if test="role != null">and `role_name` = #{role}</if>
+            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="upperId != null">and `upper_id` = #{upperId}</if>
+        </where>
+    </update>
+
+    <update id="update" parameterType="com.fleet.common.entity.role.Role">
+        update `role`
+        <set>
+            <if test="role != null">`role_name` = #{role},</if>
+            <if test="sortValue != null">`sort_value` = #{sortValue},</if>
+            <if test="upperId != null">`upper_id` = #{upperId},</if>
+            <if test="deleted != null">`deleted` = #{deleted},</if>
+        </set>
+        where role_id = #{roleId}
+    </update>
+
+    <select id="get" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `role`
+        <where>
+            <if test="roleId != null">and `role_id` = #{roleId}</if>
+            <if test="role != null">and `role_name` = #{role}</if>
+            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="upperId != null">and `upper_id` = #{upperId}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `role`
+        <where>
+            <if test="roleId != null">and `role_id` = #{roleId}</if>
+            <if test="role != null">and `role_name` = #{role}</if>
+            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="upperId != null">and `upper_id` = #{upperId}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+    </select>
+
+    <select id="roleIdList" resultType="java.lang.Integer">
+        select `role_id` from `role`
+        <where>
+            <if test="roleId != null">and `role_id` = #{roleId}</if>
+            <if test="role != null">and `role_name` = #{role}</if>
+            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="upperId != null">and `upper_id` = #{upperId}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+    </select>
+</mapper>

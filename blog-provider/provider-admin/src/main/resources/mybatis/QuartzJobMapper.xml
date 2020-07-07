@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fleet.provider.admin.dao.QuartzJobDao">
+    <resultMap id="BaseResultMap" type="com.fleet.common.entity.quartz.QuartzJob">
+        <id column="job_id" property="jobId"/>
+        <result column="job_name" property="jobName"/>
+        <result column="bean_name" property="beanName"/>
+        <result column="method_name" property="methodName"/>
+        <result column="params" property="params"/>
+        <result column="cron_expression" property="cronExpression"/>
+        <result column="enabled" property="enabled"/>
+        <result column="remark" property="remark"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		`job_id`, `job_name`, `bean_name`, `method_name`, params, cron_expression, enabled, remark, `deleted`
+	</sql>
+
+    <insert id="insert" parameterType="com.fleet.common.entity.quartz.QuartzJob" useGeneratedKeys="true"
+            keyProperty="jobId">
+        insert into `quartz_job` (
+        <trim suffixOverrides=",">
+            <if test="jobName != null">`job_name`,</if>
+            <if test="beanName != null">`bean_name`,</if>
+            <if test="methodName != null">`method_name`,</if>
+            <if test="params != null">`params`,</if>
+            <if test="cronExpression != null">`cron_expression`,</if>
+            <if test="enabled != null">`enabled`,</if>
+            <if test="remark != null">`remark`,</if>
+            <if test="deleted != null">`deleted`,</if>
+        </trim>
+        ) values (
+        <trim suffixOverrides=",">
+            <if test="jobName != null">#{jobName},</if>
+            <if test="beanName != null">#{beanName},</if>
+            <if test="methodName != null">#{methodName},</if>
+            <if test="params != null">#{params},</if>
+            <if test="cronExpression != null">#{cronExpression},</if>
+            <if test="enabled != null">#{enabled},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="deleted != null">#{deleted},</if>
+        </trim>
+        )
+    </insert>
+
+    <update id="delete" parameterType="com.fleet.common.entity.quartz.QuartzJob">
+        update `quartz_job` set `deleted` = 1
+        <where>
+            <if test="jobId != null">and `job_id` = #{jobId}</if>
+            <if test="jobName != null">and `job_name` = #{jobName}</if>
+            <if test="beanName != null">and `bean_name` = #{beanName}</if>
+            <if test="methodName != null">and `method_name` = #{methodName}</if>
+            <if test="params != null">and `params` = #{params}</if>
+            <if test="cronExpression != null">and `cron_expression` = #{cronExpression}</if>
+            <if test="enabled != null">and `enabled` = #{enabled}</if>
+            <if test="remark != null">and `remark` = #{remark}</if>
+        </where>
+    </update>
+
+    <update id="update" parameterType="com.fleet.common.entity.quartz.QuartzJob">
+        update `quartz_job`
+        <set>
+            <if test="jobName != null">`job_name` = #{jobName},</if>
+            <if test="beanName != null">`bean_name` = #{beanName},</if>
+            <if test="methodName != null">`method_name` = #{methodName},</if>
+            <if test="params != null">`params` = #{params},</if>
+            <if test="cronExpression != null">`cron_expression` = #{cronExpression},</if>
+            <if test="enabled != null">`enabled` = #{enabled},</if>
+            <if test="remark != null">`remark` = #{remark},</if>
+            <if test="deleted != null">`deleted` = #{deleted},</if>
+        </set>
+        where job_id = #{jobId}
+    </update>
+
+    <select id="get" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `quartz_job`
+        <where>
+            <if test="jobId != null">and `job_id` = #{jobId}</if>
+            <if test="jobName != null">and `job_name` = #{jobName}</if>
+            <if test="beanName != null">and `bean_name` = #{beanName}</if>
+            <if test="methodName != null">and `method_name` = #{methodName}</if>
+            <if test="params != null">and `params` = #{params}</if>
+            <if test="cronExpression != null">and `cron_expression` = #{cronExpression}</if>
+            <if test="enabled != null">and `enabled` = #{enabled}</if>
+            <if test="remark != null">`remark` = #{remark},</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `quartz_job`
+        <where>
+            <if test="jobId != null">and `job_id` = #{jobId}</if>
+            <if test="jobName != null">and `job_name` = #{jobName}</if>
+            <if test="beanName != null">and `bean_name` = #{beanName}</if>
+            <if test="methodName != null">and `method_name` = #{methodName}</if>
+            <if test="params != null">and `params` = #{params}</if>
+            <if test="cronExpression != null">and `cron_expression` = #{cronExpression}</if>
+            <if test="enabled != null">and `enabled` = #{enabled}</if>
+            <if test="remark != null">`remark` = #{remark},</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+    </select>
+</mapper>

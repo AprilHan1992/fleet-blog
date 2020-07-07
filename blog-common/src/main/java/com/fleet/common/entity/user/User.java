@@ -11,18 +11,20 @@ import java.util.List;
 
 /**
  * 用户信息
+ *
+ * @author April Han
  */
 public class User extends Base {
 
     /**
      * 用户id
      */
-    private Integer userId;
+    private Integer id;
 
     /**
-     * 用户名（登录使用）
+     * 账户（登录使用）
      */
-    private String userName;
+    private String name;
 
     /**
      * 昵称（不做登录使用）
@@ -38,7 +40,7 @@ public class User extends Base {
      * 密码
      */
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String userPwd;
+    private String pwd;
 
     /**
      * 密码加盐
@@ -47,39 +49,34 @@ public class User extends Base {
     private String pwdSalt;
 
     /**
-     * 单设备登录（0：否，1：是）
-     */
-    private Integer single;
-
-    /**
      * 用户状态（0：禁用，1：正常，2：未验证，3：锁定）
      */
-    private Integer userState;
+    private Integer state;
 
     /**
      * 注册时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date userRegTime;
+    private Date regTime;
 
     private Dept userDept;
 
     private List<Role> userRoleList;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNickName() {
@@ -98,12 +95,12 @@ public class User extends Base {
         this.email = email;
     }
 
-    public String getUserPwd() {
-        return userPwd;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     public String getPwdSalt() {
@@ -114,28 +111,20 @@ public class User extends Base {
         this.pwdSalt = pwdSalt;
     }
 
-    public Integer getSingle() {
-        return single;
+    public Integer getState() {
+        return state;
     }
 
-    public void setSingle(Integer single) {
-        this.single = single;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
-    public Integer getUserState() {
-        return userState;
+    public Date getRegTime() {
+        return regTime;
     }
 
-    public void setUserState(Integer userState) {
-        this.userState = userState;
-    }
-
-    public Date getUserRegTime() {
-        return userRegTime;
-    }
-
-    public void setUserRegTime(Date userRegTime) {
-        this.userRegTime = userRegTime;
+    public void setRegTime(Date regTime) {
+        this.regTime = regTime;
     }
 
     public Dept getUserDept() {

@@ -17,12 +17,12 @@ public class Log implements Serializable {
     /**
      * 操作用户id
      */
-    private Integer userId;
+    private Integer id;
 
     /**
      * 操作用户
      */
-    private String userName;
+    private String name;
 
     /**
      * 日志类型（1：用户登录，2：用户操作，3：用户登出）
@@ -103,20 +103,20 @@ public class Log implements Serializable {
         this.logId = logId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getType() {

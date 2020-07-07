@@ -30,7 +30,7 @@ public class QuartzUtil {
         try {
             return (CronTrigger) scheduler.getTrigger(getTriggerKey(jobId));
         } catch (SchedulerException e) {
-            throw new BaseException(ResultState.FAILED, "获取定时任务CronTrigger出现异常：" + e);
+            throw new BaseException("获取定时任务CronTrigger出现异常：" + e);
         }
     }
 
@@ -54,7 +54,7 @@ public class QuartzUtil {
                 pauseJob(scheduler, job.getJobId());
             }
         } catch (SchedulerException e) {
-            throw new BaseException(ResultState.FAILED, "定时任务创建失败：" + e);
+            throw new BaseException("定时任务创建失败：" + e);
         }
     }
 
@@ -66,7 +66,7 @@ public class QuartzUtil {
             scheduler.pauseJob(getJobKey(jobId));
             scheduler.deleteJob(getJobKey(jobId));
         } catch (SchedulerException e) {
-            throw new BaseException(ResultState.FAILED, "定时任务删除失败：" + e);
+            throw new BaseException("定时任务删除失败：" + e);
         }
     }
 
@@ -90,7 +90,7 @@ public class QuartzUtil {
                 pauseJob(scheduler, job.getJobId());
             }
         } catch (SchedulerException e) {
-            throw new BaseException(ResultState.FAILED, "定时任务更新失败：" + e);
+            throw new BaseException("定时任务更新失败：" + e);
         }
     }
 
@@ -104,7 +104,7 @@ public class QuartzUtil {
             dataMap.put(QuartzJob.JOB_PARAM_KEY, job);
             scheduler.triggerJob(getJobKey(job.getJobId()), dataMap);
         } catch (SchedulerException e) {
-            throw new BaseException(ResultState.FAILED, "立即执行定时任务失败：" + e);
+            throw new BaseException("立即执行定时任务失败：" + e);
         }
     }
 
@@ -115,7 +115,7 @@ public class QuartzUtil {
         try {
             scheduler.pauseJob(getJobKey(jobId));
         } catch (Exception e) {
-            throw new BaseException(ResultState.FAILED, "定时任务暂停失败：" + e);
+            throw new BaseException("定时任务暂停失败：" + e);
         }
     }
 
@@ -126,7 +126,7 @@ public class QuartzUtil {
         try {
             scheduler.resumeJob(getJobKey(jobId));
         } catch (SchedulerException e) {
-            throw new BaseException(ResultState.FAILED, "定时任务恢复失败：" + e);
+            throw new BaseException("定时任务恢复失败：" + e);
         }
     }
 }

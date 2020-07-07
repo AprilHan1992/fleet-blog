@@ -18,8 +18,8 @@
     <version>1.0</version>
 
     <modules>
-        <module>provider-sys</module>
-        <module>provider-article</module>
+        <module>provider-admin</module>
+        <module>provider-blog</module>
     </modules>
 
     <dependencies>

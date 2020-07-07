@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
+/**
+ * @author April Han
+ */
 @Aspect
 @Component
 public class AuthCheckAspect {
@@ -30,23 +33,23 @@ public class AuthCheckAspect {
 
         User user = CurUser.getUser();
         if (user == null) {
-            throw new BaseException(ResultState.USER_ERROR);
+            throw new BaseException(ResultState.ERROR);
         }
 
-        Integer userId = user.getUserId();
+        Integer id = user.getId();
         String[] roles = authCheck.roles();
         if (roles.length != 0) {
-            Boolean hasRoles = userRoleService.hasRoles(userId, roles);
+            Boolean hasRoles = userRoleService.hasRoles(id, roles);
             if (!hasRoles) {
-                throw new BaseException(ResultState.UNAUTHORIZED_ROLES);
+                throw new BaseException(ResultState.ERROR);
             }
         }
 
         String[] permits = authCheck.permits();
         if (permits.length != 0) {
-            Boolean hasPermits = userRoleService.hasPermits(userId, permits);
+            Boolean hasPermits = userRoleService.hasPermits(id, permits);
             if (!hasPermits) {
-                throw new BaseException(ResultState.UNAUTHORIZED_PERMITS);
+                throw new BaseException(ResultState.ERROR);
             }
         }
 

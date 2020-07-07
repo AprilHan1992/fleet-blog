@@ -6,6 +6,9 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author April Han
+ */
 @RestController
 public class NotFoundException implements ErrorController {
 
@@ -16,7 +19,6 @@ public class NotFoundException implements ErrorController {
 
     @RequestMapping("/error")
     public R error() {
-        return R.error(ResultState.NOT_FOUND);
+        return R.error();
     }
-
 }

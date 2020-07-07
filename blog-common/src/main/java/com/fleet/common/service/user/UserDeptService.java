@@ -6,5 +6,5 @@ import com.fleet.common.service.BaseService;
 
 public interface UserDeptService extends BaseService<UserDept> {
 
-    Dept userDept(Integer userId);
+    Dept userDept(Integer id);
 }

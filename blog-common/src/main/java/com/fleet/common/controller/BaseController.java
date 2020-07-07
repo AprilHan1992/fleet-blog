@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- * 公共controller
+ * 公共 controller
+ *
+ * @author April Han
  */
 @RestController
 public abstract class BaseController<T> {
@@ -23,12 +25,12 @@ public abstract class BaseController<T> {
         return CurUser.getUser();
     }
 
-    public Integer getUserId() {
+    public Integer getId() {
         User user = getUser();
         if (user == null) {
             return null;
         }
-        return getUser().getUserId();
+        return getUser().getId();
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -42,6 +44,22 @@ public abstract class BaseController<T> {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public R delete(@RequestBody T t) {
         if (baseService().delete(t)) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public R delete(@RequestParam Integer id) {
+        if (baseService().delete(id)) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    @RequestMapping(value = "/delete", method = {RequestMethod.GET, RequestMethod.POST})
+    public R delete(@RequestParam("ids[]") Integer[] ids) {
+        if (baseService().delete(ids)) {
             return R.ok();
         }
         return R.error();

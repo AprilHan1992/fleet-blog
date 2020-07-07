@@ -10,7 +10,7 @@ public class UserDept extends Base {
     /**
      * 用户id
      */
-    private Integer userId;
+    private Integer id;
 
     /**
      * 部门id
@@ -19,12 +19,12 @@ public class UserDept extends Base {
 
     private Dept dept;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getDeptId() {
