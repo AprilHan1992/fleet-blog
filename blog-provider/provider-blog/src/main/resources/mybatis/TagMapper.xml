@@ -2,32 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fleet.provider.blog.dao.TagDao">
     <resultMap id="BaseResultMap" type="com.fleet.common.entity.article.Tag">
-        <id column="tag_id" property="tagId"/>
-        <result column="tag_type" property="tagType"/>
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
         <result column="tag" property="tag"/>
-        <result column="sort_value" property="sortValue"/>
+        <result column="sort" property="sort"/>
         <result column="upper_id" property="upperId"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		`tag_id`, `tag_type`, `tag`, `sort_value`, `upper_id`, `deleted`
+		`id`, `type`, `tag`, `sort`, `upper_id`, `deleted`
 	</sql>
 
-    <insert id="insert" parameterType="com.fleet.common.entity.article.Tag" useGeneratedKeys="true" keyProperty="tagId">
+    <insert id="insert" parameterType="com.fleet.common.entity.article.Tag" useGeneratedKeys="true" keyProperty="id">
         insert into `tag` (
         <trim suffixOverrides=",">
-            <if test="tagType != null">`tag_type`,</if>
+            <if test="type != null">`type`,</if>
             <if test="tag != null">`tag`,</if>
-            <if test="sortValue != null">`sort_value`,</if>
+            <if test="sort != null">`sort`,</if>
             <if test="upperId != null">`upper_id`,</if>
             <if test="deleted != null">`deleted`,</if>
         </trim>
         ) values (
         <trim suffixOverrides=",">
-            <if test="tagType != null">#{tagType},</if>
+            <if test="type != null">#{type},</if>
             <if test="tag != null">#{tag},</if>
-            <if test="sortValue != null">#{sortValue},</if>
+            <if test="sort != null">#{sort},</if>
             <if test="upperId != null">#{upperId},</if>
             <if test="deleted != null">#{deleted},</if>
         </trim>
@@ -37,24 +37,33 @@
     <update id="delete" parameterType="com.fleet.common.entity.article.Tag">
         update `tag` set `deleted` = 1
         <where>
-            <if test="tagId != null">and `tag_id` = #{tagId}</if>
-            <if test="tagType != null">and `tag_type` = #{tagType}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="type != null">and `type` = #{type}</if>
             <if test="tag != null">and `tag` = #{tag}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort` = #{sort}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
+        </where>
+    </update>
+
+    <update id="deletes">
+        update `tag` set `deleted` = 1
+        <where>
+            <foreach collection="array" item="id" open="and `id` in (" separator="," close=")">
+                #{id}
+            </foreach>
         </where>
     </update>
 
     <update id="update" parameterType="com.fleet.common.entity.article.Tag">
         update `role`
         <set>
-            <if test="tagType != null">`tag_type` = #{tagType},</if>
+            <if test="type != null">`type` = #{type},</if>
             <if test="tag != null">`tag` = #{tag},</if>
-            <if test="sortValue != null">`sort_value` = #{sortValue},</if>
+            <if test="sort != null">`sort` = #{sort},</if>
             <if test="upperId != null">`upper_id` = #{upperId},</if>
             <if test="deleted != null">`deleted` = #{deleted},</if>
         </set>
-        where tag_id = #{tagId}
+        where id = #{id}
     </update>
 
     <select id="get" resultMap="BaseResultMap">
@@ -62,10 +71,10 @@
         <include refid="Base_Column_List"/>
         from `tag`
         <where>
-            <if test="tagId != null">and `tag_id` = #{tagId}</if>
-            <if test="tagType != null">and `tag_type` = #{tagType}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="type != null">and `type` = #{type}</if>
             <if test="tag != null">and `tag` = #{tag}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort` = #{sort}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
@@ -78,23 +87,23 @@
         <include refid="Base_Column_List"/>
         from `tag`
         <where>
-            <if test="tagId != null">and `tag_id` = #{tagId}</if>
-            <if test="tagType != null">and `tag_type` = #{tagType}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="type != null">and `type` = #{type}</if>
             <if test="tag != null">and `tag` = #{tag}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort` = #{sort}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
         </where>
     </select>
 
-    <select id="tagIdList" resultType="java.lang.Integer">
-        select `tag_id` from `tag`
+    <select id="idList" resultType="java.lang.Integer">
+        select `id` from `tag`
         <where>
-            <if test="tagId != null">and `tag_id` = #{tagId}</if>
-            <if test="tagType != null">and `tag_type` = #{tagType}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="type != null">and `type` = #{type}</if>
             <if test="tag != null">and `tag` = #{tag}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort` = #{sort}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>

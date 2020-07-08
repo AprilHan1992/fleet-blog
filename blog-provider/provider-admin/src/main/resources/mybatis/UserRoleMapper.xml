@@ -10,7 +10,7 @@
     <resultMap id="RoleResultMap" type="com.fleet.common.entity.role.Role">
         <id column="role_id" property="roleId"/>
         <result column="role_name" property="role"/>
-        <result column="sort_value" property="sortValue"/>
+        <result column="sort_value" property="sort"/>
         <result column="upper_id" property="upperId"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
@@ -24,7 +24,7 @@
         <result column="href" property="href"/>
         <result column="target" property="target"/>
         <result column="permit" property="permit"/>
-        <result column="sort_value" property="sortValue"/>
+        <result column="sort_value" property="sort"/>
         <result column="opened" property="opened"/>
         <result column="enabled" property="enabled"/>
         <result column="create_time" property="createTime"/>

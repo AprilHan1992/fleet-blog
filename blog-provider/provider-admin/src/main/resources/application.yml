@@ -1,6 +1,6 @@
 spring:
   application:
-    name: provider-sys
+    name: provider-admin
   profiles:
     active: dev
 server:
@@ -10,7 +10,7 @@ dubbo:
     name: provider-sys
   scan:
     base-packages:
-      - com.fleet.provider.sys.service.impl
+      - com.fleet.provider.admin.service.impl
   registry:
     protocol: zookeeper
     address: localhost:2181

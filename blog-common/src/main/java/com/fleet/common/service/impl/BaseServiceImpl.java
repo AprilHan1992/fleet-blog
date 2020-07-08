@@ -25,13 +25,8 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
-    public Boolean delete(Integer id) {
-        return baseDao().delete(id) != 0;
-    }
-
-    @Override
-    public Boolean delete(Integer[] ids) {
-        return baseDao().delete(ids) != 0;
+    public Boolean deletes(Integer[] ids) {
+        return baseDao().deletes(ids) != 0;
     }
 
     @Override

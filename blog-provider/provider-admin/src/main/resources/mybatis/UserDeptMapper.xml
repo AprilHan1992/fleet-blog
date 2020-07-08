@@ -11,7 +11,7 @@
         <id column="dept_id" property="deptId"/>
         <result column="dept_name" property="deptName"/>
         <result column="dept_state" property="deptState"/>
-        <result column="sort_value" property="sortValue"/>
+        <result column="sort_value" property="sort"/>
         <result column="create_time" property="createTime"/>
         <result column="edit_time" property="editTime"/>
         <result column="upper_id" property="upperId"/>

@@ -2,6 +2,9 @@ package com.fleet.common.entity.article;
 
 import com.fleet.common.entity.Base;
 
+/**
+ * @author April Han
+ */
 public class Tag extends Base {
 
     private static final long serialVersionUID = 7855463865888584657L;
@@ -9,12 +12,12 @@ public class Tag extends Base {
     /**
      * 分类/标签id
      */
-    private Integer tagId;
+    private Integer id;
 
     /**
      * 类型（1：分类，2：标签）
      */
-    private Integer tagType;
+    private Integer type;
 
     /**
      * 分类/标签
@@ -24,27 +27,27 @@ public class Tag extends Base {
     /**
      * 排序（数字越大，越排前）
      */
-    private Integer sortValue;
+    private Integer sort;
 
     /**
      * 上一级分类/标签id
      */
     private Integer upperId;
 
-    public Integer getTagId() {
-        return tagId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setTagId(Integer tagId) {
-        this.tagId = tagId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getTagType() {
-        return tagType;
+    public Integer getType() {
+        return type;
     }
 
-    public void setTagType(Integer tagType) {
-        this.tagType = tagType;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getTag() {
@@ -55,12 +58,12 @@ public class Tag extends Base {
         this.tag = tag;
     }
 
-    public Integer getSortValue() {
-        return sortValue;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setSortValue(Integer sortValue) {
-        this.sortValue = sortValue;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public Integer getUpperId() {

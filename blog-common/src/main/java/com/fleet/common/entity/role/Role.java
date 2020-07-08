@@ -21,7 +21,7 @@ public class Role extends Base {
     /**
      * 排序（数字越大，越排前）
      */
-    private Integer sortValue;
+    private Integer sort;
 
     /**
      * 上一级角色id
@@ -48,12 +48,12 @@ public class Role extends Base {
         this.role = role;
     }
 
-    public Integer getSortValue() {
-        return sortValue;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setSortValue(Integer sortValue) {
-        this.sortValue = sortValue;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public Integer getUpperId() {

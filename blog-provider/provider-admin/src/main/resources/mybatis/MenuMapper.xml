@@ -10,7 +10,7 @@
         <result column="href" property="href"/>
         <result column="target" property="target"/>
         <result column="permit" property="permit"/>
-        <result column="sort_value" property="sortValue"/>
+        <result column="sort_value" property="sort"/>
         <result column="opened" property="opened"/>
         <result column="enabled" property="enabled"/>
         <result column="create_time" property="createTime"/>
@@ -33,7 +33,7 @@
             <if test="href != null">`href`,</if>
             <if test="target != null">`target`,</if>
             <if test="permit != null">`permit`,</if>
-            <if test="sortValue != null">`sort_value`,</if>
+            <if test="sort != null">`sort_value`,</if>
             <if test="opened != null">`opened`,</if>
             <if test="enabled != null">`enabled`,</if>
             <if test="createTime != null">`create_time`,</if>
@@ -50,7 +50,7 @@
             <if test="href != null">#{href},</if>
             <if test="target != null">#{target},</if>
             <if test="permit != null">#{permit},</if>
-            <if test="sortValue != null">#{sortValue},</if>
+            <if test="sort != null">#{sort},</if>
             <if test="opened != null">#{opened},</if>
             <if test="enabled != null">#{enabled},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -72,7 +72,7 @@
             <if test="href != null">and `href` = #{href}</if>
             <if test="target != null">and `target` = #{target}</if>
             <if test="permit != null">and `permit` = #{permit}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="opened != null">and `opened` = #{opened}</if>
             <if test="enabled != null">and `enabled` = #{enabled}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
@@ -91,7 +91,7 @@
             <if test="href != null">`href` = #{href},</if>
             <if test="target != null">`target` = #{target},</if>
             <if test="permit != null">`permit` = #{permit},</if>
-            <if test="sortValue != null">`sort_value` = #{sortValue},</if>
+            <if test="sort != null">`sort_value` = #{sort},</if>
             <if test="enabled != null">`enabled` = #{enabled},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
             <if test="editTime != null">`edit_time` = #{editTime},</if>
@@ -114,7 +114,7 @@
             <if test="href != null">and `href` = #{href}</if>
             <if test="target != null">and `target` = #{target}</if>
             <if test="permit != null">and `permit` = #{permit}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="opened != null">and `opened` = #{opened}</if>
             <if test="enabled != null">and `enabled` = #{enabled}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
@@ -139,7 +139,7 @@
             <if test="href != null">and `href` = #{href}</if>
             <if test="target != null">and `target` = #{target}</if>
             <if test="permit != null">and `permit` = #{permit}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="opened != null">and `opened` = #{opened}</if>
             <if test="enabled != null">and `enabled` = #{enabled}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
@@ -161,7 +161,7 @@
             <if test="href != null">and `href` = #{href}</if>
             <if test="target != null">and `target` = #{target}</if>
             <if test="permit != null">and `permit` = #{permit}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="opened != null">and `opened` = #{opened}</if>
             <if test="enabled != null">and `enabled` = #{enabled}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>

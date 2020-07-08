@@ -11,6 +11,9 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 @Service
 public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
 
@@ -24,12 +27,12 @@ public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
 
     @Override
     public Boolean delete(Tag tag) {
-        List<Integer> tagIdList = tagDao.tagIdList(tag);
-        if (tagIdList != null && tagIdList.size() != 0) {
+        List<Integer> idList = tagDao.idList(tag);
+        if (idList != null && idList.size() != 0) {
             tagDao.delete(tag);
-            for (Integer tagId : tagIdList) {
+            for (Integer id : idList) {
                 Tag t = new Tag();
-                t.setUpperId(tagId);
+                t.setUpperId(id);
                 delete(t);
             }
         }
@@ -37,19 +40,28 @@ public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
     }
 
     @Override
-    public List<Integer> tagIdList(Integer tagId) {
+    public Boolean deletes(Integer[] ids) {
+        for (Integer id : ids) {
+            Tag tag = new Tag();
+            tag.setId(id);
+            delete(tag);
+        }
+        return true;
+    }
+
+    @Override
+    public List<Integer> idList(Integer id) {
         List<Integer> rList = new ArrayList<>();
-        rList.add(tagId);
+        rList.add(id);
 
         Tag tag = new Tag();
-        tag.setUpperId(tagId);
-        List<Integer> tagIdList = tagDao.tagIdList(tag);
-        if (tagIdList != null) {
-            for (Integer id : tagIdList) {
-                rList.addAll(tagIdList(id));
+        tag.setUpperId(id);
+        List<Integer> idList = tagDao.idList(tag);
+        if (idList != null) {
+            for (Integer i : idList) {
+                rList.addAll(idList(i));
             }
         }
         return rList;
     }
-
 }

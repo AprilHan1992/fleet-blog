@@ -28,20 +28,12 @@ public interface BaseService<T> {
     Boolean delete(T t);
 
     /**
-     * 删除
-     *
-     * @param id
-     * @return
-     */
-    Boolean delete(Integer id);
-
-    /**
      * 批量删除
      *
      * @param ids
      * @return
      */
-    Boolean delete(Integer[] ids);
+    Boolean deletes(Integer[] ids);
 
     /**
      * 修改

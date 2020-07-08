@@ -20,9 +20,21 @@ public class TagServiceTests {
     @Test
     public void insert() {
         Tag tag = new Tag();
-        tag.setTagType(1);
+        tag.setType(1);
         tag.setTag("心情日记");
         tagService.insert(tag);
     }
 
+    @Test
+    public void delete() {
+        Tag tag = new Tag();
+        tag.setId(1);
+        tagService.delete(tag);
+    }
+
+    @Test
+    public void deletes() {
+        Integer[] ids = {1, 2, 3};
+        tagService.deletes(ids);
+    }
 }

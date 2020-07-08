@@ -9,6 +9,9 @@ import org.apache.dubbo.config.annotation.Service;
 
 import javax.annotation.Resource;
 
+/**
+ * @author April Han
+ */
 @Service
 public class ArticleServiceImpl extends BaseServiceImpl<Article> implements ArticleService {
 
@@ -19,5 +22,4 @@ public class ArticleServiceImpl extends BaseServiceImpl<Article> implements Arti
     public BaseDao<Article> baseDao() {
         return articleDao;
     }
-
 }

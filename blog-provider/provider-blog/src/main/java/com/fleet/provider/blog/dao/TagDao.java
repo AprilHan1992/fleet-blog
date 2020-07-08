@@ -12,5 +12,5 @@ import java.util.List;
 @Mapper
 public interface TagDao extends BaseDao<Tag> {
 
-    List<Integer> tagIdList(Tag tag);
+    List<Integer> idList(Tag tag);
 }

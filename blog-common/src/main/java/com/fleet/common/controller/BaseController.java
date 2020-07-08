@@ -49,17 +49,9 @@ public abstract class BaseController<T> {
         return R.error();
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R delete(@RequestParam Integer id) {
-        if (baseService().delete(id)) {
-            return R.ok();
-        }
-        return R.error();
-    }
-
-    @RequestMapping(value = "/delete", method = {RequestMethod.GET, RequestMethod.POST})
-    public R delete(@RequestParam("ids[]") Integer[] ids) {
-        if (baseService().delete(ids)) {
+    @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
+    public R deletes(@RequestParam Integer[] ids) {
+        if (baseService().deletes(ids)) {
             return R.ok();
         }
         return R.error();

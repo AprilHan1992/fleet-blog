@@ -25,20 +25,12 @@ public interface BaseDao<T> {
     Integer delete(T t);
 
     /**
-     * 删除
-     *
-     * @param id
-     * @return
-     */
-    Integer delete(Integer id);
-
-    /**
      * 批量删除
      *
      * @param ids
      * @return
      */
-    Integer delete(Integer[] ids);
+    Integer deletes(Integer[] ids);
 
     /**
      * 修改

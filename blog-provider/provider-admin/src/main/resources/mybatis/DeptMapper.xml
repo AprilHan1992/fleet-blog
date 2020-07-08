@@ -5,7 +5,7 @@
         <id column="dept_id" property="deptId"/>
         <result column="dept_name" property="deptName"/>
         <result column="dept_state" property="deptState"/>
-        <result column="sort_value" property="sortValue"/>
+        <result column="sort_value" property="sort"/>
         <result column="create_time" property="createTime"/>
         <result column="edit_time" property="editTime"/>
         <result column="upper_id" property="upperId"/>
@@ -21,7 +21,7 @@
         <trim suffixOverrides=",">
             <if test="deptName != null">`dept_name`,</if>
             <if test="deptState != null">`dept_state`,</if>
-            <if test="sortValue != null">`sort_value`,</if>
+            <if test="sort != null">`sort_value`,</if>
             <if test="createTime != null">`create_time`,</if>
             <if test="editTime != null">`edit_time`,</if>
             <if test="upperId != null">`upper_id`,</if>
@@ -31,7 +31,7 @@
         <trim suffixOverrides=",">
             <if test="deptName != null">#{deptName},</if>
             <if test="deptState != null">#{deptState},</if>
-            <if test="sortValue != null">#{sortValue},</if>
+            <if test="sort != null">#{sort},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="editTime != null">#{editTime},</if>
             <if test="upperId != null">#{upperId},</if>
@@ -46,7 +46,7 @@
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
             <if test="deptName != null">and `dept_name` = #{deptName}</if>
             <if test="deptState != null">and `dept_state` = #{deptState}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
             <if test="editTime != null">and `edit_time` = #{editTime}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
@@ -58,7 +58,7 @@
         <set>
             <if test="deptName != null">`dept_name` = #{deptName},</if>
             <if test="deptState != null">`dept_state` = #{deptState},</if>
-            <if test="sortValue != null">`sort_value` = #{sortValue},</if>
+            <if test="sort != null">`sort_value` = #{sort},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
             <if test="editTime != null">`edit_time` = #{editTime},</if>
             <if test="upperId != null">`upper_id` = #{upperId},</if>
@@ -75,7 +75,7 @@
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
             <if test="deptName != null">and `dept_name` = #{deptName}</if>
             <if test="deptState != null">and `dept_state` = #{deptState}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
             <if test="editTime != null">and `edit_time` = #{editTime}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
@@ -93,7 +93,7 @@
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
             <if test="deptName != null">and `dept_name` like CONCAT('%',#{deptName},'%')</if>
             <if test="deptState != null">and `dept_state` = #{deptState}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
             <if test="editTime != null">and `edit_time` = #{editTime}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
@@ -108,7 +108,7 @@
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
             <if test="deptName != null">and `dept_name` = #{deptName}</if>
             <if test="deptState != null">and `dept_state` = #{deptState}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
             <if test="editTime != null">and `edit_time` = #{editTime}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>

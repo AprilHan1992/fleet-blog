@@ -28,7 +28,7 @@ public class Job extends Base {
     /**
      * 排序（数字越大，越排前）
      */
-    private Integer sortValue;
+    private Integer sort;
 
     /**
      * 创建时间
@@ -73,12 +73,12 @@ public class Job extends Base {
         this.jobState = jobState;
     }
 
-    public Integer getSortValue() {
-        return sortValue;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setSortValue(Integer sortValue) {
-        this.sortValue = sortValue;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public Date getCreateTime() {

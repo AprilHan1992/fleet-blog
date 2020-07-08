@@ -7,7 +7,7 @@
         <result column="dict_value_code" property="dictValueCode"/>
         <result column="dict_value" property="dictValue"/>
         <result column="dict_value_remark" property="dictValueRemark"/>
-        <result column="sort_value" property="sortValue"/>
+        <result column="sort_value" property="sort"/>
         <result column="is_default" property="isDefault"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
@@ -24,7 +24,7 @@
             <if test="dictValueCode != null">`dict_value_code`,</if>
             <if test="dictValue != null">`dict_value`,</if>
             <if test="dictValueRemark != null">`dict_value_remark`,</if>
-            <if test="sortValue != null">`sort_value`,</if>
+            <if test="sort != null">`sort_value`,</if>
             <if test="isDefault != null">`is_default`,</if>
             <if test="deleted != null">`deleted`,</if>
         </trim>
@@ -34,7 +34,7 @@
             <if test="dictValueCode != null">#{dictValueCode},</if>
             <if test="dictValue != null">#{dictValue},</if>
             <if test="dictValueRemark != null">#{dictValueRemark},</if>
-            <if test="sortValue != null">#{sortValue},</if>
+            <if test="sort != null">#{sort},</if>
             <if test="isDefault != null">#{isDefault},</if>
             <if test="deleted != null">#{deleted},</if>
         </trim>
@@ -49,7 +49,7 @@
             <if test="dictValueCode != null">and `dict_value_code` = #{dictValueCode}</if>
             <if test="dictValue != null">and `dict_value` = #{dictValue}</if>
             <if test="dictValueRemark != null">and `dict_value_remark` = #{dictValueRemark}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="remark != null">and `remark` = #{remark}</if>
             <if test="isDefault != null">and `is_default` = #{isDefault}</if>
         </where>
@@ -62,7 +62,7 @@
             <if test="dictValueCode != null">`dict_value_code` = #{dictValueCode},</if>
             <if test="dictValue != null">`dict_value` = #{dictValue},</if>
             <if test="dictValueRemark != null">`dict_value_remark` = #{dictValueRemark},</if>
-            <if test="sortValue != null">`sort_value` = #{sortValue},</if>
+            <if test="sort != null">`sort_value` = #{sort},</if>
             <if test="isDefault != null">`is_default` = #{isDefault},</if>
             <if test="deleted != null">`deleted` = #{deleted},</if>
         </set>
@@ -79,7 +79,7 @@
             <if test="dictValueCode != null">and `dict_value_code` = #{dictValueCode}</if>
             <if test="dictValue != null">and `dict_value` = #{dictValue}</if>
             <if test="dictValueRemark != null">and `dict_value_remark` = #{dictValueRemark}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="isDefault != null">and `is_default` = #{isDefault}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
@@ -97,7 +97,7 @@
             <if test="dictValueCode != null">and `dict_value_code` = #{dictValueCode}</if>
             <if test="dictValue != null">and `dict_value` = #{dictValue}</if>
             <if test="dictValueRemark != null">and `dict_value_remark` = #{dictValueRemark}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="isDefault != null">and `is_default` = #{isDefault}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>

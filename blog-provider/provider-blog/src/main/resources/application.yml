@@ -1,6 +1,6 @@
 spring:
   application:
-    name: provider-article
+    name: provider-blog
   profiles:
     active: dev
 server:
@@ -10,7 +10,7 @@ dubbo:
     name: provider-article
   scan:
     base-packages:
-      - com.fleet.provider.article.service.impl
+      - com.fleet.provider.blog.service.impl
   registry:
     protocol: zookeeper
     address: localhost:2181

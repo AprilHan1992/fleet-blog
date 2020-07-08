@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.fleet.common.entity.role.Role">
         <id column="role_id" property="roleId"/>
         <result column="role_name" property="role"/>
-        <result column="sort_value" property="sortValue"/>
+        <result column="sort_value" property="sort"/>
         <result column="upper_id" property="upperId"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
@@ -17,14 +17,14 @@
         insert into `role` (
         <trim suffixOverrides=",">
             <if test="role != null">`role_name`,</if>
-            <if test="sortValue != null">`sort_value`,</if>
+            <if test="sort != null">`sort_value`,</if>
             <if test="upperId != null">`upper_id`,</if>
             <if test="deleted != null">`deleted`,</if>
         </trim>
         ) values (
         <trim suffixOverrides=",">
             <if test="role != null">#{role},</if>
-            <if test="sortValue != null">#{sortValue},</if>
+            <if test="sort != null">#{sort},</if>
             <if test="upperId != null">#{upperId},</if>
             <if test="deleted != null">#{deleted},</if>
         </trim>
@@ -36,7 +36,7 @@
         <where>
             <if test="roleId != null">and `role_id` = #{roleId}</if>
             <if test="role != null">and `role_name` = #{role}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
         </where>
     </update>
@@ -45,7 +45,7 @@
         update `role`
         <set>
             <if test="role != null">`role_name` = #{role},</if>
-            <if test="sortValue != null">`sort_value` = #{sortValue},</if>
+            <if test="sort != null">`sort_value` = #{sort},</if>
             <if test="upperId != null">`upper_id` = #{upperId},</if>
             <if test="deleted != null">`deleted` = #{deleted},</if>
         </set>
@@ -59,7 +59,7 @@
         <where>
             <if test="roleId != null">and `role_id` = #{roleId}</if>
             <if test="role != null">and `role_name` = #{role}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
@@ -74,7 +74,7 @@
         <where>
             <if test="roleId != null">and `role_id` = #{roleId}</if>
             <if test="role != null">and `role_name` = #{role}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
@@ -86,7 +86,7 @@
         <where>
             <if test="roleId != null">and `role_id` = #{roleId}</if>
             <if test="role != null">and `role_name` = #{role}</if>
-            <if test="sortValue != null">and `sort_value` = #{sortValue}</if>
+            <if test="sort != null">and `sort_value` = #{sort}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>

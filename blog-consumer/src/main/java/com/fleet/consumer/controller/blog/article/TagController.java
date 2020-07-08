@@ -21,7 +21,7 @@ public class TagController {
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public R get(@RequestParam("tagId") Integer tagId) {
         Tag tag = new Tag();
-        tag.setTagId(tagId);
+        tag.setId(tagId);
         return R.ok(tagService.get(tag));
     }
 

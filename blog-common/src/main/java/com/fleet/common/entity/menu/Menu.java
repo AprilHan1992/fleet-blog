@@ -53,7 +53,7 @@ public class Menu extends Base {
     /**
      * 排序（数字越大，越排前）
      */
-    private Integer sortValue;
+    private Integer sort;
 
     /**
      * 是否公开菜单（1：是，无需分配就可以访问，0：否）
@@ -148,12 +148,12 @@ public class Menu extends Base {
         this.permit = permit;
     }
 
-    public Integer getSortValue() {
-        return sortValue;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setSortValue(Integer sortValue) {
-        this.sortValue = sortValue;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public Integer getOpened() {

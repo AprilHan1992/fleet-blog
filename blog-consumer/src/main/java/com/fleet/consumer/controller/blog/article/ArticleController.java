@@ -21,7 +21,7 @@ public class ArticleController {
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public R get(@RequestParam("articleId") Integer articleId) {
         Article article = new Article();
-        article.setArticleId(articleId);
+        article.setId(articleId);
         return R.ok(articleService.get(article));
     }
 
@@ -36,10 +36,10 @@ public class ArticleController {
         return articleService.listPage(page);
     }
 
-    @RequestMapping(value = "/recommend", method = RequestMethod.POST)
-    public PageUtil<Article> recommend(@RequestBody Page page) {
-        page.put("articleState", 1);
-        page.put("recommend", 1);
+    @RequestMapping(value = "/rcmd", method = RequestMethod.POST)
+    public PageUtil<Article> rcmd(@RequestBody Page page) {
+        page.put("state", 1);
+        page.put("rcmd", 1);
         return articleService.listPage(page);
     }
 
