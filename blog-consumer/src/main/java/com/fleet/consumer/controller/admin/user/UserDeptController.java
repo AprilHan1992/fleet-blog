@@ -38,8 +38,8 @@ public class UserDeptController {
         return R.error();
     }
 
-    @RequestMapping(value = "/delete/batch", method = RequestMethod.POST)
-    public R deleteBatch(@RequestBody List<UserDept> userDeptList) {
+    @RequestMapping(value = "/deletes", method = RequestMethod.POST)
+    public R deletes(@RequestBody List<UserDept> userDeptList) {
         for (UserDept userDept : userDeptList) {
             if (!userDeptService.delete(userDept)) {
                 return R.error();

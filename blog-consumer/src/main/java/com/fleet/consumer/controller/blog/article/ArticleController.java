@@ -42,5 +42,4 @@ public class ArticleController {
         page.put("rcmd", 1);
         return articleService.listPage(page);
     }
-
 }

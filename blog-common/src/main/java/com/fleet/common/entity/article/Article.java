@@ -1,7 +1,9 @@
 package com.fleet.common.entity.article;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fleet.common.entity.Base;
+import com.fleet.common.entity.user.User;
 
 import java.util.Date;
 
@@ -75,11 +77,12 @@ public class Article extends Base {
     /**
      * 创建人
      */
-    private String creator;
+    private User creator;
 
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     /**
@@ -90,11 +93,12 @@ public class Article extends Base {
     /**
      * 修改人
      */
-    private String editor;
+    private User editor;
 
     /**
      * 修改时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date editTime;
 
     public Integer getId() {
@@ -193,11 +197,11 @@ public class Article extends Base {
         this.creatorId = creatorId;
     }
 
-    public String getCreator() {
+    public User getCreator() {
         return creator;
     }
 
-    public void setCreator(String creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
 
@@ -217,11 +221,11 @@ public class Article extends Base {
         this.editorId = editorId;
     }
 
-    public String getEditor() {
+    public User getEditor() {
         return editor;
     }
 
-    public void setEditor(String editor) {
+    public void setEditor(User editor) {
         this.editor = editor;
     }
 

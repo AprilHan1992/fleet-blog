@@ -4,6 +4,9 @@ import com.fleet.common.entity.Base;
 
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 public class Dict extends Base {
 
     private static final long serialVersionUID = 1L;
@@ -11,49 +14,49 @@ public class Dict extends Base {
     /**
      * 字典id
      */
-    private Integer dictId;
+    private Integer id;
 
     /**
      * 字典组
      */
-    private String dictGroup;
+    private String group;
 
     /**
      * 字典组描述
      */
-    private String dictRemark;
+    private String remark;
 
-    private List<DictValue> dictValueList;
+    private List<Value> valueList;
 
-    public Integer getDictId() {
-        return dictId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setDictId(Integer dictId) {
-        this.dictId = dictId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getDictGroup() {
-        return dictGroup;
+    public String getGroup() {
+        return group;
     }
 
-    public void setDictGroup(String dictGroup) {
-        this.dictGroup = dictGroup;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
-    public String getDictRemark() {
-        return dictRemark;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setDictRemark(String dictRemark) {
-        this.dictRemark = dictRemark;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
-    public List<DictValue> getDictValueList() {
-        return dictValueList;
+    public List<Value> getValueList() {
+        return valueList;
     }
 
-    public void setDictValueList(List<DictValue> dictValueList) {
-        this.dictValueList = dictValueList;
+    public void setValueList(List<Value> valueList) {
+        this.valueList = valueList;
     }
 }

@@ -8,19 +8,19 @@ import java.util.List;
 public interface DeptService extends BaseService<Dept> {
 
     /**
-     * 获取所有 deptId 集合（包括）
+     * 获取所有 id 集合（包括）
      */
-    List<Integer> deptIdList(Integer deptId);
+    List<Integer> idList(Integer id);
 
     /**
      * 根据级联名称查询子项id（包括带‘/’名称），查询出多个返回null
      */
-    Integer getDeptId(String deptNames);
+    Integer getId(String names);
 
     /**
-     * 根据子项查询级联名称
+     * 查询级联名称
      */
-    String getDeptNames(Integer deptId);
+    String getNames(Integer id);
 
     List<Dept> buildTree(List<Dept> deptList);
 }

@@ -2,6 +2,7 @@ package com.fleet.provider.admin.service.impl;
 
 import com.fleet.common.dao.BaseDao;
 import com.fleet.common.entity.dept.Dept;
+import com.fleet.common.enums.Deleted;
 import com.fleet.common.service.dept.DeptService;
 import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.provider.admin.dao.DeptDao;
@@ -34,23 +35,19 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     public Dept get(Dept dept) {
         dept = deptDao.get(dept);
         if (dept != null) {
-            String upperDeptNames = getDeptNames(dept.getUpperId());
-            dept.setDeptNames(dept.getDeptName());
-            if (!upperDeptNames.equals("")) {
-                dept.setDeptNames(upperDeptNames + "/" + dept.getDeptName());
-            }
+            dept.setNames(getNames(dept.getId()));
         }
         return dept;
     }
 
     @Override
     public Boolean delete(Dept dept) {
-        List<Integer> deptIdList = deptDao.deptIdList(dept);
-        if (deptIdList != null && deptIdList.size() != 0) {
+        List<Integer> idList = deptDao.idList(dept);
+        if (idList != null && idList.size() != 0) {
             deptDao.delete(dept);
-            for (Integer deptId : deptIdList) {
+            for (Integer id : idList) {
                 Dept d = new Dept();
-                d.setUpperId(deptId);
+                d.setUpperId(id);
                 delete(d);
             }
         }
@@ -58,49 +55,50 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     }
 
     @Override
-    public List<Integer> deptIdList(Integer deptId) {
+    public List<Integer> idList(Integer id) {
         List<Integer> rList = new ArrayList<>();
-        rList.add(deptId);
+        rList.add(id);
 
         Dept dept = new Dept();
-        dept.setUpperId(deptId);
-        List<Integer> deptIdList = deptDao.deptIdList(dept);
-        if (deptIdList != null) {
-            for (Integer id : deptIdList) {
-                rList.addAll(deptIdList(id));
+        dept.setUpperId(id);
+        List<Integer> idList = deptDao.idList(dept);
+        if (idList != null) {
+            for (Integer i : idList) {
+                rList.addAll(idList(i));
             }
         }
         return rList;
     }
 
     @Override
-    public Integer getDeptId(String deptNames) {
-        if (StringUtils.isEmpty(deptNames)) {
+    public Boolean deletes(Integer[] ids) {
+        for (Integer id : ids) {
+            Dept dept = new Dept();
+            dept.setId(id);
+            delete(dept);
+        }
+        return true;
+    }
+
+    @Override
+    public Integer getId(String names) {
+        if (StringUtils.isEmpty(names)) {
             return null;
         }
-        String[] dns = deptNames.split("/");
+        String[] ns = names.split("/");
         List<Integer> upperIds = new ArrayList<>();
-        for (String dn : dns) {
+        upperIds.add(0);
+        for (String n : ns) {
             List<Integer> newUpperIds = new ArrayList<>();
-            if (upperIds.size() != 0) {
-                for (Integer upperId : upperIds) {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("upperId", upperId);
-                    map.put("deptName", dn);
-                    List<Dept> list = deptDao.list(map);
-                    if (list != null && list.size() != 0) {
-                        for (Dept dept : list) {
-                            newUpperIds.add(dept.getDeptId());
-                        }
-                    }
-                }
-            } else {
+            for (Integer upperId : upperIds) {
                 Map<String, Object> map = new HashMap<>();
-                map.put("deptName", dn);
+                map.put("deleted", Deleted.NO);
+                map.put("upperId", upperId);
+                map.put("name", n);
                 List<Dept> list = deptDao.list(map);
-                if (list != null && list.size() != 0) {
+                if (list != null) {
                     for (Dept dept : list) {
-                        newUpperIds.add(dept.getDeptId());
+                        newUpperIds.add(dept.getId());
                     }
                 }
             }
@@ -116,23 +114,23 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     }
 
     @Override
-    public String getDeptNames(Integer deptId) {
-        String deptNames = "";
-        if (deptId == 0) {
-            return deptNames;
+    public String getNames(Integer id) {
+        String names = "";
+        if (id == 0) {
+            return names;
         }
         Dept dept = new Dept();
-        dept.setDeptId(deptId);
+        dept.setId(id);
         dept = deptDao.get(dept);
         if (dept != null) {
-            String upperDeptName = getDeptNames(dept.getUpperId());
-            if (upperDeptName.equals("")) {
-                deptNames = dept.getDeptName();
+            String upperName = getNames(dept.getUpperId());
+            if ("".equals(upperName)) {
+                names = dept.getName();
             } else {
-                deptNames = upperDeptName + "/" + dept.getDeptName();
+                names = upperName + "/" + dept.getName();
             }
         }
-        return deptNames;
+        return names;
     }
 
     @Override
@@ -144,22 +142,21 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
 
         Map<Integer, Dept> map = new HashMap<>();
         for (Dept dept : deptList) {
-            map.put(dept.getDeptId(), dept);
+            map.put(dept.getId(), dept);
         }
 
-        for (Integer deptId : map.keySet()) {
-            Dept dept = map.get(deptId);
+        for (Integer id : map.keySet()) {
+            Dept dept = map.get(id);
             if (map.containsKey(dept.getUpperId())) {
-                Dept upperDept = map.get(dept.getUpperId());
-                if (upperDept.getDeptList() == null) {
-                    upperDept.setDeptList(new ArrayList<>());
+                Dept upper = map.get(dept.getUpperId());
+                if (upper.getChildren() == null) {
+                    upper.setChildren(new ArrayList<>());
                 }
-                upperDept.getDeptList().add(dept);
+                upper.getChildren().add(dept);
             } else {
                 tree.add(dept);
             }
         }
-
         return tree;
     }
 }

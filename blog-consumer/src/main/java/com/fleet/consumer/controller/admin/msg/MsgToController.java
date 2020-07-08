@@ -30,8 +30,8 @@ public class MsgToController {
         return R.ok();
     }
 
-    @RequestMapping(value = "/delete/batch", method = RequestMethod.POST)
-    public R deleteBatch(@RequestBody List<MsgTo> msgToList) {
+    @RequestMapping(value = "/deletes", method = RequestMethod.POST)
+    public R deletes(@RequestBody List<MsgTo> msgToList) {
         for (MsgTo msgTo : msgToList) {
             msgToService.delete(msgTo);
         }

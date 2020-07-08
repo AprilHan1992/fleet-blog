@@ -3,10 +3,14 @@ package com.fleet.common.entity.dept;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fleet.common.entity.Base;
+import com.fleet.common.entity.user.User;
 
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 public class Dept extends Base {
 
     private static final long serialVersionUID = 1L;
@@ -14,27 +18,37 @@ public class Dept extends Base {
     /**
      * 部门id
      */
-    private Integer deptId;
+    private Integer id;
 
     /**
      * 部门名称
      */
-    private String deptName;
+    private String name;
 
     /**
      * 部门名称
      */
-    private String deptNames;
+    private String names;
 
     /**
      * 部门状态（1：正常， 0：停用）
      */
-    private String deptState;
+    private String state;
 
     /**
      * 排序（数字越大，越排前）
      */
     private Integer sort;
+
+    /**
+     * 创建人
+     */
+    private Integer creatorId;
+
+    /**
+     * 创建人
+     */
+    private User creator;
 
     /**
      * 创建时间
@@ -43,7 +57,17 @@ public class Dept extends Base {
     private Date createTime;
 
     /**
-     * 更新时间
+     * 修改人
+     */
+    private Integer editorId;
+
+    /**
+     * 修改人
+     */
+    private User editor;
+
+    /**
+     * 修改时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date editTime;
@@ -54,38 +78,38 @@ public class Dept extends Base {
     private Integer upperId;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Dept> deptList;
+    private List<Dept> children;
 
-    public Integer getDeptId() {
-        return deptId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setDeptId(Integer deptId) {
-        this.deptId = deptId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getDeptName() {
-        return deptName;
+    public String getName() {
+        return name;
     }
 
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDeptNames() {
-        return deptNames;
+    public String getNames() {
+        return names;
     }
 
-    public void setDeptNames(String deptNames) {
-        this.deptNames = deptNames;
+    public void setNames(String names) {
+        this.names = names;
     }
 
-    public String getDeptState() {
-        return deptState;
+    public String getState() {
+        return state;
     }
 
-    public void setDeptState(String deptState) {
-        this.deptState = deptState;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public Integer getSort() {
@@ -96,12 +120,44 @@ public class Dept extends Base {
         this.sort = sort;
     }
 
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getEditorId() {
+        return editorId;
+    }
+
+    public void setEditorId(Integer editorId) {
+        this.editorId = editorId;
+    }
+
+    public User getEditor() {
+        return editor;
+    }
+
+    public void setEditor(User editor) {
+        this.editor = editor;
     }
 
     public Date getEditTime() {
@@ -120,11 +176,11 @@ public class Dept extends Base {
         this.upperId = upperId;
     }
 
-    public List<Dept> getDeptList() {
-        return deptList;
+    public List<Dept> getChildren() {
+        return children;
     }
 
-    public void setDeptList(List<Dept> deptList) {
-        this.deptList = deptList;
+    public void setChildren(List<Dept> children) {
+        this.children = children;
     }
 }

@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface DeptDao extends BaseDao<Dept> {
 
-    List<Integer> deptIdList(Dept dept);
+    List<Integer> idList(Dept dept);
 }

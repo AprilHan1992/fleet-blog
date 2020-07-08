@@ -25,7 +25,7 @@ public abstract class BaseController<T> {
         return CurUser.getUser();
     }
 
-    public Integer getId() {
+    public Integer getUserId() {
         User user = getUser();
         if (user == null) {
             return null;
@@ -35,34 +35,34 @@ public abstract class BaseController<T> {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public R insert(@RequestBody T t) {
-        if (baseService().insert(t)) {
-            return R.ok();
+        if (!baseService().insert(t)) {
+            return R.error();
         }
-        return R.error();
+        return R.ok();
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public R delete(@RequestBody T t) {
-        if (baseService().delete(t)) {
-            return R.ok();
+        if (!baseService().delete(t)) {
+            return R.error();
         }
-        return R.error();
+        return R.ok();
     }
 
     @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
     public R deletes(@RequestParam Integer[] ids) {
-        if (baseService().deletes(ids)) {
-            return R.ok();
+        if (!baseService().deletes(ids)) {
+            return R.error();
         }
-        return R.error();
+        return R.ok();
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R update(@RequestBody T t) {
-        if (baseService().update(t)) {
-            return R.ok();
+        if (!baseService().update(t)) {
+            return R.error();
         }
-        return R.error();
+        return R.ok();
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.POST)

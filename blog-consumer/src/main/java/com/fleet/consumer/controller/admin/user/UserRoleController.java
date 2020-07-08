@@ -49,8 +49,8 @@ public class UserRoleController {
         return R.ok();
     }
 
-    @RequestMapping(value = "/delete/batch", method = RequestMethod.POST)
-    public R deleteBatch(@RequestBody List<UserRole> userRoleList) {
+    @RequestMapping(value = "/deletes", method = RequestMethod.POST)
+    public R deletes(@RequestBody List<UserRole> userRoleList) {
         for (UserRole userRole : userRoleList) {
             if (!userRoleService.delete(userRole)) {
                 return R.error();

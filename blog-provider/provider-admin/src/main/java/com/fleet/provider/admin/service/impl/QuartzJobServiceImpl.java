@@ -37,8 +37,8 @@ public class QuartzJobServiceImpl extends BaseServiceImpl<QuartzJob> implements 
     @PostConstruct
     public void init() {
         Map<String, Object> map = new HashMap<>();
-        map.put("enabled", 1);
         map.put("deleted", Deleted.NO);
+        map.put("enabled", 1);
         List<QuartzJob> jobList = quartzJobDao.list(map);
         if (jobList != null) {
             for (QuartzJob job : jobList) {

@@ -87,8 +87,8 @@ public class OnlineController {
     /**
      * 批量强制退出
      */
-    @RequestMapping(value = "/delete/batch", method = RequestMethod.GET)
-    public R deleteBatch(@RequestParam("tokens") List<String> tokens) {
+    @RequestMapping(value = "/deletes", method = RequestMethod.GET)
+    public R deletes(@RequestParam("tokens") List<String> tokens) {
         for (String token : tokens) {
             Token userRefreshToken = (Token) redisUtil.get("token:refresh:" + token);
             if (userRefreshToken != null) {

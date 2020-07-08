@@ -24,24 +24,10 @@ public class AdminApplicationTests {
     private DictService dictService;
 
     @Test
-    public void deptId() {
-        Integer deptId = deptService.getDeptId("财务部/会计");
-        System.out.println(deptId);
-    }
-
-
-    @Test
-    public void deptIdList() {
-        List<Integer> list = deptService.deptIdList(1);
-        System.out.println(list);
-    }
-
-    @Test
     public void insert() {
         Dict dict = new Dict();
         dict.setDictGroup("测试1");
         dict.setDictRemark("测试");
         dictService.insert(dict);
     }
-
 }

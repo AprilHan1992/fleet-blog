@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class User extends Base {
 
+    private static final long serialVersionUID = 8953833962476594832L;
+
     /**
      * 用户id
      */
@@ -59,9 +61,9 @@ public class User extends Base {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date regTime;
 
-    private Dept userDept;
+    private Dept dept;
 
-    private List<Role> userRoleList;
+    private List<Role> roleList;
 
     public Integer getId() {
         return id;
@@ -127,19 +129,19 @@ public class User extends Base {
         this.regTime = regTime;
     }
 
-    public Dept getUserDept() {
-        return userDept;
+    public Dept getDept() {
+        return dept;
     }
 
-    public void setUserDept(Dept userDept) {
-        this.userDept = userDept;
+    public void setDept(Dept dept) {
+        this.dept = dept;
     }
 
-    public List<Role> getUserRoleList() {
-        return userRoleList;
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setUserRoleList(List<Role> userRoleList) {
-        this.userRoleList = userRoleList;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 }

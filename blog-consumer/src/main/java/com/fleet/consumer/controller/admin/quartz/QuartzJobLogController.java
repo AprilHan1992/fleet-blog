@@ -32,8 +32,8 @@ public class QuartzJobLogController {
         return R.ok();
     }
 
-    @RequestMapping(value = "/delete/batch", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deleteBatch(@RequestParam("jobLogIds") List<Integer> jobLogIds) {
+    @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
+    public R deletes(@RequestParam("jobLogIds") List<Integer> jobLogIds) {
         for (Integer jobLogId : jobLogIds) {
             QuartzJobLog quartzJobLog = new QuartzJobLog();
             quartzJobLog.setJobLogId(jobLogId);

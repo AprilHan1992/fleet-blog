@@ -37,13 +37,13 @@ public class DictController {
     }
 
     @RequestMapping(value = "/getDefaultValue", method = RequestMethod.GET)
-    public String getDefaultValue(@RequestParam("dictGroup") String dictGroup) {
-        return dictService.getDefaultValue(dictGroup);
+    public String getDefaultValue(@RequestParam("group") String group) {
+        return dictService.getDefaultValue(group);
     }
 
     @RequestMapping(value = "/getValue", method = RequestMethod.GET)
-    public String getValue(@RequestParam("dictGroup") String dictGroup, @RequestParam("dictValueCode") String dictValueCode) {
-        return dictService.getValue(dictGroup, dictValueCode);
+    public String getValue(@RequestParam("group") String group, @RequestParam("code") String code) {
+        return dictService.getValue(group, code);
     }
 
 }

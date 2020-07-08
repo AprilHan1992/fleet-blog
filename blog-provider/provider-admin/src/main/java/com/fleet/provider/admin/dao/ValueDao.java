@@ -1,7 +1,7 @@
 package com.fleet.provider.admin.dao;
 
 import com.fleet.common.dao.BaseDao;
-import com.fleet.common.entity.dict.DictValue;
+import com.fleet.common.entity.dict.Value;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface DictValueDao extends BaseDao<DictValue> {
+public interface ValueDao extends BaseDao<Value> {
 
-    String getDefaultValue(String dictGroup);
+    String getDefaultValue(String group);
 
-    String getValue(@Param("dictGroup") String dictGroup, @Param("dictValueCode") String dictValueCode);
+    String getValue(@Param("group") String group, @Param("code") String code);
 }

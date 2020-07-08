@@ -70,6 +70,7 @@ public class MsgServiceImpl extends BaseServiceImpl<Msg> implements MsgService {
         msg = msgDao.get(msg);
         if (msg != null) {
             Map<String, Object> map = new HashMap<>();
+            map.put("deleted", Deleted.NO);
             map.put("msgId", msg.getMsgId());
             List<MsgTo> msgToList = msgToDao.list(map);
             msg.setMsgToList(msgToList);

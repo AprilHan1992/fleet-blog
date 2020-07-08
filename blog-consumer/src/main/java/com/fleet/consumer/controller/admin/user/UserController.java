@@ -17,6 +17,7 @@ import com.fleet.common.util.UUIDUtil;
 import com.fleet.common.util.cache.RedisUtil;
 import com.fleet.common.util.jdbc.PageUtil;
 import com.fleet.common.util.jdbc.entity.Page;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,35 +57,27 @@ public class UserController extends BaseController<User> {
     @AuthCheck(permits = {"aaa", "bbb"})
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public R insert(@RequestBody User user) {
+        if (StringUtils.isEmpty(user.getName())) {
+            return R.error("账户为空");
+        }
+        if (StringUtils.isEmpty(user.getPwd())) {
+            return R.error("密码为空");
+        }
+
+        User u = new User();
+        u.setName(user.getName());
+        u = userService.get(u);
+        if (u != null) {
+            return R.error("账户已存在");
+        }
+
         String salt = UUIDUtil.getUUID();
         user.setPwdSalt(salt);
-        String password = MD5Util.encrypt(user.getPwd(), salt);
-        user.setPwd(password);
+        String pwd = MD5Util.encrypt(user.getPwd(), salt);
+        user.setPwd(pwd);
         user.setRegTime(new Date());
-        if (userService.insert(user)) {
-            return R.ok();
-        }
-        return R.error();
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R delete(@RequestParam("id") Integer id) {
-        User user = new User();
-        user.setId(id);
-        if (userService.delete(user)) {
-            return R.ok();
-        }
-        return R.error();
-    }
-
-    @RequestMapping(value = "/delete/batch", method = RequestMethod.GET)
-    public R deleteBatch(@RequestParam("ids") List<Integer> ids) {
-        for (Integer id : ids) {
-            User user = new User();
-            user.setId(id);
-            if (!userService.delete(user)) {
-                return R.error();
-            }
+        if (!userService.insert(user)) {
+            return R.error();
         }
         return R.ok();
     }
@@ -92,19 +85,22 @@ public class UserController extends BaseController<User> {
     @Override
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R update(@RequestBody User user) {
+        User u = new User();
+        u.setId(user.getId());
+        u = userService.get(u);
+        if (u == null) {
+            return R.error("账户不存在");
+        }
         if (user.getPwd() != null) {
-            String salt = UUIDUtil.getUUID();
-            user.setPwdSalt(salt);
-            String password = MD5Util.encrypt(user.getPwd(), salt);
-            user.setPwd(password);
+            String pwd = MD5Util.encrypt(user.getPwd(), u.getPwdSalt());
+            user.setPwd(pwd);
         }
-        if (userService.update(user)) {
-            return R.ok();
+        if (!userService.update(user)) {
+            return R.error();
         }
-        return R.error();
+        return R.ok();
     }
 
-    @AuthCheck(permits = {"aaa", "bbb"})
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public R get(@RequestParam("id") Integer id) {
         User user = new User();
@@ -117,11 +113,11 @@ public class UserController extends BaseController<User> {
     public R get(@RequestBody User user) {
         user = userService.get(user);
         if (user != null) {
-            Dept userDept = userDeptService.userDept(user.getId());
-            user.setUserDept(userDept);
+            Dept dept = userDeptService.userDept(user.getId());
+            user.setDept(dept);
 
-            List<Role> userRoleList = userRoleService.userRoleList(user.getId());
-            user.setUserRoleList(userRoleList);
+            List<Role> roleList = userRoleService.userRoleList(user.getId());
+            user.setRoleList(roleList);
         }
         return R.ok(user);
     }
@@ -130,7 +126,7 @@ public class UserController extends BaseController<User> {
     @RequestMapping(value = "/listPage", method = RequestMethod.POST)
     public PageUtil<User> listPage(@RequestBody Page page) {
         if (page.containsKey("deptId") && page.get("deptId") != null) {
-            List<Integer> deptIdList = deptService.deptIdList((Integer) page.get("deptId"));
+            List<Integer> deptIdList = deptService.idList((Integer) page.get("deptId"));
             page.remove("deptId");
             page.put("deptIdList", deptIdList);
         }
@@ -138,11 +134,11 @@ public class UserController extends BaseController<User> {
         List<User> userList = pageUtil.getList();
         if (userList != null) {
             for (User user : userList) {
-                Dept userDept = userDeptService.userDept(user.getId());
-                user.setUserDept(userDept);
+                Dept dept = userDeptService.userDept(user.getId());
+                user.setDept(dept);
 
-                List<Role> userRoleList = userRoleService.userRoleList(user.getId());
-                user.setUserRoleList(userRoleList);
+                List<Role> roleList = userRoleService.userRoleList(user.getId());
+                user.setRoleList(roleList);
             }
         }
         return pageUtil;
@@ -150,7 +146,7 @@ public class UserController extends BaseController<User> {
 
     @RequestMapping("/menuList")
     public R menuList() {
-        Integer id = getId();
+        Integer id = getUserId();
         if (id == null) {
             return R.ok(new ArrayList<>());
         }
@@ -159,7 +155,7 @@ public class UserController extends BaseController<User> {
 
     @RequestMapping("/userPermits")
     public R permitList() {
-        Integer id = getId();
+        Integer id = getUserId();
         if (id == null) {
             return R.ok(new ArrayList<>());
         }

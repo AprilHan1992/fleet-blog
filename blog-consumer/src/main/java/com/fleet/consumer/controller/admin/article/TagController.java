@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 标签管理
+ *
+ * @author April Han
+ */
 @RestController
 @RequestMapping("/tag")
 public class TagController extends BaseController<Tag> {

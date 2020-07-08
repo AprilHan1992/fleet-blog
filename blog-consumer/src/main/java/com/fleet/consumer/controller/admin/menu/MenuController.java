@@ -33,8 +33,8 @@ public class MenuController {
         return R.ok();
     }
 
-    @RequestMapping(value = "/delete/batch", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deleteBatch(@RequestParam("menuIds") List<Integer> menuIds) {
+    @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
+    public R deletes(@RequestParam("menuIds") List<Integer> menuIds) {
         for (Integer menuId : menuIds) {
             Menu menu = new Menu();
             menu.setMenuId(menuId);

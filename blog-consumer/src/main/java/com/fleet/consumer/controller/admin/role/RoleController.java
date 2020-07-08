@@ -33,8 +33,8 @@ public class RoleController {
         return R.ok();
     }
 
-    @RequestMapping(value = "/delete/batch", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deleteBatch(@RequestParam("roleIds") List<Integer> roleIds) {
+    @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
+    public R deletes(@RequestParam("roleIds") List<Integer> roleIds) {
         for (Integer roleId : roleIds) {
             Role role = new Role();
             role.setRoleId(roleId);

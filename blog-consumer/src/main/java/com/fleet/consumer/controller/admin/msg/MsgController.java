@@ -33,8 +33,8 @@ public class MsgController {
         return R.ok();
     }
 
-    @RequestMapping(value = "/delete/batch", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deleteBatch(@RequestParam("msgIds") List<Integer> msgIds) {
+    @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
+    public R deletes(@RequestParam("msgIds") List<Integer> msgIds) {
         for (Integer msgId : msgIds) {
             Msg msg = new Msg();
             msg.setMsgId(msgId);

@@ -2,37 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fleet.provider.admin.dao.DeptDao">
     <resultMap id="BaseResultMap" type="com.fleet.common.entity.dept.Dept">
-        <id column="dept_id" property="deptId"/>
-        <result column="dept_name" property="deptName"/>
-        <result column="dept_state" property="deptState"/>
-        <result column="sort_value" property="sort"/>
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="state" property="state"/>
+        <result column="sort" property="sort"/>
+        <result column="creator_id" property="creatorId"/>
         <result column="create_time" property="createTime"/>
+        <result column="editor_id" property="editorId"/>
         <result column="edit_time" property="editTime"/>
         <result column="upper_id" property="upperId"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		`dept_id`, `dept_name`, `dept_state`, `sort_value`, create_time, edit_time, upper_id, `deleted`
+		`id`, `name`, `state`, `sort`, `creator_id`, `create_time`, `editor_id`, `edit_time`, `upper_id`, `deleted`
 	</sql>
 
-    <insert id="insert" parameterType="com.fleet.common.entity.dept.Dept" useGeneratedKeys="true" keyProperty="deptId">
+    <insert id="insert" parameterType="com.fleet.common.entity.dept.Dept" useGeneratedKeys="true" keyProperty="id">
         insert into `dept` (
         <trim suffixOverrides=",">
-            <if test="deptName != null">`dept_name`,</if>
-            <if test="deptState != null">`dept_state`,</if>
-            <if test="sort != null">`sort_value`,</if>
+            <if test="name != null">`name`,</if>
+            <if test="state != null">`state`,</if>
+            <if test="sort != null">`sort`,</if>
+            <if test="creatorId != null">`creator_id`,</if>
             <if test="createTime != null">`create_time`,</if>
+            <if test="editorId != null">`editor_id`,</if>
             <if test="editTime != null">`edit_time`,</if>
             <if test="upperId != null">`upper_id`,</if>
             <if test="deleted != null">`deleted`,</if>
         </trim>
         ) values (
         <trim suffixOverrides=",">
-            <if test="deptName != null">#{deptName},</if>
-            <if test="deptState != null">#{deptState},</if>
+            <if test="name != null">#{name},</if>
+            <if test="state != null">#{state},</if>
             <if test="sort != null">#{sort},</if>
+            <if test="creatorId != null">#{creatorId},</if>
             <if test="createTime != null">#{createTime},</if>
+            <if test="editorId != null">#{editorId},</if>
             <if test="editTime != null">#{editTime},</if>
             <if test="upperId != null">#{upperId},</if>
             <if test="deleted != null">#{deleted},</if>
@@ -43,28 +49,41 @@
     <delete id="delete" parameterType="com.fleet.common.entity.dept.Dept">
         update `dept` set `deleted` = 1
         <where>
-            <if test="deptId != null">and `dept_id` = #{deptId}</if>
-            <if test="deptName != null">and `dept_name` = #{deptName}</if>
-            <if test="deptState != null">and `dept_state` = #{deptState}</if>
-            <if test="sort != null">and `sort_value` = #{sort}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="name != null">and `name` = #{name}</if>
+            <if test="state != null">and `state` = #{state}</if>
+            <if test="sort != null">and `sort` = #{sort}</if>
+            <if test="creatorId != null">and `creator_id` = #{creatorId}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
+            <if test="editorId != null">and `editor_id` = #{editorId}</if>
             <if test="editTime != null">and `edit_time` = #{editTime}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
         </where>
     </delete>
 
+    <update id="deletes">
+        update `dept` set `deleted` = 1
+        <where>
+            <foreach collection="array" item="id" open="and `id` in (" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </update>
+
     <update id="update" parameterType="com.fleet.common.entity.dept.Dept">
         update `dept`
         <set>
-            <if test="deptName != null">`dept_name` = #{deptName},</if>
-            <if test="deptState != null">`dept_state` = #{deptState},</if>
-            <if test="sort != null">`sort_value` = #{sort},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="state != null">`state` = #{state},</if>
+            <if test="sort != null">`sort` = #{sort},</if>
+            <if test="creatorId != null">`creator_id` = #{creatorId},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="editorId != null">`editor_id` = #{editorId},</if>
             <if test="editTime != null">`edit_time` = #{editTime},</if>
             <if test="upperId != null">`upper_id` = #{upperId},</if>
             <if test="deleted != null">`deleted` = #{deleted},</if>
         </set>
-        where dept_id = #{deptId}
+        where id = #{id}
     </update>
 
     <select id="get" resultMap="BaseResultMap">
@@ -72,11 +91,13 @@
         <include refid="Base_Column_List"/>
         from `dept`
         <where>
-            <if test="deptId != null">and `dept_id` = #{deptId}</if>
-            <if test="deptName != null">and `dept_name` = #{deptName}</if>
-            <if test="deptState != null">and `dept_state` = #{deptState}</if>
-            <if test="sort != null">and `sort_value` = #{sort}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="name != null">and `name` = #{name}</if>
+            <if test="state != null">and `state` = #{state}</if>
+            <if test="sort != null">and `sort` = #{sort}</if>
+            <if test="creatorId != null">and `creator_id` = #{creatorId}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
+            <if test="editorId != null">and `editor_id` = #{editorId}</if>
             <if test="editTime != null">and `edit_time` = #{editTime}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
@@ -90,11 +111,13 @@
         <include refid="Base_Column_List"/>
         from `dept`
         <where>
-            <if test="deptId != null">and `dept_id` = #{deptId}</if>
-            <if test="deptName != null">and `dept_name` like CONCAT('%',#{deptName},'%')</if>
-            <if test="deptState != null">and `dept_state` = #{deptState}</if>
-            <if test="sort != null">and `sort_value` = #{sort}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="name != null">and `name` = #{name}</if>
+            <if test="state != null">and `state` = #{state}</if>
+            <if test="sort != null">and `sort` = #{sort}</if>
+            <if test="creatorId != null">and `creator_id` = #{creatorId}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
+            <if test="editorId != null">and `editor_id` = #{editorId}</if>
             <if test="editTime != null">and `edit_time` = #{editTime}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
@@ -102,14 +125,16 @@
         </where>
     </select>
 
-    <select id="deptIdList" resultType="java.lang.Integer">
-        select `dept_id` from `dept`
+    <select id="idList" resultType="java.lang.Integer">
+        select `id` from `dept`
         <where>
-            <if test="deptId != null">and `dept_id` = #{deptId}</if>
-            <if test="deptName != null">and `dept_name` = #{deptName}</if>
-            <if test="deptState != null">and `dept_state` = #{deptState}</if>
-            <if test="sort != null">and `sort_value` = #{sort}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="name != null">and `name` = #{name}</if>
+            <if test="state != null">and `state` = #{state}</if>
+            <if test="sort != null">and `sort` = #{sort}</if>
+            <if test="creatorId != null">and `creator_id` = #{creatorId}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
+            <if test="editorId != null">and `editor_id` = #{editorId}</if>
             <if test="editTime != null">and `edit_time` = #{editTime}</if>
             <if test="upperId != null">and `upper_id` = #{upperId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>

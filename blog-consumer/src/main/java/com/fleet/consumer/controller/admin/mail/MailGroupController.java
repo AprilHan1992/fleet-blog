@@ -33,8 +33,8 @@ public class MailGroupController {
         return R.ok();
     }
 
-    @RequestMapping(value = "/delete/batch", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deleteBatch(@RequestParam("mailGroupIds") List<Integer> mailGroupIds) {
+    @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
+    public R deletes(@RequestParam("mailGroupIds") List<Integer> mailGroupIds) {
         for (Integer mailGroupId : mailGroupIds) {
             MailGroup mailGroup = new MailGroup();
             mailGroup.setMailGroupId(mailGroupId);

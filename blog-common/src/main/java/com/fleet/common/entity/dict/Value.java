@@ -2,14 +2,17 @@ package com.fleet.common.entity.dict;
 
 import com.fleet.common.entity.Base;
 
-public class DictValue extends Base {
+/**
+ * @author April Han
+ */
+public class Value extends Base {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 字典值id
      */
-    private Integer dictValueId;
+    private Integer id;
 
     /**
      * 字典id
@@ -19,17 +22,17 @@ public class DictValue extends Base {
     /**
      * 字典标签
      */
-    private String dictValueCode;
+    private String code;
 
     /**
      * 字典值
      */
-    private String dictValue;
+    private String value;
 
     /**
      * 字典值描述
      */
-    private String dictValueRemark;
+    private String remark;
 
     /**
      * 排序（数字越大，越排前）
@@ -41,12 +44,12 @@ public class DictValue extends Base {
      */
     private Integer isDefault;
 
-    public Integer getDictValueId() {
-        return dictValueId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setDictValueId(Integer dictValueId) {
-        this.dictValueId = dictValueId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getDictId() {
@@ -57,28 +60,28 @@ public class DictValue extends Base {
         this.dictId = dictId;
     }
 
-    public String getDictValueCode() {
-        return dictValueCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setDictValueCode(String dictValueCode) {
-        this.dictValueCode = dictValueCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getDictValue() {
-        return dictValue;
+    public String getValue() {
+        return value;
     }
 
-    public void setDictValue(String dictValue) {
-        this.dictValue = dictValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public String getDictValueRemark() {
-        return dictValueRemark;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setDictValueRemark(String dictValueRemark) {
-        this.dictValueRemark = dictValueRemark;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Integer getSort() {
