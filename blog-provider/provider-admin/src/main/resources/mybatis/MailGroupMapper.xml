@@ -2,28 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fleet.provider.admin.dao.MailGroupDao">
     <resultMap id="BaseResultMap" type="com.fleet.common.entity.mail.MailGroup">
-        <id column="mail_group_id" property="mailGroupId"/>
-        <result column="mail_group_name" property="mailGroupName"/>
-        <result column="mail_group_to" property="mailGroupTo"/>
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="tos" property="tos"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		`mail_group_id`, `mail_group_name`, `mail_group_to`, `deleted`
+		`id`, `name`, `tos`, `deleted`
 	</sql>
 
     <insert id="insert" parameterType="com.fleet.common.entity.mail.MailGroup" useGeneratedKeys="true"
-            keyProperty="mailGroupId">
+            keyProperty="id">
         insert into `mail_group` (
         <trim suffixOverrides=",">
-            <if test="mailGroupName != null">`mail_group_name`,</if>
-            <if test="mailGroupTo != null">`mail_group_to`,</if>
+            <if test="name != null">`name`,</if>
+            <if test="tos != null">`tos`,</if>
             <if test="deleted != null">`deleted`,</if>
         </trim>
         ) values (
         <trim suffixOverrides=",">
-            <if test="mailGroupName != null">#{mailGroupName},</if>
-            <if test="mailGroupTo != null">#{mailGroupTo},</if>
+            <if test="name != null">#{name},</if>
+            <if test="tos != null">#{tos},</if>
             <if test="deleted != null">#{deleted},</if>
         </trim>
         )
@@ -32,20 +32,29 @@
     <update id="delete" parameterType="com.fleet.common.entity.mail.MailGroup">
         update `mail_group` set `deleted` = 1
         <where>
-            <if test="mailGroupId != null">and `mail_group_id` = #{mailGroupId}</if>
-            <if test="mailGroupName != null">and `mail_group_name` = #{mailGroupName}</if>
-            <if test="mailGroupTo != null">and `mail_group_to` = #{mailGroupTo}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="name != null">and `name` = #{name}</if>
+            <if test="tos != null">and `tos` = #{tos}</if>
+        </where>
+    </update>
+
+    <update id="deletes">
+        update `mail_group` set `deleted` = 1
+        <where>
+            <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
+                #{id}
+            </foreach>
         </where>
     </update>
 
     <update id="update" parameterType="com.fleet.common.entity.mail.MailGroup">
         update `mail_group`
         <set>
-            <if test="mailGroupName != null">`mail_group_name` = #{mailGroupName},</if>
-            <if test="mailGroupTo != null">`mail_group_to` = #{mailGroupTo},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="tos != null">`tos` = #{tos},</if>
             <if test="deleted != null">`deleted` = #{deleted},</if>
         </set>
-        where mail_group_id = #{mailGroupId}
+        where id = #{id}
     </update>
 
     <select id="get" resultMap="BaseResultMap">
@@ -53,9 +62,9 @@
         <include refid="Base_Column_List"/>
         from `mail_group`
         <where>
-            <if test="mailGroupId != null">and `mail_group_id` = #{mailGroupId}</if>
-            <if test="mailGroupName != null">and `mail_group_name` = #{mailGroupName}</if>
-            <if test="mailGroupTo != null">and `mail_group_to` = #{mailGroupTo}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="name != null">and `name` = #{name}</if>
+            <if test="tos != null">and `tos` = #{tos}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
         </where>
@@ -67,9 +76,9 @@
         <include refid="Base_Column_List"/>
         from `mail_group`
         <where>
-            <if test="mailGroupId != null">and `mail_group_id` = #{mailGroupId}</if>
-            <if test="mailGroupName != null">and `mail_group_name` = #{mailGroupName}</if>
-            <if test="mailGroupTo != null">and `mail_group_to` = #{mailGroupTo}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="name != null">and `name` = #{name}</if>
+            <if test="tos != null">and `tos` = #{tos}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
         </where>

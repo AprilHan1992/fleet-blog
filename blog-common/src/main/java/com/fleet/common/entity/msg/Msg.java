@@ -1,10 +1,15 @@
 package com.fleet.common.entity.msg;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fleet.common.entity.Base;
+import com.fleet.common.entity.user.User;
 
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 public class Msg extends Base {
 
     private static final long serialVersionUID = 1L;
@@ -12,27 +17,27 @@ public class Msg extends Base {
     /**
      * 消息id
      */
-    private Integer msgId;
+    private Integer id;
 
     /**
      * 消息标题
      */
-    private String msgTitle;
+    private String title;
 
     /**
      * 消息摘要
      */
-    private String msgExcerpt;
+    private String excerpt;
 
     /**
      * 网址
      */
-    private String msgUrl;
+    private String url;
 
     /**
      * 消息状态（0：未发布，1：已发布）
      */
-    private Integer msgState;
+    private Integer state;
 
     /**
      * 创建人
@@ -40,50 +45,56 @@ public class Msg extends Base {
     private Integer creatorId;
 
     /**
+     * 创建人
+     */
+    private User creator;
+
+    /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
-    private List<MsgTo> msgToList;
+    private List<To> toList;
 
-    public Integer getMsgId() {
-        return msgId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMsgId(Integer msgId) {
-        this.msgId = msgId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getMsgTitle() {
-        return msgTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setMsgTitle(String msgTitle) {
-        this.msgTitle = msgTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getMsgExcerpt() {
-        return msgExcerpt;
+    public String getExcerpt() {
+        return excerpt;
     }
 
-    public void setMsgExcerpt(String msgExcerpt) {
-        this.msgExcerpt = msgExcerpt;
+    public void setExcerpt(String excerpt) {
+        this.excerpt = excerpt;
     }
 
-    public String getMsgUrl() {
-        return msgUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setMsgUrl(String msgUrl) {
-        this.msgUrl = msgUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public Integer getMsgState() {
-        return msgState;
+    public Integer getState() {
+        return state;
     }
 
-    public void setMsgState(Integer msgState) {
-        this.msgState = msgState;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public Integer getCreatorId() {
@@ -94,6 +105,14 @@ public class Msg extends Base {
         this.creatorId = creatorId;
     }
 
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -102,11 +121,11 @@ public class Msg extends Base {
         this.createTime = createTime;
     }
 
-    public List<MsgTo> getMsgToList() {
-        return msgToList;
+    public List<To> getToList() {
+        return toList;
     }
 
-    public void setMsgToList(List<MsgTo> msgToList) {
-        this.msgToList = msgToList;
+    public void setToList(List<To> toList) {
+        this.toList = toList;
     }
 }

@@ -4,7 +4,10 @@ import com.fleet.common.entity.dept.Dept;
 import com.fleet.common.entity.user.UserDept;
 import com.fleet.common.service.BaseService;
 
+/**
+ * @author April Han
+ */
 public interface UserDeptService extends BaseService<UserDept> {
 
-    Dept userDept(Integer id);
+    Dept dept(Integer userId);
 }

@@ -8,9 +8,19 @@ public class UserDept extends Base {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户id
+     * 用户对应部门id
      */
     private Integer id;
+
+    /**
+     * 用户id
+     */
+    private Integer userId;
+
+    /**
+     * 用户
+     */
+    private User user;
 
     /**
      * 部门id
@@ -25,6 +35,22 @@ public class UserDept extends Base {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getDeptId() {

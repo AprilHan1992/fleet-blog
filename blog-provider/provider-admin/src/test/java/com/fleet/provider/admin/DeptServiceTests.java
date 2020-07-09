@@ -85,7 +85,7 @@ public class DeptServiceTests {
 
 
     @Test
-    public void deptIdList() {
+    public void idList() {
         List<Integer> list = deptService.idList(1);
         System.out.println(JSON.toJSONString(list));
     }

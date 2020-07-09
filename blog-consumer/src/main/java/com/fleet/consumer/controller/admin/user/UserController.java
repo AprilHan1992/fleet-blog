@@ -9,6 +9,7 @@ import com.fleet.common.json.R;
 import com.fleet.common.service.BaseService;
 import com.fleet.common.service.dept.DeptService;
 import com.fleet.common.service.menu.MenuService;
+import com.fleet.common.service.role.RoleService;
 import com.fleet.common.service.user.UserDeptService;
 import com.fleet.common.service.user.UserRoleService;
 import com.fleet.common.service.user.UserService;
@@ -40,6 +41,9 @@ public class UserController extends BaseController<User> {
     private UserDeptService userDeptService;
 
     @Reference
+    private RoleService roleService;
+
+    @Reference
     private MenuService menuService;
 
     @Reference
@@ -55,7 +59,7 @@ public class UserController extends BaseController<User> {
 
     @Override
     @AuthCheck(permits = {"aaa", "bbb"})
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @PostMapping("/insert")
     public R insert(@RequestBody User user) {
         if (StringUtils.isEmpty(user.getName())) {
             return R.error("账户为空");
@@ -83,7 +87,7 @@ public class UserController extends BaseController<User> {
     }
 
     @Override
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping("/update")
     public R update(@RequestBody User user) {
         User u = new User();
         u.setId(user.getId());
@@ -101,7 +105,7 @@ public class UserController extends BaseController<User> {
         return R.ok();
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         User user = new User();
         user.setId(id);
@@ -109,57 +113,66 @@ public class UserController extends BaseController<User> {
     }
 
     @Override
-    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    @PostMapping("/get")
     public R get(@RequestBody User user) {
         user = userService.get(user);
         if (user != null) {
-            Dept dept = userDeptService.userDept(user.getId());
+            Dept dept = userDeptService.dept(user.getId());
             user.setDept(dept);
 
-            List<Role> roleList = userRoleService.userRoleList(user.getId());
+            List<Role> roleList = userRoleService.roleList(user.getId());
             user.setRoleList(roleList);
         }
         return R.ok(user);
     }
 
     @Override
-    @RequestMapping(value = "/listPage", method = RequestMethod.POST)
+    @PostMapping("/listPage")
     public PageUtil<User> listPage(@RequestBody Page page) {
         if (page.containsKey("deptId") && page.get("deptId") != null) {
-            List<Integer> deptIdList = deptService.idList((Integer) page.get("deptId"));
+            List<Integer> idList = deptService.idList((Integer) page.get("deptId"));
             page.remove("deptId");
-            page.put("deptIdList", deptIdList);
+            page.put("idList", idList);
         }
         PageUtil<User> pageUtil = userService.listPage(page);
         List<User> userList = pageUtil.getList();
         if (userList != null) {
             for (User user : userList) {
-                Dept dept = userDeptService.userDept(user.getId());
+                Dept dept = userDeptService.dept(user.getId());
                 user.setDept(dept);
 
-                List<Role> roleList = userRoleService.userRoleList(user.getId());
+                List<Role> roleList = userRoleService.roleList(user.getId());
                 user.setRoleList(roleList);
             }
         }
         return pageUtil;
     }
 
-    @RequestMapping("/menuList")
-    public R menuList() {
-        Integer id = getUserId();
-        if (id == null) {
+    @RequestMapping("/roleList")
+    public R roleList() {
+        Integer userId = getUserId();
+        if (userId == null) {
             return R.ok(new ArrayList<>());
         }
-        return R.ok(menuService.buildTree(userRoleService.userMenuList(id)));
+        return R.ok(roleService.buildTree(userRoleService.roleList(userId)));
     }
 
-    @RequestMapping("/userPermits")
+    @RequestMapping("/menuList")
+    public R menuList() {
+        Integer userId = getUserId();
+        if (userId == null) {
+            return R.ok(new ArrayList<>());
+        }
+        return R.ok(menuService.buildTree(userRoleService.menuList(userId)));
+    }
+
+    @RequestMapping("/permitList")
     public R permitList() {
         Integer id = getUserId();
         if (id == null) {
             return R.ok(new ArrayList<>());
         }
-        return R.ok(userRoleService.userPermits(id));
+        return R.ok(userRoleService.permitList(id));
     }
 
     @RequestMapping("/hasRoles")

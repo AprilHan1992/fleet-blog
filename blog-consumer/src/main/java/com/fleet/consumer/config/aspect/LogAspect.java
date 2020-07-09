@@ -1,6 +1,5 @@
 package com.fleet.consumer.config.aspect;
 
-import com.fleet.consumer.config.async.LogAsyncTask;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;

@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
+/**
+ * @author April Han
+ */
 @Transactional
 @Service
 public class LogServiceImpl extends BaseServiceImpl<Log> implements LogService {

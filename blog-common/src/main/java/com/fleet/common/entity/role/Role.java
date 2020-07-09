@@ -4,19 +4,22 @@ import com.fleet.common.entity.Base;
 
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 public class Role extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2822811996935124899L;
 
     /**
      * 角色id
      */
-    private Integer roleId;
+    private Integer id;
 
     /**
      * 角色名称
      */
-    private String role;
+    private String name;
 
     /**
      * 排序（数字越大，越排前）
@@ -28,24 +31,22 @@ public class Role extends Base {
      */
     private Integer upperId;
 
-    private List<RoleMenu> roleMenuList;
+    private List<Role> children;
 
-    private List<Role> roleList;
-
-    public Integer getRoleId() {
-        return roleId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getSort() {
@@ -64,19 +65,11 @@ public class Role extends Base {
         this.upperId = upperId;
     }
 
-    public List<RoleMenu> getRoleMenuList() {
-        return roleMenuList;
+    public List<Role> getChildren() {
+        return children;
     }
 
-    public void setRoleMenuList(List<RoleMenu> roleMenuList) {
-        this.roleMenuList = roleMenuList;
-    }
-
-    public List<Role> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
+    public void setChildren(List<Role> children) {
+        this.children = children;
     }
 }

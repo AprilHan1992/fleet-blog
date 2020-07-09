@@ -108,9 +108,9 @@
             <if test="deleted != null">and u.`deleted` = #{deleted}</if>
             <if test="deleted == null">and u.`deleted` = 0</if>
             <if test="deptId != null">and ud.`dept_id` = #{deptId}</if>
-            <if test="deptIdList != null">
-                <foreach item="id" collection="array" open="and ud.`dept_id` in (" separator="," close=")">
-                    #{id}
+            <if test="idList != null">
+                <foreach collection="array" item="did" open="and ud.`dept_id` in (" separator="," close=")">
+                    #{did}
                 </foreach>
             </if>
             <if test="deptName != null">and d.`dept_name` = #{deptName}</if>

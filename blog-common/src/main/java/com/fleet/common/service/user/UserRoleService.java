@@ -7,17 +7,20 @@ import com.fleet.common.service.BaseService;
 
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 public interface UserRoleService extends BaseService<UserRole> {
 
-    List<Role> userRoleList(Integer id);
+    List<Integer> idList(UserRole userRole);
 
-    List<String> userRoles(Integer id);
+    List<Role> roleList(Integer userId);
 
-    List<Menu> userMenuList(Integer id);
+    List<Menu> menuList(Integer userId);
 
-    List<String> userPermits(Integer id);
+    List<String> permitList(Integer userId);
 
-    Boolean hasRoles(Integer id, String[] roles);
+    Boolean hasRoles(Integer userId, String[] roles);
 
-    Boolean hasPermits(Integer id, String[] permits);
+    Boolean hasPermits(Integer userId, String[] permits);
 }

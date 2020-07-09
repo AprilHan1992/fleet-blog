@@ -1,8 +1,10 @@
 package com.fleet.consumer.controller.admin.menu;
 
+import com.fleet.common.controller.BaseController;
 import com.fleet.common.entity.menu.Menu;
 import com.fleet.common.enums.Deleted;
 import com.fleet.common.json.R;
+import com.fleet.common.service.BaseService;
 import com.fleet.common.service.menu.MenuService;
 import com.fleet.common.util.jdbc.PageUtil;
 import com.fleet.common.util.jdbc.entity.Page;
@@ -12,57 +14,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 菜单管理
+ *
+ * @author April Han
+ */
 @RestController
 @RequestMapping("/menu")
-public class MenuController {
+public class MenuController extends BaseController<Menu> {
 
     @Reference
     private MenuService menuService;
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public R insert(@RequestBody Menu menu) {
-        menuService.insert(menu);
-        return R.ok();
+    @Override
+    public BaseService<Menu> baseService() {
+        return menuService;
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R delete(@RequestParam("menuId") Integer menuId) {
+    @GetMapping("/get")
+    public R get(@RequestParam("id") Integer id) {
         Menu menu = new Menu();
-        menu.setMenuId(menuId);
-        menuService.delete(menu);
-        return R.ok();
+        menu.setId(id);
+        return get(menu);
     }
 
-    @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deletes(@RequestParam("menuIds") List<Integer> menuIds) {
-        for (Integer menuId : menuIds) {
-            Menu menu = new Menu();
-            menu.setMenuId(menuId);
-            menuService.delete(menu);
-        }
-        return R.ok();
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public R update(@RequestBody Menu menu) {
-        menuService.update(menu);
-        return R.ok();
-    }
-
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public R get(@RequestParam("menuId") Integer menuId) {
-        Menu menu = new Menu();
-        menu.setMenuId(menuId);
-        return R.ok(menuService.get(menu));
-    }
-
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @Override
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
-        return R.ok(menuService.list(map));
+        List<Menu> list = menuService.list(map);
+        list = menuService.buildTree(list);
+        return R.ok(list);
     }
 
-    @RequestMapping(value = "/listPage", method = RequestMethod.POST)
+    @Override
+    @PostMapping("/listPage")
     public PageUtil<Menu> listPage(@RequestBody Page page) {
         PageUtil<Menu> pageUtil = new PageUtil<>();
         List<Menu> list = menuService.list(page);

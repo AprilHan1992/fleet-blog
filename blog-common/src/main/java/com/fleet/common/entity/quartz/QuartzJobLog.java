@@ -1,155 +1,158 @@
 package com.fleet.common.entity.quartz;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fleet.common.entity.Base;
 
+import java.util.Date;
+
+/**
+ * @author April Han
+ */
 public class QuartzJobLog extends Base {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 日志id
-	 */
-	private Integer jobLogId;
+    /**
+     * 日志id
+     */
+    private Integer id;
 
-	/**
-	 * 任务id
-	 */
-	private Integer jobId;
+    /**
+     * 任务id
+     */
+    private Integer jobId;
 
-	/**
-	 * 定时器名称
-	 */
-	private String jobName;
+    /**
+     * 定时器名称
+     */
+    private String jobName;
 
-	/**
-	 * Bean名称
-	 */
-	private String beanName;
+    /**
+     * Bean名称
+     */
+    private String beanName;
 
-	/**
-	 * 方法名称
-	 */
-	private String methodName;
+    /**
+     * 方法名称
+     */
+    private String methodName;
 
-	/**
-	 * 参数
-	 */
-	private String params;
+    /**
+     * 参数
+     */
+    private String params;
 
-	/**
-	 * cron表达式
-	 */
-	private String cronExpression;
+    /**
+     * cron表达式
+     */
+    private String cronExpression;
 
-	/**
-	 * 任务状态 （1：成功，0：失败）
-	 */
-	private Integer state;
+    /**
+     * 任务状态 （1：成功，0：失败）
+     */
+    private Integer state;
 
-	/**
-	 * 失败信息
-	 */
-	private String error;
+    /**
+     * 失败信息
+     */
+    private String error;
 
-	/**
-	 * 执行时间（单位：毫秒）
-	 */
-	private Long millis;
+    /**
+     * 执行时间（单位：毫秒）
+     */
+    private Long millis;
 
-	/**
-	 * 创建时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date createTime;
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
 
-	public Integer getJobLogId() {
-		return jobLogId;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setJobLogId(Integer jobLogId) {
-		this.jobLogId = jobLogId;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getJobId() {
-		return jobId;
-	}
+    public Integer getJobId() {
+        return jobId;
+    }
 
-	public void setJobId(Integer jobId) {
-		this.jobId = jobId;
-	}
+    public void setJobId(Integer jobId) {
+        this.jobId = jobId;
+    }
 
-	public String getJobName() {
-		return jobName;
-	}
+    public String getJobName() {
+        return jobName;
+    }
 
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
-	}
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
 
-	public String getBeanName() {
-		return beanName;
-	}
+    public String getBeanName() {
+        return beanName;
+    }
 
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
-	}
+    public void setBeanName(String beanName) {
+        this.beanName = beanName;
+    }
 
-	public String getMethodName() {
-		return methodName;
-	}
+    public String getMethodName() {
+        return methodName;
+    }
 
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
 
-	public String getParams() {
-		return params;
-	}
+    public String getParams() {
+        return params;
+    }
 
-	public void setParams(String params) {
-		this.params = params;
-	}
+    public void setParams(String params) {
+        this.params = params;
+    }
 
-	public String getCronExpression() {
-		return cronExpression;
-	}
+    public String getCronExpression() {
+        return cronExpression;
+    }
 
-	public void setCronExpression(String cronExpression) {
-		this.cronExpression = cronExpression;
-	}
+    public void setCronExpression(String cronExpression) {
+        this.cronExpression = cronExpression;
+    }
 
-	public Integer getState() {
-		return state;
-	}
+    public Integer getState() {
+        return state;
+    }
 
-	public void setState(Integer state) {
-		this.state = state;
-	}
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
-	public String getError() {
-		return error;
-	}
+    public String getError() {
+        return error;
+    }
 
-	public void setError(String error) {
-		this.error = error;
-	}
+    public void setError(String error) {
+        this.error = error;
+    }
 
-	public Long getMillis() {
-		return millis;
-	}
+    public Long getMillis() {
+        return millis;
+    }
 
-	public void setMillis(Long millis) {
-		this.millis = millis;
-	}
+    public void setMillis(Long millis) {
+        this.millis = millis;
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

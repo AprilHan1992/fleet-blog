@@ -2,50 +2,81 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fleet.provider.admin.dao.UserDeptDao">
     <resultMap id="BaseResultMap" type="com.fleet.common.entity.user.UserDept">
-        <result column="user_id" property="id"/>
-        <result column="dept_id" property="deptId"/>
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="dept_id" property="userId"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
 
     <resultMap id="DeptResultMap" type="com.fleet.common.entity.dept.Dept">
-        <id column="dept_id" property="deptId"/>
-        <result column="dept_name" property="deptName"/>
-        <result column="dept_state" property="deptState"/>
-        <result column="sort_value" property="sort"/>
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="state" property="state"/>
+        <result column="sort" property="sort"/>
+        <result column="creator_id" property="creatorId"/>
         <result column="create_time" property="createTime"/>
+        <result column="editor_id" property="editorId"/>
         <result column="edit_time" property="editTime"/>
         <result column="upper_id" property="upperId"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		`user_id`, `dept_id`, `deleted`
+		`id`, `user_id`, `dept_id`, `deleted`
 	</sql>
 
-    <insert id="insert" parameterType="com.fleet.common.entity.user.UserDept">
-		insert into `user_dept`(`user_id`, `dept_id`, `deleted`) values (#{id}, #{deptId}, #{deleted})
-		ON DUPLICATE KEY UPDATE user_id = #{id}, dept_id = #{deptId}, deleted = #{deleted}
-	</insert>
+    <insert id="insert" parameterType="com.fleet.common.entity.user.UserDept" useGeneratedKeys="true" keyProperty="id">
+        insert into `user_dept` (
+        <trim suffixOverrides=",">
+            <if test="userId != null">`user_id`,</if>
+            <if test="deptId != null">`dept_id`,</if>
+            <if test="deleted != null">`deleted`,</if>
+        </trim>
+        ) values (
+        <trim suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="deleted != null">#{deleted},</if>
+        </trim>
+        )
+    </insert>
 
-    <delete id="delete" parameterType="com.fleet.common.entity.user.UserDept">
+    <update id="delete" parameterType="com.fleet.common.entity.user.UserDept">
         update `user_dept` set `deleted` = 1
         <where>
-            <if test="id != null">and user_id = #{id}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
         </where>
-    </delete>
+    </update>
+
+    <update id="deletes">
+        update `user_dept` set `deleted` = 1
+        <where>
+            <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </update>
 
     <update id="update" parameterType="com.fleet.common.entity.user.UserDept">
-		insert into `user_dept`(`user_id`, `dept_id`, `deleted`) values (#{id}, #{deptId}, #{deleted})
-		ON DUPLICATE KEY UPDATE user_id = #{id}, dept_id = #{deptId}, deleted = #{deleted}
-	</update>
+        update `user_dept`
+        <set>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="userId != null">`user_id` = #{userId},</if>
+            <if test="deptId != null">`dept_id` = #{deptId},</if>
+            <if test="deleted != null">`deleted` = #{deleted},</if>
+        </set>
+        where id = #{id}
+    </update>
 
     <select id="get" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from `user_dept`
         <where>
-            <if test="id != null">and user_id = #{id}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
@@ -58,28 +89,30 @@
         <include refid="Base_Column_List"/>
         from `user_dept`
         <where>
-            <if test="id != null">and user_id = #{id}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
         </where>
     </select>
 
-    <select id="deptIdList" resultType="java.lang.Integer">
-        select dept_id from `user_dept`
+    <select id="idList" resultType="java.lang.Integer">
+        select `id` from `user_dept`
         <where>
-            <if test="id != null">and user_id = #{id}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
         </where>
     </select>
 
-    <select id="userDept" parameterType="java.lang.Integer" resultMap="DeptResultMap">
-		select d.`dept_id`, d.`dept_name`, d.`dept_state`, d.`sort_value`, d.`create_time`, d.`edit_time`, d.`upper_id`, d.`deleted`
+    <select id="dept" parameterType="java.lang.Integer" resultMap="DeptResultMap">
+		select d.`id`, d.`name`, d.`state`, d.`sort`, d.`creator_id`, d.`create_time`, d.`editor_id`, d.`edit_time`, d.`upper_id`, d.`deleted`
 		from `user_dept` as ud
-		left join `dept` as d on ud.dept_id = d.dept_id
-		where ud.user_id = #{id} and ud.deleted = 0 and d.deleted = 0
+		left join `dept` as d on ud.dept_id = d.id
+		where ud.user_id = #{userId} and ud.deleted = 0 and d.deleted = 0
 		limit 1
 	</select>
 </mapper>

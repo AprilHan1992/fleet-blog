@@ -2,28 +2,28 @@ package com.fleet.common.util.quartz;
 
 import com.fleet.common.entity.quartz.QuartzJob;
 import com.fleet.common.entity.quartz.QuartzJobLog;
-import com.fleet.common.service.quartz.QuartzJobLogService;
 import com.fleet.common.util.SpringContextUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Method;
-import java.util.Date;
 
+/**
+ * @author April Han
+ */
 public class ExecutionJob extends QuartzJobBean {
 
-    @Reference
-    private QuartzJobLogService quartzJobLogService;
+    @Resource
+    private JobLogAsyncTask jobLogAsyncTask;
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
         QuartzJob quartzJob = (QuartzJob) context.getMergedJobDataMap().get(QuartzJob.JOB_PARAM_KEY);
         QuartzJobLog quartzJobLog = new QuartzJobLog();
-        quartzJobLog.setJobId(quartzJob.getJobId());
+        quartzJobLog.setId(quartzJob.getId());
         quartzJobLog.setJobName(quartzJob.getJobName());
         quartzJobLog.setBeanName(quartzJob.getBeanName());
         quartzJobLog.setMethodName(quartzJob.getMethodName());
@@ -43,20 +43,14 @@ public class ExecutionJob extends QuartzJobBean {
             long millis = System.currentTimeMillis() - startTimeMillis;
             quartzJobLog.setState(1);
             quartzJobLog.setMillis(millis);
-            saveLog(quartzJobLog);
+            jobLogAsyncTask.saveLog(quartzJobLog);
         } catch (Exception e) {
             long millis = System.currentTimeMillis() - startTimeMillis;
             quartzJobLog.setState(0);
             quartzJobLog.setError(e.getMessage());
             quartzJobLog.setMillis(millis);
-            saveLog(quartzJobLog);
+            jobLogAsyncTask.saveLog(quartzJobLog);
         } finally {
         }
-    }
-
-    @Async
-    void saveLog(QuartzJobLog quartzJobLog) {
-        quartzJobLog.setCreateTime(new Date());
-        quartzJobLogService.insert(quartzJobLog);
     }
 }

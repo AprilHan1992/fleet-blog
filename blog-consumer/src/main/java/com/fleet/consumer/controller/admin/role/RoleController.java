@@ -1,8 +1,10 @@
 package com.fleet.consumer.controller.admin.role;
 
+import com.fleet.common.controller.BaseController;
 import com.fleet.common.entity.role.Role;
 import com.fleet.common.enums.Deleted;
 import com.fleet.common.json.R;
+import com.fleet.common.service.BaseService;
 import com.fleet.common.service.role.RoleService;
 import com.fleet.common.util.jdbc.PageUtil;
 import com.fleet.common.util.jdbc.entity.Page;
@@ -12,57 +14,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 角色管理
+ *
+ * @author April Han
+ */
 @RestController
 @RequestMapping("/role")
-public class RoleController {
+public class RoleController extends BaseController<Role> {
 
     @Reference
     private RoleService roleService;
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public R insert(@RequestBody Role role) {
-        roleService.insert(role);
-        return R.ok();
+    @Override
+    public BaseService<Role> baseService() {
+        return roleService;
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public R delete(@RequestParam("roleId") Integer roleId) {
+    @GetMapping("/get")
+    public R get(@RequestParam("id") Integer id) {
         Role role = new Role();
-        role.setRoleId(roleId);
-        roleService.delete(role);
-        return R.ok();
+        role.setId(id);
+        return get(role);
     }
 
-    @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deletes(@RequestParam("roleIds") List<Integer> roleIds) {
-        for (Integer roleId : roleIds) {
-            Role role = new Role();
-            role.setRoleId(roleId);
-            roleService.delete(role);
-        }
-        return R.ok();
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public R update(@RequestBody Role role) {
-        roleService.update(role);
-        return R.ok();
-    }
-
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public R get(@RequestParam("roleId") Integer roleId) {
-        Role role = new Role();
-        role.setRoleId(roleId);
-        return R.ok(roleService.get(role));
-    }
-
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @Override
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
-        return R.ok(roleService.list(map));
+        List<Role> list = roleService.list(map);
+        list = roleService.buildTree(list);
+        return R.ok(list);
     }
 
-    @RequestMapping(value = "/listPage", method = RequestMethod.POST)
+    @Override
+    @PostMapping("/listPage")
     public PageUtil<Role> listPage(@RequestBody Page page) {
         PageUtil<Role> pageUtil = new PageUtil<>();
         List<Role> list = roleService.list(page);

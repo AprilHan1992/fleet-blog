@@ -6,8 +6,8 @@ import com.fleet.common.json.R;
 import com.fleet.common.service.BaseService;
 import com.fleet.common.service.article.TagService;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +28,7 @@ public class TagController extends BaseController<Tag> {
         return tagService;
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         Tag tag = new Tag();
         tag.setId(id);

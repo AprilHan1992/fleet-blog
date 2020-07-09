@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author April Han
+ */
 @Service
 public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuService {
 
@@ -26,16 +29,42 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 
     @Override
     public Boolean delete(Menu menu) {
-        List<Integer> menuIdList = menuDao.menuIdList(menu);
-        if (menuIdList != null && menuIdList.size() != 0) {
-            for (Integer menuId : menuIdList) {
+        List<Integer> idList = menuDao.idList(menu);
+        if (idList != null && idList.size() != 0) {
+            menuDao.delete(menu);
+            for (Integer id : idList) {
                 Menu m = new Menu();
-                m.setUpperId(menuId);
+                m.setUpperId(id);
                 delete(m);
             }
-            menuDao.delete(menu);
         }
         return true;
+    }
+
+    @Override
+    public Boolean deletes(Integer[] ids) {
+        for (Integer id : ids) {
+            Menu menu = new Menu();
+            menu.setId(id);
+            delete(menu);
+        }
+        return true;
+    }
+
+    @Override
+    public List<Integer> idList(Integer id) {
+        List<Integer> rList = new ArrayList<>();
+        rList.add(id);
+
+        Menu menu = new Menu();
+        menu.setUpperId(id);
+        List<Integer> idList = menuDao.idList(menu);
+        if (idList != null) {
+            for (Integer i : idList) {
+                rList.addAll(idList(i));
+            }
+        }
+        return rList;
     }
 
     @Override
@@ -47,22 +76,21 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 
         Map<Integer, Menu> map = new HashMap<>();
         for (Menu menu : menuList) {
-            map.put(menu.getMenuId(), menu);
+            map.put(menu.getId(), menu);
         }
 
-        for (Integer menuId : map.keySet()) {
-            Menu menu = map.get(menuId);
+        for (Integer id : map.keySet()) {
+            Menu menu = map.get(id);
             if (map.containsKey(menu.getUpperId())) {
-                Menu upperMenu = map.get(menu.getUpperId());
-                if (upperMenu.getMenuList() == null) {
-                    upperMenu.setMenuList(new ArrayList<>());
+                Menu upper = map.get(menu.getUpperId());
+                if (upper.getChildren() == null) {
+                    upper.setChildren(new ArrayList<>());
                 }
-                upperMenu.getMenuList().add(menu);
+                upper.getChildren().add(menu);
             } else {
                 tree.add(menu);
             }
         }
         return tree;
     }
-
 }

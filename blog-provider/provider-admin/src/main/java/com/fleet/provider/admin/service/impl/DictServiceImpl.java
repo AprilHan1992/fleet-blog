@@ -2,6 +2,7 @@ package com.fleet.provider.admin.service.impl;
 
 import com.fleet.common.dao.BaseDao;
 import com.fleet.common.entity.dict.Dict;
+import com.fleet.common.entity.dict.Value;
 import com.fleet.common.enums.Deleted;
 import com.fleet.common.service.dict.DictService;
 import com.fleet.common.service.impl.BaseServiceImpl;
@@ -31,6 +32,35 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
     @Override
     public BaseDao<Dict> baseDao() {
         return dictDao;
+    }
+
+    @Override
+    public Boolean update(Dict dict) {
+        if (dictDao.update(dict) == 0) {
+            return false;
+        }
+        List<Value> valueList = dict.getValueList();
+        if (valueList != null) {
+            Value value = new Value();
+            value.setDictId(dict.getId());
+            List<Integer> idList = valueDao.idList(value);
+            for (Value v : valueList) {
+                if (v.getId() != null) {
+                    if (idList != null) {
+                        idList.remove(v.getId());
+                    }
+                    v.setDictId(dict.getId());
+                    valueDao.update(v);
+                } else {
+                    v.setDictId(dict.getId());
+                    valueDao.insert(v);
+                }
+            }
+            if (idList != null && idList.size() != 0) {
+                valueDao.deletes(idList.toArray(new Integer[0]));
+            }
+        }
+        return true;
     }
 
     @Override

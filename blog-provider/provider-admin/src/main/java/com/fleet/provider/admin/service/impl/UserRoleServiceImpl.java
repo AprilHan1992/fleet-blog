@@ -13,6 +13,9 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 @Service
 public class UserRoleServiceImpl extends BaseServiceImpl<UserRole> implements UserRoleService {
 
@@ -25,32 +28,32 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole> implements Us
     }
 
     @Override
-    public List<Role> userRoleList(Integer id) {
-        return userRoleDao.userRoleList(id);
+    public List<Integer> idList(UserRole userRole) {
+        return userRoleDao.idList(userRole);
     }
 
     @Override
-    public List<String> userRoles(Integer id) {
-        return userRoleDao.userRoles(id);
+    public List<Role> roleList(Integer userId) {
+        return userRoleDao.roleList(userId);
     }
 
     @Override
-    public List<Menu> userMenuList(Integer id) {
-        return userRoleDao.userMenuList(id);
+    public List<Menu> menuList(Integer userId) {
+        return userRoleDao.menuList(userId);
     }
 
     @Override
-    public List<String> userPermits(Integer id) {
-        return userRoleDao.userPermits(id);
+    public List<String> permitList(Integer userId) {
+        return userRoleDao.permitList(userId);
     }
 
     @Override
-    public Boolean hasRoles(Integer id, String[] roles) {
+    public Boolean hasRoles(Integer userId, String[] roles) {
         if (roles != null && roles.length != 0) {
-            List<String> userRoles = userRoles(id);
-            if (userRoles != null && userRoles.size() != 0) {
-                userRoles.retainAll(Arrays.asList(roles));
-                if (userRoles.size() != 0) {
+            List<String> roleNameList = userRoleDao.roleNameList(userId);
+            if (roleNameList != null && roleNameList.size() != 0) {
+                roleNameList.retainAll(Arrays.asList(roles));
+                if (roleNameList.size() != 0) {
                     return true;
                 }
             }
@@ -59,12 +62,12 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole> implements Us
     }
 
     @Override
-    public Boolean hasPermits(Integer id, String[] permits) {
+    public Boolean hasPermits(Integer userId, String[] permits) {
         if (permits != null && permits.length != 0) {
-            List<String> userPermits = userPermits(id);
-            if (userPermits != null && userPermits.size() != 0) {
-                userPermits.retainAll(Arrays.asList(permits));
-                if (userPermits.size() != 0) {
+            List<String> permitList = userRoleDao.permitList(userId);
+            if (permitList != null && permitList.size() != 0) {
+                permitList.retainAll(Arrays.asList(permits));
+                if (permitList.size() != 0) {
                     return true;
                 }
             }

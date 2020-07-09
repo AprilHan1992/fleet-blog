@@ -1,9 +1,15 @@
 package com.fleet.consumer.controller.admin.user;
 
+import com.fleet.common.controller.BaseController;
+import com.fleet.common.entity.dept.Dept;
+import com.fleet.common.entity.user.User;
 import com.fleet.common.entity.user.UserDept;
 import com.fleet.common.enums.Deleted;
 import com.fleet.common.json.R;
+import com.fleet.common.service.BaseService;
+import com.fleet.common.service.dept.DeptService;
 import com.fleet.common.service.user.UserDeptService;
+import com.fleet.common.service.user.UserService;
 import com.fleet.common.util.jdbc.PageUtil;
 import com.fleet.common.util.jdbc.entity.Page;
 import org.apache.dubbo.config.annotation.Reference;
@@ -12,67 +18,69 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author April Han
+ */
 @RestController
 @RequestMapping("/user/dept")
-public class UserDeptController {
+public class UserDeptController extends BaseController<UserDept> {
 
     @Reference
     private UserDeptService userDeptService;
 
-    @RequestMapping("/insert")
-    public R insert(UserDept userDept) {
-        UserDept ud = new UserDept();
-        ud.setId(userDept.getId());
-        userDeptService.delete(ud);
-        if (userDeptService.insert(userDept)) {
-            return R.ok();
-        }
-        return R.error();
-    }
+    @Reference
+    private UserService userService;
 
-    @RequestMapping("/delete")
-    public R delete(@RequestBody UserDept userDept) {
-        if (userDeptService.delete(userDept)) {
-            return R.ok();
-        }
-        return R.error();
-    }
+    @Reference
+    private DeptService deptService;
 
-    @RequestMapping(value = "/deletes", method = RequestMethod.POST)
-    public R deletes(@RequestBody List<UserDept> userDeptList) {
-        for (UserDept userDept : userDeptList) {
-            if (!userDeptService.delete(userDept)) {
-                return R.error();
-            }
-        }
-        return R.ok();
-    }
-
-    @RequestMapping("/update")
-    public R update(@RequestBody UserDept userDept) {
-        UserDept ud = new UserDept();
-        ud.setId(userDept.getId());
-        userDeptService.delete(ud);
-        if (userDeptService.update(userDept)) {
-            return R.ok();
-        }
-        return R.error();
+    @Override
+    public BaseService<UserDept> baseService() {
+        return userDeptService;
     }
 
     @RequestMapping("/get")
-    public R get(@RequestBody UserDept userDept) {
-        return R.ok(userDeptService.get(userDept));
+    public R get(@RequestParam("id") Integer id) {
+        UserDept userDept = new UserDept();
+        userDept.setId(id);
+        return get(userDept);
     }
 
+    @Override
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
-        return R.ok(userDeptService.list(map));
+        List<UserDept> list = userDeptService.list(map);
+        if (list != null) {
+            for (UserDept userDept : list) {
+                User user = new User();
+                user.setId(userDept.getUserId());
+                userDept.setUser(userService.get(user));
+
+                Dept dept = new Dept();
+                dept.setId(userDept.getDeptId());
+                userDept.setDept(deptService.get(dept));
+            }
+        }
+        return R.ok(list);
     }
 
-    @RequestMapping("/listPage")
+    @Override
+    @PostMapping("/listPage")
     public PageUtil<UserDept> listPage(@RequestBody Page page) {
-        return userDeptService.listPage(page);
-    }
+        PageUtil<UserDept> pageUtil = userDeptService.listPage(page);
+        List<UserDept> list = pageUtil.getList();
+        if (list != null) {
+            for (UserDept userDept : list) {
+                User user = new User();
+                user.setId(userDept.getUserId());
+                userDept.setUser(userService.get(user));
 
+                Dept dept = new Dept();
+                dept.setId(userDept.getDeptId());
+                userDept.setDept(deptService.get(dept));
+            }
+        }
+        return pageUtil;
+    }
 }

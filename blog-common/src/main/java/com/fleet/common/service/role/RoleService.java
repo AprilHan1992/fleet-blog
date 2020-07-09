@@ -7,5 +7,10 @@ import java.util.List;
 
 public interface RoleService extends BaseService<Role> {
 
+    /**
+     * 获取所有 roleId 集合（包括）
+     */
+    List<Integer> idList(Integer id);
+
     List<Role> buildTree(List<Role> roleList);
 }

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fleet.provider.admin.dao.ToDao">
+    <resultMap id="BaseResultMap" type="com.fleet.common.entity.msg.To">
+        <id column="id" property="id"/>
+        <result column="msg_id" property="msgId"/>
+        <result column="to" property="to"/>
+        <result column="read_state" property="readState"/>
+        <result column="read_time" property="readTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		`id`, `msg_id`, `to`, `read_state`, `read_time`, `deleted`
+	</sql>
+
+    <insert id="insert" parameterType="com.fleet.common.entity.msg.To" useGeneratedKeys="true" keyProperty="id">
+        insert into `to` (
+        <trim suffixOverrides=",">
+            <if test="msgId != null">`msg_id`,</if>
+            <if test="to != null">`to`,</if>
+            <if test="readState != null">`read_state`,</if>
+            <if test="readTime != null">`read_time`,</if>
+            <if test="deleted != null">`deleted`,</if>
+        </trim>
+        ) values (
+        <trim suffixOverrides=",">
+            <if test="msgId != null">#{msgId},</if>
+            <if test="to != null">#{to},</if>
+            <if test="readState != null">#{readState},</if>
+            <if test="readTime != null">#{readTime},</if>
+            <if test="deleted != null">#{deleted},</if>
+        </trim>
+        )
+    </insert>
+
+    <update id="delete" parameterType="com.fleet.common.entity.msg.To">
+        update `to` set `deleted` = 1
+        <where>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="msgId != null">and `msg_id` = #{msgId}</if>
+            <if test="to != null">and `to` = #{to}</if>
+            <if test="readState != null">and `read_state` = #{readState}</if>
+            <if test="readTime != null">and `read_time` = #{readTime}</if>
+        </where>
+    </update>
+
+    <update id="deletes">
+        update `to` set `deleted` = 1
+        <where>
+            <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </update>
+
+    <update id="update" parameterType="com.fleet.common.entity.msg.To">
+        update `to`
+        <set>
+            <if test="msgId != null">`msg_id` = #{msgId},</if>
+            <if test="to != null">`to` = #{to},</if>
+            <if test="readState != null">`read_state` = #{readState},</if>
+            <if test="readTime != null">`read_time` = #{readTime},</if>
+            <if test="deleted != null">`deleted` = #{deleted},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="get" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `to`
+        <where>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="msgId != null">and `msg_id` = #{msgId}</if>
+            <if test="to != null">and `to` = #{to}</if>
+            <if test="readState != null">and `read_state` = #{readState}</if>
+            <if test="readTime != null">and `read_time` = #{readTime}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+        </where>
+        limit 1
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `to`
+        <where>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="msgId != null">and `msg_id` = #{msgId}</if>
+            <if test="to != null">and `to` = #{to}</if>
+            <if test="readState != null">and `read_state` = #{readState}</if>
+            <if test="readTime != null">and `read_time` = #{readTime}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+        </where>
+    </select>
+
+    <select id="idList" resultType="java.lang.Integer">
+        select `id` from `to`
+        <where>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="msgId != null">and `msg_id` = #{msgId}</if>
+            <if test="to != null">and `to` = #{to}</if>
+            <if test="readState != null">and `read_state` = #{readState}</if>
+            <if test="readTime != null">and `read_time` = #{readTime}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+        </where>
+    </select>
+</mapper>

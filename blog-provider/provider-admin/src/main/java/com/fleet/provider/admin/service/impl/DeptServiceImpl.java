@@ -55,6 +55,16 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     }
 
     @Override
+    public Boolean deletes(Integer[] ids) {
+        for (Integer id : ids) {
+            Dept dept = new Dept();
+            dept.setId(id);
+            delete(dept);
+        }
+        return true;
+    }
+
+    @Override
     public List<Integer> idList(Integer id) {
         List<Integer> rList = new ArrayList<>();
         rList.add(id);
@@ -68,16 +78,6 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
             }
         }
         return rList;
-    }
-
-    @Override
-    public Boolean deletes(Integer[] ids) {
-        for (Integer id : ids) {
-            Dept dept = new Dept();
-            dept.setId(id);
-            delete(dept);
-        }
-        return true;
     }
 
     @Override

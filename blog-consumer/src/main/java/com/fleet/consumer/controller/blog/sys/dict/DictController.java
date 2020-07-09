@@ -18,20 +18,20 @@
 //    @Reference
 //    private DictService dictService;
 //
-//    @RequestMapping(value = "/get", method = RequestMethod.GET)
+//    @GetMapping("/get")
 //    public R get(@RequestParam("dictId") Integer dictId) {
 //        Dict dict = new Dict();
 //        dict.setDictId(dictId);
 //        return get(dict);
 //    }
 //
-//    @RequestMapping(value = "/list", method = RequestMethod.GET)
+//    @GetMapping("/list")
 //    public R list(@RequestParam Map<String, Object> map) {
 //        map.put("deleted", Deleted.NO);
 //        return R.ok(dictService.list(map));
 //    }
 //
-//    @RequestMapping(value = "/listPage", method = RequestMethod.POST)
+//    @PostMapping("/listPage")
 //    public PageUtil<Dict> listPage(@RequestBody Page page) {
 //        return dictService.listPage(page);
 //    }

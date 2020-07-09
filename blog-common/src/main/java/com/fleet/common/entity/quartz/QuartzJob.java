@@ -2,116 +2,119 @@ package com.fleet.common.entity.quartz;
 
 import com.fleet.common.entity.Base;
 
+/**
+ * @author April Han
+ */
 public class QuartzJob extends Base {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 任务调度参数key
-	 */
-	public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
+    /**
+     * 任务调度参数key
+     */
+    public static final String JOB_PARAM_KEY = "JOB_PARAM_KEY";
 
-	/**
-	 * 定时器id
-	 */
-	private Integer jobId;
+    /**
+     * 定时器id
+     */
+    private Integer id;
 
-	/**
-	 * 定时器名称
-	 */
-	private String jobName;
+    /**
+     * 定时器名称
+     */
+    private String jobName;
 
-	/**
-	 * Bean名称
-	 */
-	private String beanName;
+    /**
+     * Bean名称
+     */
+    private String beanName;
 
-	/**
-	 * 方法名称
-	 */
-	private String methodName;
+    /**
+     * 方法名称
+     */
+    private String methodName;
 
-	/**
-	 * 参数
-	 */
-	private String params;
+    /**
+     * 参数
+     */
+    private String params;
 
-	/**
-	 * cron表达式
-	 */
-	private String cronExpression;
+    /**
+     * cron表达式
+     */
+    private String cronExpression;
 
-	/**
-	 * 是否启用（1：是，0：否）
-	 */
-	private Integer enabled;
+    /**
+     * 是否启用（1：是，0：否）
+     */
+    private Integer enabled;
 
-	/**
-	 * 备注
-	 */
-	private String remark;
+    /**
+     * 备注
+     */
+    private String remark;
 
-	public Integer getJobId() {
-		return jobId;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setJobId(Integer jobId) {
-		this.jobId = jobId;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getJobName() {
-		return jobName;
-	}
+    public String getJobName() {
+        return jobName;
+    }
 
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
-	}
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
 
-	public String getBeanName() {
-		return beanName;
-	}
+    public String getBeanName() {
+        return beanName;
+    }
 
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
-	}
+    public void setBeanName(String beanName) {
+        this.beanName = beanName;
+    }
 
-	public String getMethodName() {
-		return methodName;
-	}
+    public String getMethodName() {
+        return methodName;
+    }
 
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
 
-	public String getParams() {
-		return params;
-	}
+    public String getParams() {
+        return params;
+    }
 
-	public void setParams(String params) {
-		this.params = params;
-	}
+    public void setParams(String params) {
+        this.params = params;
+    }
 
-	public String getCronExpression() {
-		return cronExpression;
-	}
+    public String getCronExpression() {
+        return cronExpression;
+    }
 
-	public void setCronExpression(String cronExpression) {
-		this.cronExpression = cronExpression;
-	}
+    public void setCronExpression(String cronExpression) {
+        this.cronExpression = cronExpression;
+    }
 
-	public Integer getEnabledd() {
-		return enabled;
-	}
+    public Integer getEnabledd() {
+        return enabled;
+    }
 
-	public void setEnabledd(Integer enabled) {
-		this.enabled = enabled;
-	}
+    public void setEnabledd(Integer enabled) {
+        this.enabled = enabled;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public String getRemark() {
+        return remark;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

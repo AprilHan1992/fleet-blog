@@ -33,7 +33,7 @@ public abstract class BaseController<T> {
         return getUser().getId();
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @PostMapping("/insert")
     public R insert(@RequestBody T t) {
         if (!baseService().insert(t)) {
             return R.error();
@@ -41,7 +41,7 @@ public abstract class BaseController<T> {
         return R.ok();
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @PostMapping("/delete")
     public R delete(@RequestBody T t) {
         if (!baseService().delete(t)) {
             return R.error();
@@ -57,7 +57,7 @@ public abstract class BaseController<T> {
         return R.ok();
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping("/update")
     public R update(@RequestBody T t) {
         if (!baseService().update(t)) {
             return R.error();
@@ -65,18 +65,18 @@ public abstract class BaseController<T> {
         return R.ok();
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    @PostMapping("/get")
     public R get(@RequestBody T t) {
         return R.ok(baseService().get(t));
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
         return R.ok(baseService().list(map));
     }
 
-    @RequestMapping(value = "/listPage", method = RequestMethod.POST)
+    @PostMapping("/listPage")
     public PageUtil<T> listPage(@RequestBody Page page) {
         return baseService().listPage(page);
     }

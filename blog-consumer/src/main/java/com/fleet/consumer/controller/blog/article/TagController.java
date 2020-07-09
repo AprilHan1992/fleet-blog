@@ -18,20 +18,20 @@ public class TagController {
     @Reference
     private TagService tagService;
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public R get(@RequestParam("tagId") Integer tagId) {
+    @GetMapping("/get")
+    public R get(@RequestParam("id") Integer id) {
         Tag tag = new Tag();
-        tag.setId(tagId);
+        tag.setId(id);
         return R.ok(tagService.get(tag));
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
         return R.ok(tagService.list(map));
     }
 
-    @RequestMapping(value = "/listPage", method = RequestMethod.POST)
+    @PostMapping("/listPage")
     public PageUtil<Tag> listPage(@RequestBody Page page) {
         return tagService.listPage(page);
     }

@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
+/**
+ * @author April Han
+ */
 @Transactional
 @Service
 public class UserDeptServiceImpl extends BaseServiceImpl<UserDept> implements UserDeptService {
@@ -24,7 +27,18 @@ public class UserDeptServiceImpl extends BaseServiceImpl<UserDept> implements Us
     }
 
     @Override
-    public Dept userDept(Integer id) {
-        return userDeptDao.userDept(id);
+    public Boolean insert(UserDept userDept) {
+        UserDept ud = new UserDept();
+        ud.setUserId(userDept.getUserId());
+        ud = userDeptDao.get(ud);
+        if (ud != null) {
+            userDeptDao.delete(ud);
+        }
+        return userDeptDao.insert(userDept) != 0;
+    }
+
+    @Override
+    public Dept dept(Integer userId) {
+        return userDeptDao.dept(userId);
     }
 }

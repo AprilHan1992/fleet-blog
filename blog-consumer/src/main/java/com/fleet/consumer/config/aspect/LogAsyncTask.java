@@ -1,4 +1,4 @@
-package com.fleet.consumer.config.async;
+package com.fleet.consumer.config.aspect;
 
 import com.fleet.common.entity.user.User;
 import com.fleet.common.service.log.LogService;

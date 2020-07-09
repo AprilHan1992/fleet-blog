@@ -28,7 +28,7 @@ public class ValueController extends BaseController<Value> {
     }
 
     @Override
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @PostMapping("/insert")
     public R insert(@RequestBody Value value) {
         Value v = new Value();
         v.setDictId(value.getDictId());
@@ -54,7 +54,7 @@ public class ValueController extends BaseController<Value> {
     }
 
     @Override
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping("/update")
     public R update(@RequestBody Value value) {
         if (StringUtils.isNotEmpty(value.getCode())) {
             Value v = new Value();
@@ -81,7 +81,7 @@ public class ValueController extends BaseController<Value> {
         return R.ok();
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         Value value = new Value();
         value.setId(id);

@@ -8,7 +8,7 @@ import java.util.List;
 public interface DeptService extends BaseService<Dept> {
 
     /**
-     * 获取所有 id 集合（包括）
+     * 获取所有 deptId 集合（包括）
      */
     List<Integer> idList(Integer id);
 

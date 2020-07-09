@@ -7,7 +7,6 @@ import com.fleet.common.json.R;
 import com.fleet.common.service.user.UserService;
 import com.fleet.common.util.CurUser;
 import com.fleet.common.util.MD5Util;
-import com.fleet.common.util.cache.RedisUtil;
 import com.fleet.common.util.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
@@ -15,17 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-
+/**
+ * 密码管理
+ *
+ * @author April Han
+ */
 @RestController
 @RequestMapping("/pwd")
 public class PwdController {
 
     @Reference
     UserService userService;
-
-    @Resource
-    RedisUtil redisUtil;
 
     /**
      * 登陆

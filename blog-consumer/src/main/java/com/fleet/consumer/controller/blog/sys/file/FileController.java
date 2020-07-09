@@ -20,7 +20,7 @@ public class FileController {
     /**
      * 上传文件
      */
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @PostMapping("/upload")
     public R upload(@RequestParam(value = "file") MultipartFile file) throws Exception {
         if (file == null) {
             return R.error("上传文件为空");
@@ -38,7 +38,7 @@ public class FileController {
     /**
      * 上传图片文件
      */
-    @RequestMapping(value = "/image/upload", method = RequestMethod.POST)
+    @PostMapping("/image/upload")
     public R imageUpload(@RequestParam(value = "file") MultipartFile file) {
         if (file == null) {
             return R.error("上传图片文件为空");

@@ -9,6 +9,9 @@ import org.apache.dubbo.config.annotation.Service;
 
 import javax.annotation.Resource;
 
+/**
+ * @author April Han
+ */
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 

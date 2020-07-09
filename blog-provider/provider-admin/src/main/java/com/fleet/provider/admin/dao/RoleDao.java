@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface RoleDao extends BaseDao<Role> {
 
-    List<Integer> roleIdList(Role role);
+    List<Integer> idList(Role role);
 }

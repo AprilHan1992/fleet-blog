@@ -1,11 +1,16 @@
 package com.fleet.common.entity.menu;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fleet.common.entity.Base;
+import com.fleet.common.entity.user.User;
 
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 public class Menu extends Base {
 
     private static final long serialVersionUID = 1L;
@@ -13,27 +18,27 @@ public class Menu extends Base {
     /**
      * 菜单id
      */
-    private Integer menuId;
+    private Integer id;
 
     /**
      * 菜单类型（1：目录，2：菜单，3：权限标识）
      */
-    private Integer menuType;
+    private Integer type;
 
     /**
      * 菜单名称
      */
-    private String menuName;
+    private String name;
 
     /**
      * 菜单图标
      */
-    private String menuIcon;
+    private String icon;
 
     /**
      * 菜单描述
      */
-    private String menuDesc;
+    private String desc;
 
     /**
      * 资源路径
@@ -66,13 +71,33 @@ public class Menu extends Base {
     private Integer enabled;
 
     /**
+     * 创建人
+     */
+    private Integer creatorId;
+
+    /**
+     * 创建人
+     */
+    private User creator;
+
+    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     /**
-     * 更新时间
+     * 修改人
+     */
+    private Integer editorId;
+
+    /**
+     * 修改人
+     */
+    private User editor;
+
+    /**
+     * 修改时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date editTime;
@@ -82,46 +107,47 @@ public class Menu extends Base {
      */
     private Integer upperId;
 
-    private List<Menu> menuList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<Menu> children;
 
-    public Integer getMenuId() {
-        return menuId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setMenuId(Integer menuId) {
-        this.menuId = menuId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getMenuType() {
-        return menuType;
+    public Integer getType() {
+        return type;
     }
 
-    public void setMenuType(Integer menuType) {
-        this.menuType = menuType;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
-    public String getMenuName() {
-        return menuName;
+    public String getName() {
+        return name;
     }
 
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getMenuIcon() {
-        return menuIcon;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setMenuIcon(String menuIcon) {
-        this.menuIcon = menuIcon;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public String getMenuDesc() {
-        return menuDesc;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setMenuDesc(String menuDesc) {
-        this.menuDesc = menuDesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getHref() {
@@ -172,12 +198,44 @@ public class Menu extends Base {
         this.enabled = enabled;
     }
 
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getEditorId() {
+        return editorId;
+    }
+
+    public void setEditorId(Integer editorId) {
+        this.editorId = editorId;
+    }
+
+    public User getEditor() {
+        return editor;
+    }
+
+    public void setEditor(User editor) {
+        this.editor = editor;
     }
 
     public Date getEditTime() {
@@ -196,11 +254,11 @@ public class Menu extends Base {
         this.upperId = upperId;
     }
 
-    public List<Menu> getMenuList() {
-        return menuList;
+    public List<Menu> getChildren() {
+        return children;
     }
 
-    public void setMenuList(List<Menu> menuList) {
-        this.menuList = menuList;
+    public void setChildren(List<Menu> children) {
+        this.children = children;
     }
 }

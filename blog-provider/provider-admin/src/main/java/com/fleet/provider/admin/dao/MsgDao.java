@@ -15,5 +15,5 @@ import java.util.Map;
 @Repository
 public interface MsgDao extends BaseDao<Msg> {
 
-    List<Msg> userMsgList(Map<String, Object> map);
+    List<Msg> msgToList(Map<String, Object> map);
 }

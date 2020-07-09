@@ -8,8 +8,9 @@ import com.fleet.consumer.config.FileConfig;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -29,7 +30,7 @@ public class BigFileController {
     /**
      * 秒传判断，断点判断
      */
-    @RequestMapping(value = "checkFileMd5", method = RequestMethod.GET)
+    @GetMapping("checkFileMd5")
     public R checkFileMd5(String md5) throws Exception {
         File md5Dir = new File(fileConfig.getBigFilePath() + md5);
         if (!md5Dir.exists()) {
@@ -53,7 +54,7 @@ public class BigFileController {
     /**
      * 上传文件
      */
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @PostMapping("/upload")
     public R upload(BigFile bigFile) {
         try {
             bigFile.setFilePath(fileConfig.getBigFilePath());

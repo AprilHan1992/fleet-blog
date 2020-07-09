@@ -1,7 +1,8 @@
 package com.fleet.provider.admin.dao;
 
 import com.fleet.common.dao.BaseDao;
-import com.fleet.common.entity.job.Job;
+import com.fleet.common.entity.menu.Menu;
+import com.fleet.common.entity.msg.To;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +13,7 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface JobDao extends BaseDao<Job> {
+public interface ToDao extends BaseDao<To> {
 
-    List<Integer> jobIdList(Job job);
-
-    List<Job> listById(Integer id);
+    List<Integer> idList(To to);
 }

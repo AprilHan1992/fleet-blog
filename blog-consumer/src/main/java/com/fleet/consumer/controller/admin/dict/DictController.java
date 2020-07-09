@@ -26,7 +26,7 @@ public class DictController extends BaseController<Dict> {
     }
 
     @Override
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @PostMapping("/insert")
     public R insert(@RequestBody Dict dict) {
         Dict d = new Dict();
         d.setGroup(dict.getGroup());
@@ -41,7 +41,7 @@ public class DictController extends BaseController<Dict> {
     }
 
     @Override
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping("/update")
     public R update(@RequestBody Dict dict) {
         Dict d = new Dict();
         d.setGroup(dict.getGroup());
@@ -55,19 +55,19 @@ public class DictController extends BaseController<Dict> {
         return R.ok();
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         Dict dict = new Dict();
         dict.setId(id);
         return get(dict);
     }
 
-    @RequestMapping(value = "/getDefaultValue", method = RequestMethod.GET)
+    @GetMapping("/getDefaultValue")
     public String getDefaultValue(@RequestParam("group") String group) {
         return dictService.getDefaultValue(group);
     }
 
-    @RequestMapping(value = "/getValue", method = RequestMethod.GET)
+    @GetMapping("/getValue")
     public String getValue(@RequestParam("group") String group, @RequestParam("code") String code) {
         return dictService.getValue(group, code);
     }

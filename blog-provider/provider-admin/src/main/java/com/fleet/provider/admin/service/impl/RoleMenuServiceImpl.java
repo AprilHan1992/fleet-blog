@@ -11,6 +11,9 @@ import org.apache.dubbo.config.annotation.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 @Service
 public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements RoleMenuService {
 
@@ -23,10 +26,10 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
     }
 
     @Override
-    public List<Integer> menuIdList(Integer roleId) {
+    public List<Integer> idList(Integer roleId) {
         RoleMenu roleMenu = new RoleMenu();
         roleMenu.setRoleId(roleId);
-        return roleMenuDao.menuIdList(roleMenu);
+        return roleMenuDao.idList(roleMenu);
     }
 
     @Override

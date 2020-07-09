@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author April Han
+ */
 @Service
 public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleService {
 
@@ -26,16 +29,42 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
     @Override
     public Boolean delete(Role role) {
-        List<Integer> roleIdList = roleDao.roleIdList(role);
-        if (roleIdList != null) {
+        List<Integer> idList = roleDao.idList(role);
+        if (idList != null) {
             roleDao.delete(role);
-            for (Integer roleId : roleIdList) {
+            for (Integer id : idList) {
                 Role r = new Role();
-                r.setUpperId(roleId);
+                r.setUpperId(id);
                 delete(r);
             }
         }
         return true;
+    }
+
+    @Override
+    public Boolean deletes(Integer[] ids) {
+        for (Integer id : ids) {
+            Role role = new Role();
+            role.setId(id);
+            delete(role);
+        }
+        return true;
+    }
+
+    @Override
+    public List<Integer> idList(Integer id) {
+        List<Integer> rList = new ArrayList<>();
+        rList.add(id);
+
+        Role role = new Role();
+        role.setUpperId(id);
+        List<Integer> idList = roleDao.idList(role);
+        if (idList != null) {
+            for (Integer i : idList) {
+                rList.addAll(idList(i));
+            }
+        }
+        return rList;
     }
 
     @Override
@@ -47,17 +76,17 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
         Map<Integer, Role> map = new HashMap<>();
         for (Role role : roleList) {
-            map.put(role.getRoleId(), role);
+            map.put(role.getId(), role);
         }
 
-        for (Integer roleId : map.keySet()) {
-            Role role = map.get(roleId);
+        for (Integer id : map.keySet()) {
+            Role role = map.get(id);
             if (map.containsKey(role.getUpperId())) {
-                Role upperRole = map.get(role.getUpperId());
-                if (upperRole.getRoleList() == null) {
-                    upperRole.setRoleList(new ArrayList<>());
+                Role upper = map.get(role.getUpperId());
+                if (upper.getChildren() == null) {
+                    upper.setChildren(new ArrayList<>());
                 }
-                upperRole.getRoleList().add(role);
+                upper.getChildren().add(role);
             } else {
                 tree.add(role);
             }

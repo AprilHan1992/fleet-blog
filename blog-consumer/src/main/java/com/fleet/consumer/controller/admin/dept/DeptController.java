@@ -2,6 +2,7 @@ package com.fleet.consumer.controller.admin.dept;
 
 import com.fleet.common.controller.BaseController;
 import com.fleet.common.entity.dept.Dept;
+import com.fleet.common.enums.Deleted;
 import com.fleet.common.json.R;
 import com.fleet.common.service.BaseService;
 import com.fleet.common.service.dept.DeptService;
@@ -32,7 +33,7 @@ public class DeptController extends BaseController<Dept> {
     }
 
     @Override
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @PostMapping("/insert")
     public R insert(@RequestBody Dept dept) {
         dept.setCreatorId(getUserId());
         dept.setCreateTime(new Date());
@@ -43,7 +44,7 @@ public class DeptController extends BaseController<Dept> {
     }
 
     @Override
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping("/update")
     public R update(@RequestBody Dept dept) {
         dept.setEditorId(getUserId());
         dept.setEditTime(new Date());
@@ -53,7 +54,7 @@ public class DeptController extends BaseController<Dept> {
         return R.ok();
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         Dept dept = new Dept();
         dept.setId(id);
@@ -61,16 +62,16 @@ public class DeptController extends BaseController<Dept> {
     }
 
     @Override
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
-        map.put("isDeleted", 0);
+        map.put("deleted", Deleted.NO);
         List<Dept> list = deptService.list(map);
         list = deptService.buildTree(list);
         return R.ok(list);
     }
 
     @Override
-    @RequestMapping(value = "/listPage", method = RequestMethod.POST)
+    @PostMapping("/listPage")
     public PageUtil<Dept> listPage(@RequestBody Page page) {
         PageUtil<Dept> pageUtil = new PageUtil<>();
         List<Dept> list = deptService.list(page);

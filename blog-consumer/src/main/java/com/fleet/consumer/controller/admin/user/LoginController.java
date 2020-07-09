@@ -2,7 +2,6 @@ package com.fleet.consumer.controller.admin.user;
 
 import com.fleet.common.annotation.Log;
 import com.fleet.common.entity.user.User;
-import com.fleet.common.enums.ResultState;
 import com.fleet.common.enums.TokenExpiresIn;
 import com.fleet.common.enums.UserState;
 import com.fleet.common.json.R;

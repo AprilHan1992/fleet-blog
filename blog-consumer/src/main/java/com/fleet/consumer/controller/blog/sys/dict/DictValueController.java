@@ -18,20 +18,20 @@
 //    @Reference
 //    private ValueService valueService;
 //
-//    @RequestMapping(value = "/get", method = RequestMethod.GET)
+//    @GetMapping("/get")
 //    public R get(@RequestParam("dictValueId") Integer dictValueId) {
 //        Value dictValue = new Value();
 //        dictValue.setId(dictValueId);
 //        return get(dictValue);
 //    }
 //
-//    @RequestMapping(value = "/list", method = RequestMethod.GET)
+//    @GetMapping("/list")
 //    public R list(@RequestParam Map<String, Object> map) {
 //        map.put("deleted", Deleted.NO);
 //        return R.ok(valueService.list(map));
 //    }
 //
-//    @RequestMapping(value = "/listPage", method = RequestMethod.POST)
+//    @PostMapping("/listPage")
 //    public PageUtil<Value> listPage(@RequestBody Page page) {
 //        return valueService.listPage(page);
 //    }

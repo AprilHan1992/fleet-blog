@@ -30,7 +30,7 @@ public class ArticleController extends BaseController<Article> {
     }
 
     @Override
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @PostMapping("/insert")
     public R insert(@RequestBody Article article) {
         article.setCreatorId(getUserId());
         article.setCreateTime(new Date());
@@ -41,7 +41,7 @@ public class ArticleController extends BaseController<Article> {
     }
 
     @Override
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping("/update")
     public R update(@RequestBody Article article) {
         article.setEditorId(getUserId());
         article.setEditTime(new Date());
@@ -51,14 +51,14 @@ public class ArticleController extends BaseController<Article> {
         return R.ok();
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         Article article = new Article();
         article.setId(id);
         return get(article);
     }
 
-    @RequestMapping(value = "/rcmd", method = RequestMethod.POST)
+    @PostMapping("/rcmd")
     public PageUtil<Article> rcmd(@RequestBody Page page) {
         page.put("state", 1);
         page.put("rcmd", 1);

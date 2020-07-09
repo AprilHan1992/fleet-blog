@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 public class QuartzConfig {
 
     @Component
-    public class QuartzJobFactory extends AdaptableJobFactory {
+    public static class QuartzJobFactory extends AdaptableJobFactory {
 
         @Resource
         private AutowireCapableBeanFactory capableBeanFactory;

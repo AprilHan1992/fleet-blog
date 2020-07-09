@@ -4,9 +4,17 @@ import com.fleet.common.entity.Base;
 
 import java.util.Date;
 
-public class MsgTo extends Base {
+/**
+ * @author April Han
+ */
+public class To extends Base {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 消息接收id
+     */
+    private Integer id;
 
     /**
      * 消息id
@@ -16,7 +24,7 @@ public class MsgTo extends Base {
     /**
      * 消息接收人
      */
-    private Integer msgTo;
+    private Integer to;
 
     /**
      * 消息阅读状态（0：未读，1：已读）
@@ -28,6 +36,14 @@ public class MsgTo extends Base {
      */
     private Date readTime;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getMsgId() {
         return msgId;
     }
@@ -36,12 +52,12 @@ public class MsgTo extends Base {
         this.msgId = msgId;
     }
 
-    public Integer getMsgTo() {
-        return msgTo;
+    public Integer getTo() {
+        return to;
     }
 
-    public void setMsgTo(Integer msgTo) {
-        this.msgTo = msgTo;
+    public void setTo(Integer to) {
+        this.to = to;
     }
 
     public Integer getReadState() {

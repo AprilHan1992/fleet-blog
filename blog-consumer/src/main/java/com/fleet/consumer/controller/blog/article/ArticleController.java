@@ -18,25 +18,25 @@ public class ArticleController {
     @Reference
     private ArticleService articleService;
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping("/get")
     public R get(@RequestParam("articleId") Integer articleId) {
         Article article = new Article();
         article.setId(articleId);
         return R.ok(articleService.get(article));
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
         return R.ok(articleService.list(map));
     }
 
-    @RequestMapping(value = "/listPage", method = RequestMethod.POST)
+    @PostMapping("/listPage")
     public PageUtil<Article> listPage(@RequestBody(required = false) Page page) {
         return articleService.listPage(page);
     }
 
-    @RequestMapping(value = "/rcmd", method = RequestMethod.POST)
+    @PostMapping("/rcmd")
     public PageUtil<Article> rcmd(@RequestBody Page page) {
         page.put("state", 1);
         page.put("rcmd", 1);
