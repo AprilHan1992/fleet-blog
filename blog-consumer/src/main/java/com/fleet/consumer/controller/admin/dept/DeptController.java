@@ -57,7 +57,7 @@ public class DeptController extends BaseController<Dept> {
     public R get(@RequestParam("id") Integer id) {
         Dept dept = new Dept();
         dept.setId(id);
-        return R.ok(deptService.get(dept));
+        return get(dept);
     }
 
     @Override

@@ -32,6 +32,6 @@ public class TagController extends BaseController<Tag> {
     public R get(@RequestParam("id") Integer id) {
         Tag tag = new Tag();
         tag.setId(id);
-        return R.ok(tagService.get(tag));
+        return get(tag);
     }
 }

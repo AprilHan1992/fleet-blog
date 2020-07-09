@@ -11,6 +11,7 @@ public enum ResultState {
      * 200 成功
      **/
     SUCCESS(200, "成功"),
+
     /**
      * 400 错误
      **/

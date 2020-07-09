@@ -55,7 +55,7 @@ public class ArticleController extends BaseController<Article> {
     public R get(@RequestParam("id") Integer id) {
         Article article = new Article();
         article.setId(id);
-        return R.ok(articleService.get(article));
+        return get(article);
     }
 
     @RequestMapping(value = "/rcmd", method = RequestMethod.POST)

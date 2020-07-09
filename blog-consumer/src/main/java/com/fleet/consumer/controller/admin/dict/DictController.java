@@ -8,6 +8,11 @@ import com.fleet.common.service.dict.DictService;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 字典与字典值管理
+ *
+ * @author April Han
+ */
 @RestController
 @RequestMapping("/dict")
 public class DictController extends BaseController<Dict> {
@@ -21,8 +26,29 @@ public class DictController extends BaseController<Dict> {
     }
 
     @Override
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    public R insert(@RequestBody Dict dict) {
+        Dict d = new Dict();
+        d.setGroup(dict.getGroup());
+        d = dictService.get(d);
+        if (d != null) {
+            return R.error("字典组已存在");
+        }
+        if (!dictService.insert(dict)) {
+            return R.error();
+        }
+        return R.ok();
+    }
+
+    @Override
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public R update(@RequestBody Dict dict) {
+        Dict d = new Dict();
+        d.setGroup(dict.getGroup());
+        d = dictService.get(d);
+        if (d != null && !d.getId().equals(dict.getId())) {
+            return R.error("字典组已存在");
+        }
         if (!dictService.update(dict)) {
             return R.error();
         }
@@ -33,7 +59,7 @@ public class DictController extends BaseController<Dict> {
     public R get(@RequestParam("id") Integer id) {
         Dict dict = new Dict();
         dict.setId(id);
-        return R.ok(dictService.get(dict));
+        return get(dict);
     }
 
     @RequestMapping(value = "/getDefaultValue", method = RequestMethod.GET)

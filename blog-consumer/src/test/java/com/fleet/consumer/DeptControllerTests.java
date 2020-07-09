@@ -9,8 +9,8 @@ public class DeptControllerTests extends BaseTests {
     @Test
     public void insert() {
         Dict dict = new Dict();
-        dict.setDictGroup("测试1");
-        dict.setDictRemark("测试");
+        dict.setGroup("测试1");
+        dict.setRemark("测试");
         super.post("/dict/insert", JSONObject.toJSONString(dict));
     }
 

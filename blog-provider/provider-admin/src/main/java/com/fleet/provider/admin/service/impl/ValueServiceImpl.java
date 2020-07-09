@@ -9,6 +9,9 @@ import org.apache.dubbo.config.annotation.Service;
 
 import javax.annotation.Resource;
 
+/**
+ * @author April Han
+ */
 @Service
 public class ValueServiceImpl extends BaseServiceImpl<Value> implements ValueService {
 
@@ -19,5 +22,4 @@ public class ValueServiceImpl extends BaseServiceImpl<Value> implements ValueSer
     public BaseDao<Value> baseDao() {
         return valueDao;
     }
-
 }

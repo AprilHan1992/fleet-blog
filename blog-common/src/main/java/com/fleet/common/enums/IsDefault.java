@@ -1,6 +1,6 @@
 package com.fleet.common.enums;
 
-public final class Deleted {
+public final class IsDefault {
 
     /**
      * 否

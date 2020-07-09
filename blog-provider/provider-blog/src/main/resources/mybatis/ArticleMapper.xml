@@ -164,6 +164,7 @@
             <if test="deleted != null">and a.`deleted` = #{deleted}</if>
             <if test="deleted == null">and a.`deleted` = 0</if>
         </where>
+        order by a.`sort` desc
     </select>
 </mapper>
 

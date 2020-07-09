@@ -86,6 +86,7 @@
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
         </where>
+        order by `sort` desc
     </select>
 
     <select id="idList" resultType="java.lang.Integer">

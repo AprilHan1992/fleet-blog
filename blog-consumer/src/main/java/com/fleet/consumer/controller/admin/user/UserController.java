@@ -105,7 +105,7 @@ public class UserController extends BaseController<User> {
     public R get(@RequestParam("id") Integer id) {
         User user = new User();
         user.setId(id);
-        return R.ok(get(user));
+        return get(user);
     }
 
     @Override
