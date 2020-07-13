@@ -7,8 +7,8 @@
         <result column="title" property="cover"/>
         <result column="tag_id" property="tagId"/>
         <result column="tag" property="tag"/>
-        <result column="content" property="content"/>
         <result column="tags" property="tags"/>
+        <result column="content" property="content"/>
         <result column="top" property="top"/>
         <result column="rcmd" property="rcmd"/>
         <result column="state" property="state"/>
@@ -21,7 +21,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		`id`, `title`, `title`, `tag_id`, `content`, `tags`, `top`, `rcmd`, `state`, `sort`, `creator_id`, `create_time`, `editor_id`, `edit_time`, `deleted`
+		`id`, `title`, `title`, `tag_id`, `tags`, `content`, `top`, `rcmd`, `state`, `sort`, `creator_id`, `create_time`, `editor_id`, `edit_time`, `deleted`
 	</sql>
 
     <insert id="insert" parameterType="com.fleet.common.entity.article.Article" useGeneratedKeys="true"
@@ -31,8 +31,8 @@
             <if test="title != null">`title`,</if>
             <if test="cover != null">`title`,</if>
             <if test="tagId != null">`tag_id`,</if>
-            <if test="content != null">`content`,</if>
             <if test="tags != null">`tags`,</if>
+            <if test="content != null">`content`,</if>
             <if test="top != null">`top`,</if>
             <if test="rcmd != null">`rcmd`,</if>
             <if test="state != null">`state`,</if>
@@ -48,8 +48,8 @@
             <if test="title != null">#{title},</if>
             <if test="cover != null">#{cover},</if>
             <if test="tagId != null">#{tagId},</if>
-            <if test="content != null">#{content},</if>
             <if test="tags != null">#{tags},</if>
+            <if test="content != null">#{content},</if>
             <if test="top != null">#{top},</if>
             <if test="rcmd != null">#{rcmd},</if>
             <if test="state != null">#{state},</if>
@@ -70,8 +70,8 @@
             <if test="title != null">and `title` = #{title}</if>
             <if test="cover != null">and `title` = #{cover}</if>
             <if test="tagId != null">and `tag_id` = #{tagId}</if>
-            <if test="content != null">and `content` = #{content}</if>
             <if test="tags != null">and `tags` = #{tags}</if>
+            <if test="content != null">and `content` = #{content}</if>
             <if test="top != null">and `top` = #{top}</if>
             <if test="rcmd != null">and `rcmd` = #{rcmd}</if>
             <if test="state != null">and `state` = #{state}</if>
@@ -98,8 +98,8 @@
             <if test="title != null">`title` = #{title},</if>
             <if test="cover != null">`title` = #{cover},</if>
             <if test="tagId != null">`tag_id` = #{tagId},</if>
-            <if test="content != null">`content` = #{content},</if>
             <if test="tags != null">`tags` = #{tags},</if>
+            <if test="content != null">`content` = #{content},</if>
             <if test="top != null">`top` = #{top},</if>
             <if test="rcmd != null">`rcmd` = #{rcmd},</if>
             <if test="state != null">`state` = #{state},</if>
@@ -124,8 +124,8 @@
             <if test="title != null">and a.`title` = #{title}</if>
             <if test="cover != null">and a.`title` = #{cover}</if>
             <if test="tagId != null">and a.`tag_id` = #{tagId}</if>
-            <if test="content != null">and a.`content` = #{content}</if>
             <if test="tags != null">and a.`tags` = #{tags}</if>
+            <if test="content != null">and a.`content` = #{content}</if>
             <if test="top != null">and a.`top` = #{top}</if>
             <if test="rcmd != null">and a.`rcmd` = #{rcmd}</if>
             <if test="state != null">and a.`state` = #{state}</if>

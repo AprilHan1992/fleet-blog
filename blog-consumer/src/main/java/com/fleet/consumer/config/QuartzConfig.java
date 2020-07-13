@@ -1,6 +1,5 @@
-package com.fleet.provider.admin.config;
+package com.fleet.consumer.config;
 
-import com.fleet.common.util.SpringContextUtil;
 import org.quartz.Scheduler;
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -33,15 +32,10 @@ public class QuartzConfig {
         }
     }
 
-    @Bean
-    public SpringContextUtil springContextUtil() {
-        return new SpringContextUtil();
-    }
-
     /**
      * 注入 scheduler 到 spring
      */
-    @Bean(name = "scheduler")
+    @Bean
     public Scheduler scheduler(QuartzJobFactory quartzJobFactory) throws Exception {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setJobFactory(quartzJobFactory);

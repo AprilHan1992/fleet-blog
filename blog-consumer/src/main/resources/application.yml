@@ -20,5 +20,5 @@ dubbo:
     client: curator
 # 单元测试
 test:
-  # 当前用户
-  user-name: admin
+  # 测试用户名
+  name: admin

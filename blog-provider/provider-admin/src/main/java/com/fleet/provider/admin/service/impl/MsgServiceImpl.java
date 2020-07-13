@@ -91,9 +91,17 @@ public class MsgServiceImpl extends BaseServiceImpl<Msg> implements MsgService {
     }
 
     @Override
-    public PageUtil<Msg> msgToListPage(Page page) {
+    public PageUtil<Msg> toListPage(Page page) {
         PageUtil<Msg> pageUtil = new PageUtil<>();
-        List<Msg> list = msgDao.msgToList(page);
+        List<Msg> list = msgDao.toList(page);
+        if (list != null) {
+            for (Msg msg : list) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("deleted", Deleted.NO);
+                map.put("msgId", msg.getId());
+                msg.setToList(toDao.list(map));
+            }
+        }
         pageUtil.setList(list);
         pageUtil.setPage(page);
         return pageUtil;

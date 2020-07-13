@@ -11,6 +11,7 @@ import com.fleet.common.util.jdbc.entity.Page;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,31 @@ public class MenuController extends BaseController<Menu> {
     @Override
     public BaseService<Menu> baseService() {
         return menuService;
+    }
+
+    @Override
+    @PostMapping("/insert")
+    public R insert(@RequestBody Menu menu) {
+        if (menu.getUpperId() == null) {
+            menu.setUpperId(0);
+        }
+        menu.setCreatorId(getUserId());
+        menu.setCreateTime(new Date());
+        if (!menuService.insert(menu)) {
+            return R.error();
+        }
+        return R.ok();
+    }
+
+    @Override
+    @PostMapping("/update")
+    public R update(@RequestBody Menu menu) {
+        menu.setEditorId(getUserId());
+        menu.setEditTime(new Date());
+        if (!menuService.update(menu)) {
+            return R.error();
+        }
+        return R.ok();
     }
 
     @GetMapping("/get")

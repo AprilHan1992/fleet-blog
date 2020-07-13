@@ -4,7 +4,7 @@ import com.fleet.common.entity.Base;
 
 public class Test extends Base {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -271731878526726342L;
 
 	/**
 	 * 测试id

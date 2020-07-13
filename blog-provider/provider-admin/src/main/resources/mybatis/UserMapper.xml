@@ -57,6 +57,15 @@
         </where>
     </update>
 
+    <update id="deletes">
+        update `user` set `deleted` = 1
+        <where>
+            <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </update>
+
     <update id="update" parameterType="com.fleet.common.entity.user.User">
         update `user`
         <set>
@@ -94,8 +103,8 @@
         select u.`id`, u.`name`, u.`nick_name`, u.`email`, u.`pwd`, u.`pwd_salt`,
         u.`state`, u.`reg_time`, u.`deleted`
         from `user` as u
-        left join `user_dept` as ud on u.`id` = ud.`id`
-        left join `dept` as d on ud.`dept_id` = d.`dept_id`
+        left join `user_dept` as ud on ud.`user_id` = u.`id`
+        left join `dept` as d on d.`id` = ud.`dept_id`
         <where>
             <if test="id != null">and u.`id` = #{id}</if>
             <if test="name != null">and u.`name` = #{name}</if>
@@ -108,8 +117,8 @@
             <if test="deleted != null">and u.`deleted` = #{deleted}</if>
             <if test="deleted == null">and u.`deleted` = 0</if>
             <if test="deptId != null">and ud.`dept_id` = #{deptId}</if>
-            <if test="idList != null">
-                <foreach collection="array" item="did" open="and ud.`dept_id` in (" separator="," close=")">
+            <if test="deptIdList != null">
+                <foreach collection="deptIdList" item="did" open="and ud.`dept_id` in (" separator="," close=")">
                     #{did}
                 </foreach>
             </if>

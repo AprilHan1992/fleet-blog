@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Dict extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -5626663637379233824L;
 
     /**
      * 字典id

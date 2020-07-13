@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class FieldAddition implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1311703984803168887L;
 
 	/**
 	 * 字段ID

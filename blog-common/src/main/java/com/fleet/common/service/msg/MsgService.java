@@ -10,5 +10,5 @@ import com.fleet.common.util.jdbc.entity.Page;
  */
 public interface MsgService extends BaseService<Msg> {
 
-    PageUtil<Msg> msgToListPage(Page page);
+    PageUtil<Msg> toListPage(Page page);
 }

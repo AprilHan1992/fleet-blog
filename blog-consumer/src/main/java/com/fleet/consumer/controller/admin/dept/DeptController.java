@@ -35,6 +35,9 @@ public class DeptController extends BaseController<Dept> {
     @Override
     @PostMapping("/insert")
     public R insert(@RequestBody Dept dept) {
+        if (dept.getUpperId() == null) {
+            dept.setUpperId(0);
+        }
         dept.setCreatorId(getUserId());
         dept.setCreateTime(new Date());
         if (!deptService.insert(dept)) {

@@ -42,7 +42,7 @@ public class LogAsyncTask {
         com.fleet.common.entity.log.Log opLog = new com.fleet.common.entity.log.Log();
         User user = CurUser.getUser();
         if (user != null) {
-            opLog.setId(user.getId());
+            opLog.setUserId(user.getId());
             opLog.setName(user.getName());
         }
 
@@ -71,7 +71,7 @@ public class LogAsyncTask {
                 if (argNames[i].equals("pwd") || argNames[i].equals("oldPwd") || argNames[i].equals("newPwd")) {
                     argValues[i] = "密码不能明文显示";
                 }
-                // 获取登录用户输入账户
+                // 获取登录用户输入用户名
                 if (signature.getName().equals("login")) {
                     if (argNames[i].equals("name")) {
                         opLog.setName(argValues[i].toString());

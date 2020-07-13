@@ -10,7 +10,7 @@ import com.fleet.common.entity.Base;
  */
 public class Field extends Base {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2805588221252171447L;
 
 	/**
 	 * 字段ID

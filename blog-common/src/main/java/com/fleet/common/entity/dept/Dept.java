@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Dept extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -1094435773384395079L;
 
     /**
      * 部门id

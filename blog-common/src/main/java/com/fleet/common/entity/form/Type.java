@@ -7,7 +7,7 @@ import com.fleet.common.entity.Base;
  */
 public class Type extends Base {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 684689427829571991L;
 
 	/**
 	 * 分类ID

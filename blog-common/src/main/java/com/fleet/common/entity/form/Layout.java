@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class Layout extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7452443340884422468L;
 
     /**
      * 布局ID

@@ -5,6 +5,7 @@ import com.fleet.common.entity.dict.Dict;
 import com.fleet.common.json.R;
 import com.fleet.common.service.BaseService;
 import com.fleet.common.service.dict.DictService;
+import com.fleet.common.service.dict.ValueService;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,9 @@ public class DictController extends BaseController<Dict> {
     @Reference
     private DictService dictService;
 
+    @Reference
+    private ValueService valueService;
+
     @Override
     public BaseService<Dict> baseService() {
         return dictService;
@@ -34,6 +38,7 @@ public class DictController extends BaseController<Dict> {
         if (d != null) {
             return R.error("字典组已存在");
         }
+
         if (!dictService.insert(dict)) {
             return R.error();
         }
@@ -49,6 +54,7 @@ public class DictController extends BaseController<Dict> {
         if (d != null && !d.getId().equals(dict.getId())) {
             return R.error("字典组已存在");
         }
+
         if (!dictService.update(dict)) {
             return R.error();
         }
@@ -63,12 +69,12 @@ public class DictController extends BaseController<Dict> {
     }
 
     @GetMapping("/getDefaultValue")
-    public String getDefaultValue(@RequestParam("group") String group) {
-        return dictService.getDefaultValue(group);
+    public R getDefaultValue(@RequestParam("group") String group) {
+        return R.ok(dictService.getDefaultValue(group));
     }
 
     @GetMapping("/getValue")
-    public String getValue(@RequestParam("group") String group, @RequestParam("code") String code) {
-        return dictService.getValue(group, code);
+    public R getValue(@RequestParam("group") String group, @RequestParam("code") String code) {
+        return R.ok(dictService.getValue(group, code));
     }
 }

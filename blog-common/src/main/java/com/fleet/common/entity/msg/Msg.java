@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Msg extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4736591895618842716L;
 
     /**
      * 消息id

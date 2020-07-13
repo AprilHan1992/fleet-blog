@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fleet.provider.admin.dao.LogDao">
     <resultMap id="BaseResultMap" type="com.fleet.common.entity.log.Log">
-        <id column="log_id" property="logId"/>
-        <result column="user_id" property="id"/>
-        <result column="user_name" property="name"/>
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="name" property="name"/>
         <result column="type" property="type"/>
         <result column="log" property="log"/>
         <result column="url" property="url"/>
@@ -21,14 +21,14 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		`log_id`, `user_id`, `type`, `log`, `url`, `http_method`, `method`, `params`, `ip`, `agent`, os, browser, state, error, `millis`, `create_time`
+		`id`, `user_id`, `type`, `log`, `url`, `http_method`, `method`, `params`, `ip`, `agent`, `os`, `browser`, `state`, `error`, `millis`, `create_time`
 	</sql>
 
-    <insert id="insert" parameterType="com.fleet.common.entity.log.Log" useGeneratedKeys="true" keyProperty="logId">
+    <insert id="insert" parameterType="com.fleet.common.entity.log.Log" useGeneratedKeys="true" keyProperty="id">
         insert into `log` (
         <trim suffixOverrides=",">
-            <if test="id != null">`user_id`,</if>
-            <if test="name != null">`user_name`,</if>
+            <if test="userId != null">`user_id`,</if>
+            <if test="name != null">`name`,</if>
             <if test="type != null">`type`,</if>
             <if test="log != null">`log`,</if>
             <if test="url != null">`url`,</if>
@@ -46,7 +46,7 @@
         </trim>
         ) values (
         <trim suffixOverrides=",">
-            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
             <if test="name != null">#{name},</if>
             <if test="type != null">#{type},</if>
             <if test="log != null">#{log},</if>
@@ -69,9 +69,9 @@
     <update id="delete" parameterType="com.fleet.common.entity.log.Log">
         update `log` set `millis` = 1
         <where>
-            <if test="logId != null">and `log_id` = #{logId}</if>
-            <if test="id != null">and `user_id` = #{id}</if>
-            <if test="name != null">and `user_name` = #{name}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
+            <if test="name != null">and `name` = #{name}</if>
             <if test="type != null">and `type` = #{type}</if>
             <if test="log != null">and `log` = #{log}</if>
             <if test="url != null">and `url` = #{url}</if>
@@ -88,11 +88,20 @@
         </where>
     </update>
 
+    <update id="deletes">
+        update `log` set `deleted` = 1
+        <where>
+            <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </update>
+
     <update id="update" parameterType="com.fleet.common.entity.log.Log">
         update `log`
         <set>
-            <if test="id != null">`user_id` = #{id},</if>
-            <if test="name != null">`user_name` = #{name},</if>
+            <if test="userId != null">`user_id` = #{userId},</if>
+            <if test="name != null">`name` = #{name},</if>
             <if test="type != null">`type` = #{type},</if>
             <if test="log != null">`log` = #{log},</if>
             <if test="url != null">`url` = #{url},</if>
@@ -107,7 +116,7 @@
             <if test="millis != null">`millis` = #{millis},</if>
             <if test="createTime != null">`create_time` = #{createTime},</if>
         </set>
-        where log_id = #{logId}
+        where id = #{id}
     </update>
 
     <select id="get" resultMap="BaseResultMap">
@@ -115,9 +124,9 @@
         <include refid="Base_Column_List"/>
         from `log`
         <where>
-            <if test="logId != null">and `log_id` = #{logId}</if>
-            <if test="id != null">and `user_id` = #{id}</if>
-            <if test="name != null">and `user_name` = #{name}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
+            <if test="name != null">and `name` = #{name}</if>
             <if test="type != null">and `type` = #{type}</if>
             <if test="log != null">and `log` = #{log}</if>
             <if test="url != null">and `url` = #{url}</if>
@@ -141,32 +150,9 @@
         <include refid="Base_Column_List"/>
         from `log`
         <where>
-            <if test="logId != null">and `log_id` = #{logId}</if>
-            <if test="id != null">and `user_id` = #{id}</if>
-            <if test="name != null">and `user_name` = #{name}</if>
-            <if test="type != null">and `type` = #{type}</if>
-            <if test="log != null">and `log` = #{log}</if>
-            <if test="url != null">and `url` = #{url}</if>
-            <if test="httpMethod != null">and `http_method` = #{httpMethod}</if>
-            <if test="method != null">and `method` = #{method}</if>
-            <if test="params != null">and `params` = #{params}</if>
-            <if test="ip != null">and `ip` = #{ip}</if>
-            <if test="agent != null">and `agent` = #{agent}</if>
-            <if test="os != null">and `os` = #{os}</if>
-            <if test="browser != null">and `browser` = #{browser}</if>
-            <if test="state != null">and `state` = #{state}</if>
-            <if test="error != null">and `error` = #{error}</if>
-            <if test="millis != null">and `millis` = #{millis}</if>
-            <if test="createTime != null">and `create_time` = #{createTime}</if>
-        </where>
-    </select>
-
-    <select id="logIdList" resultType="java.lang.Integer">
-        select `log_id` from `log`
-        <where>
-            <if test="logId != null">and `log_id` = #{logId}</if>
-            <if test="id != null">and `user_id` = #{id}</if>
-            <if test="name != null">and `user_name` = #{name}</if>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="userId != null">and `user_id` = #{userId}</if>
+            <if test="name != null">and `name` = #{name}</if>
             <if test="type != null">and `type` = #{type}</if>
             <if test="log != null">and `log` = #{log}</if>
             <if test="url != null">and `url` = #{url}</if>

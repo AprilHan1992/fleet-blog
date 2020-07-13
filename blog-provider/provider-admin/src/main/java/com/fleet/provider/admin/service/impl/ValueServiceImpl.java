@@ -8,6 +8,7 @@ import com.fleet.provider.admin.dao.ValueDao;
 import org.apache.dubbo.config.annotation.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author April Han
@@ -21,5 +22,10 @@ public class ValueServiceImpl extends BaseServiceImpl<Value> implements ValueSer
     @Override
     public BaseDao<Value> baseDao() {
         return valueDao;
+    }
+
+    @Override
+    public List<Integer> idList(Value value) {
+        return valueDao.idList(value);
     }
 }

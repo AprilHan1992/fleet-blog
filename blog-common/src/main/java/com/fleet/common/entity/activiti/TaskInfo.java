@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class TaskInfo<T> implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 7220007461645369416L;
 
     /**
      * 流程编号（唯一）

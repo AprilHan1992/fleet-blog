@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class QuartzJobLog extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4069607703129526255L;
 
     /**
      * 日志id

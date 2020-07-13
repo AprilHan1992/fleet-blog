@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 public class TurnLog implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3213211790201422097L;
 
 	/**
 	 * 任务节点名称

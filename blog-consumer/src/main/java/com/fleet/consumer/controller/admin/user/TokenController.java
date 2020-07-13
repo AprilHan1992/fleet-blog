@@ -37,8 +37,8 @@ public class TokenController {
             return R.error("缺少 refreshToken");
         }
 
-        Integer id = (Integer) redisUtil.get("refreshToken:user:" + refreshToken);
-        if (id == null) {
+        Integer userId = (Integer) redisUtil.get("refreshToken:user:" + refreshToken);
+        if (userId == null) {
             throw new BaseException("refreshToken 无效或已过期");
         }
 
@@ -50,7 +50,7 @@ public class TokenController {
 
         accessToken = UUIDUtil.getUUID();
         redisUtil.setEx("refreshToken:accessToken:" + refreshToken, accessToken, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
-        redisUtil.setEx("accessToken:user:" + accessToken, id, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+        redisUtil.setEx("accessToken:user:" + accessToken, userId, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
         return R.ok(accessToken);
     }
 }

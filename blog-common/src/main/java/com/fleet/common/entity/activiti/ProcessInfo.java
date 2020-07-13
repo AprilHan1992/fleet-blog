@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 public class ProcessInfo<T> implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7264165955117621066L;
 
 	/**
 	 * 流程标识

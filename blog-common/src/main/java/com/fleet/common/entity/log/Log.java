@@ -7,17 +7,17 @@ import java.util.Date;
 
 public class Log implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -7279093462458595191L;
 
     /**
-     * 记录id
+     * 日志id
      */
-    private Long logId;
+    private Long id;
 
     /**
      * 操作用户id
      */
-    private Integer id;
+    private Integer userId;
 
     /**
      * 操作用户
@@ -95,20 +95,20 @@ public class Log implements Serializable {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    public Long getLogId() {
-        return logId;
-    }
-
-    public void setLogId(Long logId) {
-        this.logId = logId;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getName() {

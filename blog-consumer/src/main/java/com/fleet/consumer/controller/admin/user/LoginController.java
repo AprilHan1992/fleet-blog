@@ -37,14 +37,14 @@ public class LoginController {
     /**
      * 登陆
      *
-     * @param name 账户
+     * @param name 用户名
      * @param pwd  密码
      */
     @Log(value = "登录", type = 1)
     @GetMapping("/login")
     public R login(@RequestParam("name") String name, @RequestParam("pwd") String pwd) {
         if (StringUtils.isEmpty(name)) {
-            return R.error("账户为空");
+            return R.error("用户名为空");
         }
         if (StringUtils.isEmpty(pwd)) {
             return R.error("密码为空");
@@ -54,29 +54,28 @@ public class LoginController {
         user.setName(name);
         user = userService.get(user);
         if (user == null) {
-            return R.error("账户或密码错误");
+            return R.error("用户名或密码错误");
         }
 
         pwd = MD5Util.encrypt(pwd, user.getPwdSalt());
         if (!pwd.equals(user.getPwd())) {
-            return R.error("账户或密码错误");
+            return R.error("用户名或密码错误");
         }
-
         if (user.getState().equals(UserState.FORBIDDEN)) {
-            return R.error("账户被禁用");
+            return R.error("用户名被禁用");
         }
         if (user.getState().equals(UserState.LOCKED)) {
-            return R.error("账户被锁定");
+            return R.error("用户名被锁定");
         }
 
-        Integer id = user.getId();
-        clearToken(id);
-        Map<String, Object> tokenMap = initToken(id);
+        Integer userId = user.getId();
+        clearToken(userId);
+        Map<String, Object> tokenMap = initToken(userId);
         return R.ok(tokenMap);
     }
 
-    public void clearToken(Integer id) {
-        String refreshToken = (String) redisUtil.get("user:refreshToken:" + id);
+    public void clearToken(Integer userId) {
+        String refreshToken = (String) redisUtil.get("user:refreshToken:" + userId);
         if (StringUtils.isNotEmpty(refreshToken)) {
             redisUtil.delete("refreshToken:user:" + refreshToken);
             String accessToken = (String) redisUtil.get("refreshToken:accessToken:" + refreshToken);
@@ -85,17 +84,17 @@ public class LoginController {
             }
             redisUtil.delete("refreshToken:accessToken:" + refreshToken);
         }
-        redisUtil.delete("user:refreshToken:" + id);
+        redisUtil.delete("user:refreshToken:" + userId);
     }
 
-    public Map<String, Object> initToken(Integer id) {
+    public Map<String, Object> initToken(Integer userId) {
         Map<String, Object> tokenMap = new HashMap<>();
         String refreshToken = UUIDUtil.getUUID();
         String accessToken = UUIDUtil.getUUID();
-        redisUtil.setEx("user:refreshToken:" + id, refreshToken, TokenExpiresIn.REFRESH_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
-        redisUtil.setEx("refreshToken:user:" + refreshToken, id, TokenExpiresIn.REFRESH_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+        redisUtil.setEx("user:refreshToken:" + userId, refreshToken, TokenExpiresIn.REFRESH_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+        redisUtil.setEx("refreshToken:user:" + refreshToken, userId, TokenExpiresIn.REFRESH_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
         redisUtil.setEx("refreshToken:accessToken:" + refreshToken, accessToken, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
-        redisUtil.setEx("accessToken:user:" + accessToken, id, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+        redisUtil.setEx("accessToken:user:" + accessToken, userId, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
         tokenMap.put("refreshToken", refreshToken);
         tokenMap.put("accessToken", accessToken);
         return tokenMap;

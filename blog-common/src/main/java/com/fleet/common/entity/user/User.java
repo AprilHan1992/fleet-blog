@@ -24,7 +24,7 @@ public class User extends Base {
     private Integer id;
 
     /**
-     * 账户（登录使用）
+     * 用户名（登录使用）
      */
     private String name;
 

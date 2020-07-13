@@ -5,7 +5,7 @@ import com.fleet.common.entity.dept.Dept;
 
 public class UserDept extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8532522385874555467L;
 
     /**
      * 用户对应部门id

@@ -6,7 +6,7 @@ import com.fleet.common.entity.Base;
 
 public class App extends Base {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 354203266314535432L;
 
 	/**
 	 * 应用标识

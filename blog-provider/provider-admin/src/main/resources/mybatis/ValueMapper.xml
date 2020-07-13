@@ -128,18 +128,4 @@
             <if test="deleted == null">and `deleted` = 0</if>
         </where>
     </select>
-
-    <select id="getDefaultValue" parameterType="java.lang.String" resultType="java.lang.String">
-		select v.`value`
-		from `dict` as d
-		left join `value` as v on d.id = v.dict_id
-		where d.`group` = #{group} and d.`deleted` = 0 and v.`is_default` = 1 and v.`deleted` = 0
-	</select>
-
-    <select id="getValue" parameterType="java.lang.String" resultType="java.lang.String">
-		select v.`value`
-		from `dict` as d
-		left join `value` as v on d.id = v.dict_id
-		where d.`group` = #{group} and d.`deleted` = 0 and v.`code` = #{code} and v.`deleted` = 0
-	</select>
 </mapper>

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 public class ApprovalLog implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5733919495088577796L;
 
 	/**
 	 * 任务节点名称

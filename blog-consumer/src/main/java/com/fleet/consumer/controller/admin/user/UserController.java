@@ -62,7 +62,7 @@ public class UserController extends BaseController<User> {
     @PostMapping("/insert")
     public R insert(@RequestBody User user) {
         if (StringUtils.isEmpty(user.getName())) {
-            return R.error("账户为空");
+            return R.error("用户名为空");
         }
         if (StringUtils.isEmpty(user.getPwd())) {
             return R.error("密码为空");
@@ -72,7 +72,7 @@ public class UserController extends BaseController<User> {
         u.setName(user.getName());
         u = userService.get(u);
         if (u != null) {
-            return R.error("账户已存在");
+            return R.error("用户名已存在");
         }
 
         String salt = UUIDUtil.getUUID();
@@ -93,7 +93,7 @@ public class UserController extends BaseController<User> {
         u.setId(user.getId());
         u = userService.get(u);
         if (u == null) {
-            return R.error("账户不存在");
+            return R.error("用户名不存在");
         }
         if (user.getPwd() != null) {
             String pwd = MD5Util.encrypt(user.getPwd(), u.getPwdSalt());
@@ -130,9 +130,9 @@ public class UserController extends BaseController<User> {
     @PostMapping("/listPage")
     public PageUtil<User> listPage(@RequestBody Page page) {
         if (page.containsKey("deptId") && page.get("deptId") != null) {
-            List<Integer> idList = deptService.idList((Integer) page.get("deptId"));
+            List<Integer> deptIdList = deptService.idList((Integer) page.get("deptId"));
             page.remove("deptId");
-            page.put("idList", idList);
+            page.put("deptIdList", deptIdList);
         }
         PageUtil<User> pageUtil = userService.listPage(page);
         List<User> userList = pageUtil.getList();

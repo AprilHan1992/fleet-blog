@@ -6,8 +6,6 @@ import com.fleet.common.exception.BaseException;
 import com.fleet.common.service.user.UserService;
 import com.fleet.common.util.UUIDUtil;
 import com.fleet.common.util.cache.RedisUtil;
-import com.fleet.common.util.token.entity.Token;
-import com.fleet.common.util.token.entity.UserToken;
 import com.fleet.consumer.config.TestConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
@@ -26,9 +24,8 @@ import org.springframework.util.Assert;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,7 +47,7 @@ public class BaseTests {
     @Resource
     private RedisUtil redisUtil;
 
-    private Integer id;
+    private Integer userId;
 
     private String accessToken;
 
@@ -64,12 +61,11 @@ public class BaseTests {
 
     @After
     public void after() {
-        deleteToken();
     }
 
-    public void post(String url, String json) {
+    public void post(String url) {
         try {
-            builder = MockMvcRequestBuilders.post(url).header("accessToken", this.accessToken).contentType(MediaType.APPLICATION_JSON).content(json);
+            builder = MockMvcRequestBuilders.post(url).header("accessToken", this.accessToken);
             String result = getMockHttpServletResponse(builder).getContentAsString();
             result(result);
         } catch (Exception e) {
@@ -77,14 +73,24 @@ public class BaseTests {
         }
     }
 
-    public void post(String url, Map<String, String> param) {
+    public void post(String url, Map<String, String[]> params) {
         try {
             builder = MockMvcRequestBuilders.post(url).header("accessToken", this.accessToken);
-            if (param != null && param.size() > 0) {
-                for (String key : param.keySet()) {
-                    builder.param(key, param.get(key));
+            if (params != null && params.size() > 0) {
+                for (String key : params.keySet()) {
+                    builder.param(key, params.get(key));
                 }
             }
+            String result = getMockHttpServletResponse(builder).getContentAsString();
+            result(result);
+        } catch (Exception e) {
+            throw new BaseException("test fail：" + e);
+        }
+    }
+
+    public void post(String url, String json) {
+        try {
+            builder = MockMvcRequestBuilders.post(url).header("accessToken", this.accessToken).contentType(MediaType.APPLICATION_JSON).content(json);
             String result = getMockHttpServletResponse(builder).getContentAsString();
             result(result);
         } catch (Exception e) {
@@ -102,19 +108,12 @@ public class BaseTests {
         }
     }
 
-    public void get(String url, Map<String, String> param) {
-        List<String> paramList = new ArrayList<>();
-        if (param != null && param.size() != 0) {
-            for (String key : param.keySet()) {
-                paramList.add(key + "=" + param.get(key));
-            }
-        }
+    public void get(String url, Map<String, String[]> params) {
         try {
-            String paramString = paramList.size() != 0 ? "?" + StringUtils.join(paramList, "&") : "";
-            builder = MockMvcRequestBuilders.get(url + paramString).header("accessToken", this.accessToken);
-            if (param != null && param.size() > 0) {
-                for (String key : param.keySet()) {
-                    builder.param(key, param.get(key));
+            builder = MockMvcRequestBuilders.get(url).header("accessToken", this.accessToken);
+            if (params != null && params.size() > 0) {
+                for (String key : params.keySet()) {
+                    builder.param(key, params.get(key));
                 }
             }
             String result = getMockHttpServletResponse(builder).getContentAsString();
@@ -144,45 +143,34 @@ public class BaseTests {
         user.setName(testConfig.getName());
         user = userService.get(user);
         if (user == null) {
-            throw new BaseException("test fail：测试账户不存在");
+            throw new BaseException("test fail：测试用户名不存在");
         }
 
-        Integer id = user.getId();
+        Integer userId = user.getId();
+        String refreshToken = (String) redisUtil.get("user:refreshToken:" + userId);
+        String accessToken;
+        if (StringUtils.isNotEmpty(refreshToken)) {
+            accessToken = (String) redisUtil.get("refreshToken:accessToken:" + refreshToken);
+            if (StringUtils.isEmpty(accessToken)) {
+                redisUtil.delete("refreshToken:accessToken:" + refreshToken);
 
-        Long issuedAt = System.currentTimeMillis();
-        String accessToken = UUIDUtil.getUUID();
-        String refreshToken = UUIDUtil.getUUID();
+                accessToken = UUIDUtil.getUUID();
+                redisUtil.setEx("refreshToken:accessToken:" + refreshToken, accessToken, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+                redisUtil.setEx("accessToken:user:" + accessToken, userId, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+            }
+        } else {
+            redisUtil.delete("user:refreshToken:" + userId);
 
-//        // 设置用户 accessToken 信息
-//        Token userAccessToken = new Token();
-//        userAccessToken.setId(id);
-//        userAccessToken.setToken(accessToken);
-//        userAccessToken.setIssuedAt(issuedAt);
-//        userAccessToken.setExpiresIn(TokenExpiresIn.EXPIRES_IN.getMsec());
-//        redisUtil.set("token:access:" + accessToken, userAccessToken);
-//
-//        // 设置用户 refreshToken 信息
-//        Token userRefreshToken = new Token();
-//        userRefreshToken.setId(id);
-//        userRefreshToken.setToken(refreshToken);
-//        userRefreshToken.setIssuedAt(issuedAt);
-//        userRefreshToken.setExpiresIn(TokenExpiresIn.REFRESH_EXPIRES_IN.getMsec());
-//        redisUtil.set("token:refresh:" + refreshToken, userRefreshToken);
+            refreshToken = UUIDUtil.getUUID();
+            accessToken = UUIDUtil.getUUID();
+            redisUtil.setEx("user:refreshToken:" + userId, refreshToken, TokenExpiresIn.REFRESH_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+            redisUtil.setEx("refreshToken:user:" + refreshToken, userId, TokenExpiresIn.REFRESH_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+            redisUtil.setEx("refreshToken:accessToken:" + refreshToken, accessToken, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+            redisUtil.setEx("accessToken:user:" + accessToken, userId, TokenExpiresIn.ACCESS_EXPIRES_IN.getSec(), TimeUnit.SECONDS);
+        }
 
-        // 设置用户 token 关联信息
-        UserToken userToken = new UserToken();
-        userToken.setAccessToken(accessToken);
-        userToken.setRefreshToken(refreshToken);
-        redisUtil.set("token:user:" + id + ":refresh:" + refreshToken + ":access:" + accessToken, userToken);
-
-        this.id = id;
+        this.userId = userId;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
-    }
-
-    public void deleteToken() {
-        redisUtil.delete("token:access:" + this.accessToken);
-        redisUtil.delete("token:refresh:" + this.refreshToken);
-        redisUtil.delete("token:user:" + this.id + ":refresh:" + this.refreshToken + ":access:" + this.accessToken);
     }
 }

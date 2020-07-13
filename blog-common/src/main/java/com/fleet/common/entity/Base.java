@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class Base implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 6831341801816382151L;
 
     /**
      * 是否删除（1：是，0：否）

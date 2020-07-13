@@ -53,6 +53,15 @@
         </where>
     </update>
 
+    <update id="deletes">
+        update `msg` set `deleted` = 1
+        <where>
+            <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </update>
+
     <update id="update" parameterType="com.fleet.common.entity.msg.Msg">
         update `msg`
         <set>
@@ -102,13 +111,13 @@
         </where>
     </select>
 
-    <select id="msgToList" resultMap="BaseResultMap">
+    <select id="toList" resultMap="BaseResultMap">
         select m.`id`, m.`title`, m.`excerpt`, m.`url`, m.`state`, m.`creator_id`, m.`create_time`, m.`deleted`
         from `msg` as m
-        left join `to` as t on m.id = t.msg_id
+        left join `to` as t on t.`msg_id` = m.`id`
         <where>
-            <if test="readState != null">and t.read_state = #{readState}</if>
-            and m.deleted = 0 and m.state = 1 and t.to = #{to} and t.deleted = 0
+            <if test="readState != null">and t.`read_state` = #{readState}</if>
+            and m.`deleted` = 0 and m.`state` = 1 and t.`to` = #{to} and t.`deleted` = 0
         </where>
     </select>
 </mapper>

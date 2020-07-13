@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class To extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 4115146960165874556L;
 
     /**
      * 消息接收id

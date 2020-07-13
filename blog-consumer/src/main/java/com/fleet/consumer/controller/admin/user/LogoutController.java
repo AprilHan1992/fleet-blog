@@ -38,16 +38,16 @@ public class LogoutController {
         if (user == null) {
             return R.error("当前用户不存在");
         }
-        Integer id = user.getId();
-        if (id == null) {
+        Integer userId = user.getId();
+        if (userId == null) {
             return R.error("当前用户不存在");
         }
-        clearToken(id);
+        clearToken(userId);
         return R.ok();
     }
 
-    public void clearToken(Integer id) {
-        String refreshToken = (String) redisUtil.get("user:refreshToken:" + id);
+    public void clearToken(Integer userId) {
+        String refreshToken = (String) redisUtil.get("user:refreshToken:" + userId);
         if (StringUtils.isNotEmpty(refreshToken)) {
             redisUtil.delete("refreshToken:user:" + refreshToken);
             String accessToken = (String) redisUtil.get("refreshToken:accessToken:" + refreshToken);
@@ -56,6 +56,6 @@ public class LogoutController {
             }
             redisUtil.delete("refreshToken:accessToken:" + refreshToken);
         }
-        redisUtil.delete("user:refreshToken:" + id);
+        redisUtil.delete("user:refreshToken:" + userId);
     }
 }

@@ -4,7 +4,7 @@ import com.fleet.common.entity.Base;
 
 public class MailGroup extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 505485382588424034L;
 
     /**
      * 邮箱组id

@@ -35,19 +35,19 @@ public class Article extends Base {
     private Integer tagId;
 
     /**
-     * 分类/标签
+     * 分类
      */
     private String tag;
+
+    /**
+     * 标签（多个用,隔开）
+     */
+    private String tags;
 
     /**
      * 文章内容
      */
     private String content;
-
-    /**
-     * 文章标签（多个用,隔开）
-     */
-    private String tags;
 
     /**
      * 是否置顶（1：是，0：否）
@@ -141,20 +141,20 @@ public class Article extends Base {
         this.tag = tag;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public String getTags() {
         return tags;
     }
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Integer getTop() {

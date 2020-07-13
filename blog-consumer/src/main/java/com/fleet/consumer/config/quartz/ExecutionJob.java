@@ -1,4 +1,4 @@
-package com.fleet.common.util.quartz;
+package com.fleet.consumer.config.quartz;
 
 import com.fleet.common.entity.quartz.QuartzJob;
 import com.fleet.common.entity.quartz.QuartzJobLog;

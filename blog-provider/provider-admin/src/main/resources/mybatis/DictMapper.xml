@@ -82,4 +82,31 @@
             <if test="deleted == null">and `deleted` = 0</if>
         </where>
     </select>
+
+    <select id="idList" resultType="java.lang.Integer">
+        select `id` from `dict`
+        <where>
+            <if test="id != null">and `id` = #{id}</if>
+            <if test="group != null">and `group` = #{group}</if>
+            <if test="remark != null">and `remark` = #{remark}</if>
+            <if test="deleted != null">and `deleted` = #{deleted}</if>
+            <if test="deleted == null">and `deleted` = 0</if>
+        </where>
+    </select>
+
+    <select id="getDefaultValue" parameterType="java.lang.String" resultType="java.lang.String">
+		select v.`value`
+		from `dict` as d
+		left join `value` as v on v.`dict_id` = d.`id`
+		where d.`group` = #{group} and d.`deleted` = 0 and v.`is_default` = 1 and v.`deleted` = 0
+		limit 1
+	</select>
+
+    <select id="getValue" parameterType="java.lang.String" resultType="java.lang.String">
+		select v.`value`
+		from `dict` as d
+		left join `value` as v on v.`dict_id` = d.`id`
+		where d.`group` = #{group} and d.`deleted` = 0 and v.`code` = #{code} and v.`deleted` = 0
+		limit 1
+	</select>
 </mapper>

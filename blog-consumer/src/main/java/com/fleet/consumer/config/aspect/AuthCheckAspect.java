@@ -36,10 +36,10 @@ public class AuthCheckAspect {
             throw new BaseException(ResultState.ERROR);
         }
 
-        Integer id = user.getId();
+        Integer userId = user.getId();
         String[] roles = authCheck.roles();
         if (roles.length != 0) {
-            Boolean hasRoles = userRoleService.hasRoles(id, roles);
+            Boolean hasRoles = userRoleService.hasRoles(userId, roles);
             if (!hasRoles) {
                 throw new BaseException(ResultState.ERROR);
             }
@@ -47,7 +47,7 @@ public class AuthCheckAspect {
 
         String[] permits = authCheck.permits();
         if (permits.length != 0) {
-            Boolean hasPermits = userRoleService.hasPermits(id, permits);
+            Boolean hasPermits = userRoleService.hasPermits(userId, permits);
             if (!hasPermits) {
                 throw new BaseException(ResultState.ERROR);
             }

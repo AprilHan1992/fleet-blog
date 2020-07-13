@@ -10,7 +10,7 @@ import com.fleet.common.entity.Base;
  */
 public class Table extends Base {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3988208876846092722L;
 
 	/**
 	 * 数据表ID

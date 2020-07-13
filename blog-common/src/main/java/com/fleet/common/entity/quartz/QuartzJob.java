@@ -7,7 +7,7 @@ import com.fleet.common.entity.Base;
  */
 public class QuartzJob extends Base {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -7583052536281180202L;
 
     /**
      * 任务调度参数key
@@ -102,11 +102,11 @@ public class QuartzJob extends Base {
         this.cronExpression = cronExpression;
     }
 
-    public Integer getEnabledd() {
+    public Integer getEnabled() {
         return enabled;
     }
 
-    public void setEnabledd(Integer enabled) {
+    public void setEnabled(Integer enabled) {
         this.enabled = enabled;
     }
 

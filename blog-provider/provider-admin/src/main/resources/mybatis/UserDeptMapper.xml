@@ -111,8 +111,8 @@
     <select id="dept" parameterType="java.lang.Integer" resultMap="DeptResultMap">
 		select d.`id`, d.`name`, d.`state`, d.`sort`, d.`creator_id`, d.`create_time`, d.`editor_id`, d.`edit_time`, d.`upper_id`, d.`deleted`
 		from `user_dept` as ud
-		left join `dept` as d on ud.dept_id = d.id
-		where ud.user_id = #{userId} and ud.deleted = 0 and d.deleted = 0
+		left join `dept` as d on d.`id` = ud.`dept_id`
+		where ud.`user_id` = #{userId} and ud.`deleted` = 0 and d.`deleted` = 0
 		limit 1
 	</select>
 </mapper>
