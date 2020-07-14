@@ -13,13 +13,22 @@ public class QuartzJobControllerTests extends BaseTests {
     @Test
     public void insert() {
         QuartzJob quartzJob = new QuartzJob();
-        quartzJob.setJobName("测试");
+        quartzJob.setJobName("有参定时任务");
         quartzJob.setBeanName("testTask");
         quartzJob.setMethodName("run");
-        quartzJob.setParam("test");
+        quartzJob.setParam("参数");
         quartzJob.setCronExpression("*/20 * * * * ?");
         quartzJob.setEnabled(1);
-        quartzJob.setRemark("测试");
+        quartzJob.setRemark("有参定时任务");
+        super.post("/quartz/job/insert", JSONObject.toJSONString(quartzJob));
+
+        quartzJob = new QuartzJob();
+        quartzJob.setJobName("无参定时任务");
+        quartzJob.setBeanName("testTask");
+        quartzJob.setMethodName("run");
+        quartzJob.setCronExpression("*/20 * * * * ?");
+        quartzJob.setEnabled(1);
+        quartzJob.setRemark("无参定时任务");
         super.post("/quartz/job/insert", JSONObject.toJSONString(quartzJob));
     }
 

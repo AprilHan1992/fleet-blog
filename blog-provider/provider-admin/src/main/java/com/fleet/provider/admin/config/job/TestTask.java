@@ -15,4 +15,8 @@ public class TestTask {
     public void run(String params) {
         logger.debug("有参定时任务定时执行，参数为：{}", params);
     }
+
+    public void run() {
+        logger.debug("无参定时任务定时执行");
+    }
 }
