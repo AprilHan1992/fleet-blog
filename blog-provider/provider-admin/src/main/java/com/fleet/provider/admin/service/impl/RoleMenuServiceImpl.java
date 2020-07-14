@@ -26,6 +26,18 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
     }
 
     @Override
+    public Boolean insert(RoleMenu roleMenu) {
+        RoleMenu rm = new RoleMenu();
+        rm.setRoleId(roleMenu.getRoleId());
+        rm.setMenuId(roleMenu.getMenuId());
+        rm = roleMenuDao.get(rm);
+        if (rm != null) {
+            return true;
+        }
+        return roleMenuDao.insert(roleMenu) != 0;
+    }
+
+    @Override
     public List<Integer> idList(Integer roleId) {
         RoleMenu roleMenu = new RoleMenu();
         roleMenu.setRoleId(roleId);

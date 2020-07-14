@@ -2,9 +2,11 @@ package com.fleet.provider.admin.service.impl;
 
 import com.fleet.common.dao.BaseDao;
 import com.fleet.common.entity.role.Role;
+import com.fleet.common.entity.role.RoleMenu;
 import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.service.role.RoleService;
 import com.fleet.provider.admin.dao.RoleDao;
+import com.fleet.provider.admin.dao.RoleMenuDao;
 import org.apache.dubbo.config.annotation.Service;
 
 import javax.annotation.Resource;
@@ -22,9 +24,37 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
     @Resource
     private RoleDao roleDao;
 
+    @Resource
+    private RoleMenuDao roleMenuDao;
+
     @Override
     public BaseDao<Role> baseDao() {
         return roleDao;
+    }
+
+    @Override
+    public Boolean insert(Role role) {
+        if (roleDao.insert(role) == 0) {
+            return false;
+        }
+        List<Integer> menuIdList = role.getMenuIdList();
+        if (menuIdList != null) {
+            for (Integer menuId : menuIdList) {
+                RoleMenu rm = new RoleMenu();
+                rm.setRoleId(role.getId());
+                rm.setMenuId(menuId);
+                rm = roleMenuDao.get(rm);
+                if (rm != null) {
+                    continue;
+                }
+
+                RoleMenu roleMenu = new RoleMenu();
+                roleMenu.setRoleId(role.getId());
+                roleMenu.setMenuId(menuId);
+                roleMenuDao.insert(roleMenu);
+            }
+        }
+        return true;
     }
 
     @Override
@@ -47,6 +77,38 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
             Role role = new Role();
             role.setId(id);
             delete(role);
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean update(Role role) {
+        if (roleDao.update(role) == 0) {
+            return false;
+        }
+        List<Integer> menuIdList = role.getMenuIdList();
+        if (menuIdList != null) {
+            List<Integer> midList = roleMenuDao.menuIdList(role.getId());
+            for (Integer menuId : menuIdList) {
+                if (midList != null) {
+                    if (midList.contains(menuId)) {
+                        midList.remove(menuId);
+                    } else {
+                        RoleMenu roleMenu = new RoleMenu();
+                        roleMenu.setRoleId(role.getId());
+                        roleMenu.setMenuId(menuId);
+                        roleMenuDao.insert(roleMenu);
+                    }
+                }
+            }
+            if (midList != null) {
+                for (Integer menuId : midList) {
+                    RoleMenu roleMenu = new RoleMenu();
+                    roleMenu.setRoleId(role.getId());
+                    roleMenu.setMenuId(menuId);
+                    roleMenuDao.delete(roleMenu);
+                }
+            }
         }
         return true;
     }

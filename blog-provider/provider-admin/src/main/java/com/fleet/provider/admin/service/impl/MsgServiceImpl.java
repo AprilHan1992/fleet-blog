@@ -60,14 +60,13 @@ public class MsgServiceImpl extends BaseServiceImpl<Msg> implements MsgService {
             to.setMsgId(msg.getId());
             List<Integer> idList = toDao.idList(to);
             for (To t : toList) {
+                t.setMsgId(msg.getId());
                 if (t.getId() != null) {
                     if (idList != null) {
                         idList.remove(t.getId());
                     }
-                    t.setMsgId(msg.getId());
                     toDao.update(t);
                 } else {
-                    t.setMsgId(msg.getId());
                     toDao.insert(t);
                 }
             }

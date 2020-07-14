@@ -114,6 +114,11 @@
         </where>
     </select>
 
+    <select id="menuIdList" resultType="java.lang.Integer">
+        select `id` from `role_menu`
+        where `role_id` = #{roleId} and `deleted` = 0
+    </select>
+
     <select id="menuList" parameterType="java.lang.Integer" resultMap="MenuResultMap">
 		select m.`id`, m.`type`, m.`name`, m.`icon`, m.`desc`, m.`href`, m.`target`, m.`permit`, m.`sort`, m.`opened`, m.`enabled`, m.`creator_id`, m.`create_time`, m.`editor_id`, m.`edit_time`, m.`upper_id`, m.`deleted`
 		from `menu` as m
