@@ -7,4 +7,10 @@ import com.fleet.common.service.BaseService;
  * @author April Han
  */
 public interface QuartzJobService extends BaseService<QuartzJob> {
+
+    void run(Integer id);
+
+    void pause(Integer id);
+
+    void resume(Integer id);
 }

@@ -1,8 +1,7 @@
-package com.fleet.consumer.config.quartz;
+package com.fleet.provider.admin.config.quartz;
 
 import com.fleet.common.entity.quartz.QuartzJob;
 import com.fleet.common.exception.BaseException;
-import com.fleet.common.util.SpringContextUtil;
 import org.quartz.*;
 
 /**
@@ -25,15 +24,15 @@ public class QuartzUtil {
         try {
             JobKey jobKey = getJobKey(job.getId());
             TriggerKey triggerKey = getTriggerKey(job.getId());
-            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
-            Class<? extends Job> jobClass = SpringContextUtil.getBean(job.getBeanName());
-            JobDetail jobDetail = JobBuilder.newJob(SchedulerQuartzJob.class)
+            JobDetail jobDetail = JobBuilder.newJob(ExecutionJob.class)
                     .withIdentity(jobKey)
-                    .withDescription("定时执行任务")
+                    .withDescription(job.getJobName())
                     .build();
+            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
             Trigger trigger = TriggerBuilder.newTrigger()
                     .withIdentity(triggerKey)
                     .forJob(jobKey)
+                    .withDescription(job.getJobName())
                     .withSchedule(cronScheduleBuilder)
                     .startNow()
                     .build();
@@ -76,7 +75,6 @@ public class QuartzUtil {
         try {
             JobKey jobKey = getJobKey(job.getId());
             TriggerKey triggerKey = getTriggerKey(job.getId());
-            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
             if (scheduler.checkExists(triggerKey)) {
                 // 停止触发器
                 scheduler.pauseTrigger(triggerKey);
@@ -88,14 +86,15 @@ public class QuartzUtil {
                 // 删除任务
                 scheduler.deleteJob(jobKey);
             }
-            JobDetail jobDetail = JobBuilder.newJob(SchedulerQuartzJob.class)
+            JobDetail jobDetail = JobBuilder.newJob(ExecutionJob.class)
                     .withIdentity(jobKey)
-                    .withDescription("定时执行任务")
+                    .withDescription(job.getJobName())
                     .build();
-            Trigger trigger = TriggerBuilder
-                    .newTrigger()
+            CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
+            Trigger trigger = TriggerBuilder.newTrigger()
                     .withIdentity(triggerKey)
                     .forJob(jobKey)
+                    .withDescription(job.getJobName())
                     .withSchedule(cronScheduleBuilder)
                     .startNow()
                     .build();

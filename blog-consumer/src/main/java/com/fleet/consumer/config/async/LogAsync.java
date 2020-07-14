@@ -1,4 +1,4 @@
-package com.fleet.consumer.config.aspect;
+package com.fleet.consumer.config.async;
 
 import com.fleet.common.entity.user.User;
 import com.fleet.common.service.log.LogService;
@@ -29,7 +29,7 @@ import java.util.Objects;
  * @author April Han
  */
 @Component
-public class LogAsyncTask {
+public class LogAsync {
 
     @Reference
     private LogService logService;
@@ -80,7 +80,7 @@ public class LogAsyncTask {
                 paramList.add(argNames[i] + ": " + argValues[i]);
             }
         }
-        opLog.setParams("{ " + StringUtils.join(paramList, ", ") + " }");
+        opLog.setParam("{ " + StringUtils.join(paramList, ", ") + " }");
 
         opLog.setIp(IPUtil.getIpAddr(request));
 

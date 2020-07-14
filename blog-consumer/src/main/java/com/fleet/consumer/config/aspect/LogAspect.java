@@ -1,5 +1,6 @@
 package com.fleet.consumer.config.aspect;
 
+import com.fleet.consumer.config.async.LogAsync;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -18,7 +19,7 @@ public class LogAspect {
     ThreadLocal<Long> times = new ThreadLocal<>();
 
     @Resource
-    private LogAsyncTask logAsyncTask;
+    private LogAsync logAsync;
 
     @Around("@annotation(com.fleet.common.annotation.Log)")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
@@ -26,7 +27,7 @@ public class LogAspect {
         Object object = pjp.proceed();
         long millis = System.currentTimeMillis() - times.get();
         times.remove();
-        logAsyncTask.saveLog(pjp, millis, 1, null);
+        logAsync.saveLog(pjp, millis, 1, null);
         return object;
     }
 
@@ -36,6 +37,6 @@ public class LogAspect {
         times.remove();
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         RequestContextHolder.setRequestAttributes(servletRequestAttributes, true);
-        logAsyncTask.saveLog((ProceedingJoinPoint) jp, millis, 0, e.getMessage());
+        logAsync.saveLog((ProceedingJoinPoint) jp, millis, 0, e.getMessage());
     }
 }

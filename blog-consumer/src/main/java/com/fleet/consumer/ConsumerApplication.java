@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableDubbo
 @EnableAsync
-@EnableScheduling
 public class ConsumerApplication {
 
     public static void main(String[] args) {

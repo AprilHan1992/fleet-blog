@@ -2,23 +2,12 @@ package com.fleet.consumer.controller.admin.quartz;
 
 import com.fleet.common.controller.BaseController;
 import com.fleet.common.entity.quartz.QuartzJob;
-import com.fleet.common.enums.Deleted;
-import com.fleet.common.enums.Enabled;
 import com.fleet.common.json.R;
 import com.fleet.common.service.BaseService;
 import com.fleet.common.service.quartz.QuartzJobService;
-import com.fleet.consumer.config.quartz.QuartzUtil;
 import org.apache.dubbo.config.annotation.Reference;
 import org.quartz.CronExpression;
-import org.quartz.CronTrigger;
-import org.quartz.Scheduler;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 定时任务
@@ -29,37 +18,12 @@ import java.util.Map;
 @RequestMapping("/quartz/job")
 public class QuartzJobController extends BaseController<QuartzJob> {
 
-    @Resource
-    private Scheduler scheduler;
-
     @Reference
     private QuartzJobService quartzJobService;
 
     @Override
     public BaseService<QuartzJob> baseService() {
         return quartzJobService;
-    }
-
-    /**
-     * 项目启动时，初始化定时器
-     */
-    @PostConstruct
-    public void init() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("deleted", Deleted.NO);
-        map.put("enabled", Enabled.YES);
-        List<QuartzJob> list = quartzJobService.list(map);
-        if (list != null) {
-            for (QuartzJob job : list) {
-                CronTrigger trigger = QuartzUtil.getCronTrigger(scheduler, job.getId());
-                // 如果不存在，则创建
-                if (trigger == null) {
-                    QuartzUtil.insert(scheduler, job);
-                } else {
-                    QuartzUtil.update(scheduler, job);
-                }
-            }
-        }
     }
 
     @Override
@@ -70,19 +34,6 @@ public class QuartzJobController extends BaseController<QuartzJob> {
         }
         if (!quartzJobService.insert(quartzJob)) {
             return R.error();
-        }
-        QuartzUtil.insert(scheduler, quartzJob);
-        return R.ok();
-    }
-
-    @Override
-    @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deletes(@RequestParam Integer[] ids) {
-        for (Integer id : ids) {
-            QuartzJob quartzJob = new QuartzJob();
-            quartzJob.setId(id);
-            quartzJobService.delete(quartzJob);
-            QuartzUtil.delete(scheduler, quartzJob.getId());
         }
         return R.ok();
     }
@@ -96,7 +47,6 @@ public class QuartzJobController extends BaseController<QuartzJob> {
         if (!quartzJobService.update(quartzJob)) {
             return R.error();
         }
-        QuartzUtil.update(scheduler, quartzJob);
         return R.ok();
     }
 
@@ -104,11 +54,7 @@ public class QuartzJobController extends BaseController<QuartzJob> {
     public R get(@RequestParam("id") Integer id) {
         QuartzJob quartzJob = new QuartzJob();
         quartzJob.setId(id);
-        quartzJob = quartzJobService.get(quartzJob);
-        if (quartzJob == null) {
-            return R.error("定时任务不存在");
-        }
-        return R.ok(quartzJob);
+        return R.ok(get(quartzJob));
     }
 
     /**
@@ -119,7 +65,7 @@ public class QuartzJobController extends BaseController<QuartzJob> {
      */
     @RequestMapping("/run/{id}")
     public R run(@PathVariable("id") Integer id) {
-        QuartzUtil.run(scheduler, id);
+        quartzJobService.run(id);
         return R.ok();
     }
 
@@ -137,7 +83,7 @@ public class QuartzJobController extends BaseController<QuartzJob> {
         if (quartzJob == null) {
             return R.error("定时任务不存在");
         }
-        QuartzUtil.pause(scheduler, id);
+        quartzJobService.pause(id);
         return R.ok();
     }
 
@@ -148,14 +94,14 @@ public class QuartzJobController extends BaseController<QuartzJob> {
      * @return
      */
     @RequestMapping("/resume/{id}")
-    public R restart(@PathVariable("id") Integer id) {
+    public R resume(@PathVariable("id") Integer id) {
         QuartzJob quartzJob = new QuartzJob();
         quartzJob.setId(id);
         quartzJob = quartzJobService.get(quartzJob);
         if (quartzJob == null) {
             return R.error("定时任务不存在");
         }
-        QuartzUtil.resume(scheduler, id);
+        quartzJobService.resume(id);
         return R.ok();
     }
 }

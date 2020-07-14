@@ -40,7 +40,7 @@ public class QuartzJobLog extends Base {
     /**
      * 参数
      */
-    private String params;
+    private String param;
 
     /**
      * cron表达式
@@ -108,12 +108,12 @@ public class QuartzJobLog extends Base {
         this.methodName = methodName;
     }
 
-    public String getParams() {
-        return params;
+    public String getParam() {
+        return param;
     }
 
-    public void setParams(String params) {
-        this.params = params;
+    public void setParam(String param) {
+        this.param = param;
     }
 
     public String getCronExpression() {

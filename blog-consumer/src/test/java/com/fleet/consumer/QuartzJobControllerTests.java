@@ -15,8 +15,8 @@ public class QuartzJobControllerTests extends BaseTests {
         QuartzJob quartzJob = new QuartzJob();
         quartzJob.setJobName("测试");
         quartzJob.setBeanName("testTask");
-        quartzJob.setMethodName("run1");
-        quartzJob.setParams("test");
+        quartzJob.setMethodName("run");
+        quartzJob.setParam("test");
         quartzJob.setCronExpression("*/20 * * * * ?");
         quartzJob.setEnabled(1);
         quartzJob.setRemark("测试");
@@ -50,8 +50,8 @@ public class QuartzJobControllerTests extends BaseTests {
         quartzJob.setId(1);
         quartzJob.setJobName("测试");
         quartzJob.setBeanName("testTask");
-        quartzJob.setMethodName("run1");
-        quartzJob.setParams("test");
+        quartzJob.setMethodName("run");
+        quartzJob.setParam("test");
         quartzJob.setCronExpression("*/20 * * * * ?");
         quartzJob.setEnabled(1);
         super.post("/quartz/job/update", JSONObject.toJSONString(quartzJob));

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2020-07-13 10:08:46
+Date: 2020-07-14 15:42:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -200,12 +200,13 @@ CREATE TABLE `mail_group` (
   `tos` text COMMENT '邮箱（多个邮箱之间用","隔开）',
   `deleted` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除（1：是，0：否）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='邮箱组信息';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='邮箱组信息';
 
 -- ----------------------------
 -- Records of mail_group
 -- ----------------------------
 INSERT INTO `mail_group` VALUES ('1', '资产台账数据修改提醒组', '785579683@qq.com', '0');
+INSERT INTO `mail_group` VALUES ('2', '资产邮箱组', 'fleet@fleet.com,admin@fleet.com', '0');
 
 -- ----------------------------
 -- Table structure for menu
@@ -230,39 +231,70 @@ CREATE TABLE `menu` (
   `upper_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '上一级菜单id',
   `deleted` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除（1：是，0：否）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('1', '1', '综合管理', null, null, null, null, null, '4', '0', '1', '0', '2020-07-28 16:09:28', null, null, '0', '0');
-INSERT INTO `menu` VALUES ('2', '1', '项目管理', null, null, null, null, null, '3', '1', '1', '0', '2020-07-14 16:09:31', null, null, '0', '0');
-INSERT INTO `menu` VALUES ('3', '1', '人力资源', null, null, null, null, null, '2', '0', '1', '0', '2020-07-14 16:09:34', null, null, '0', '0');
-INSERT INTO `menu` VALUES ('4', '1', '系统管理', null, null, null, null, null, '1', '1', '1', '0', '0000-00-00 00:00:00', null, null, '0', '0');
-INSERT INTO `menu` VALUES ('5', '1', '工作流程', null, null, null, null, null, '0', '0', '1', '0', '0000-00-00 00:00:00', null, null, '1', '0');
-INSERT INTO `menu` VALUES ('6', '3', '人员管理', null, null, null, null, null, '0', '0', '1', '0', '0000-00-00 00:00:00', null, null, '3', '0');
-INSERT INTO `menu` VALUES ('7', '3', '人员信息', null, null, '/user/getList', null, 'a:b', '0', '0', '1', '0', '0000-00-00 00:00:00', null, null, '6', '0');
+INSERT INTO `menu` VALUES ('1', '1', '工具', null, null, null, null, null, '0', '1', '1', '1', '2020-07-13 10:58:52', null, null, '0', '0');
+
+-- ----------------------------
+-- Table structure for menu_copy
+-- ----------------------------
+DROP TABLE IF EXISTS `menu_copy`;
+CREATE TABLE `menu_copy` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '菜单id',
+  `type` int(11) unsigned NOT NULL COMMENT '菜单类型（1：目录，2：菜单，3：权限标识）',
+  `name` varchar(32) NOT NULL COMMENT '菜单名称',
+  `icon` varchar(128) DEFAULT NULL COMMENT '菜单图标',
+  `desc` varchar(128) DEFAULT NULL COMMENT '菜单描述',
+  `href` varchar(255) DEFAULT NULL COMMENT '资源路径',
+  `target` varchar(16) DEFAULT NULL COMMENT '打开方式（_self：相同框架，Top：当前页，_blank：新建窗口，Parent：父窗口）',
+  `permit` varchar(255) DEFAULT NULL COMMENT '授权标识（多个之间用","隔开）',
+  `sort` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序（数字越大，越排前）',
+  `opened` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '是否公开菜单（1：是，无需分配就可以访问，0：否）',
+  `enabled` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '是否启用（1：是，0：否）',
+  `creator_id` int(11) unsigned NOT NULL COMMENT '创建人',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `editor_id` int(11) unsigned DEFAULT NULL COMMENT '修改人',
+  `edit_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `upper_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '上一级菜单id',
+  `deleted` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除（1：是，0：否）',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+
+-- ----------------------------
+-- Records of menu_copy
+-- ----------------------------
+INSERT INTO `menu_copy` VALUES ('1', '1', '综合管理', null, null, null, null, null, '4', '0', '1', '0', '2020-07-28 16:09:28', null, null, '0', '0');
+INSERT INTO `menu_copy` VALUES ('2', '1', '项目管理', null, null, null, null, null, '3', '1', '1', '0', '2020-07-14 16:09:31', null, null, '0', '0');
+INSERT INTO `menu_copy` VALUES ('3', '1', '人力资源', null, null, null, null, null, '2', '0', '1', '0', '2020-07-14 16:09:34', null, null, '0', '0');
+INSERT INTO `menu_copy` VALUES ('4', '1', '系统管理', null, null, null, null, null, '1', '1', '1', '0', '0000-00-00 00:00:00', null, null, '0', '0');
+INSERT INTO `menu_copy` VALUES ('5', '1', '工作流程', null, null, null, null, null, '0', '0', '1', '0', '0000-00-00 00:00:00', null, null, '1', '0');
+INSERT INTO `menu_copy` VALUES ('6', '3', '人员管理', null, null, null, null, null, '0', '0', '1', '0', '0000-00-00 00:00:00', null, null, '3', '0');
+INSERT INTO `menu_copy` VALUES ('7', '3', '人员信息', null, null, '/user/getList', null, 'a:b', '0', '0', '1', '0', '0000-00-00 00:00:00', null, null, '6', '0');
 
 -- ----------------------------
 -- Table structure for msg
 -- ----------------------------
 DROP TABLE IF EXISTS `msg`;
 CREATE TABLE `msg` (
-  `msg_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '消息id',
-  `msg_title` varchar(255) NOT NULL COMMENT '消息标题',
-  `msg_excerpt` varchar(255) DEFAULT NULL COMMENT '消息摘要',
-  `msg_url` varchar(255) DEFAULT NULL COMMENT '网址',
-  `msg_state` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '消息状态（0：未发布，1：已发布）',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '消息id',
+  `title` varchar(255) NOT NULL COMMENT '消息标题',
+  `excerpt` varchar(255) DEFAULT NULL COMMENT '消息摘要',
+  `url` varchar(255) DEFAULT NULL COMMENT '网址',
+  `state` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '消息状态（0：未发布，1：已发布）',
   `creator_id` int(11) unsigned NOT NULL COMMENT '创建人',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `deleted` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除（1：是，0：否）',
-  PRIMARY KEY (`msg_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色';
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of msg
 -- ----------------------------
 INSERT INTO `msg` VALUES ('1', '测试', '测试', null, '0', '1', '2020-04-06 12:23:50', '0');
+INSERT INTO `msg` VALUES ('2', '消息标题', '消息摘要', 'http://www.fleetsoft.com', '1', '1', '2020-07-13 11:35:43', '0');
 
 -- ----------------------------
 -- Table structure for permission
@@ -293,18 +325,19 @@ CREATE TABLE `quartz_job` (
   `job_name` varchar(64) NOT NULL COMMENT '定时器名称',
   `bean_name` varchar(64) NOT NULL COMMENT 'Bean名称',
   `method_name` varchar(64) NOT NULL COMMENT '方法名称',
-  `params` varchar(128) NOT NULL COMMENT '参数',
+  `param` varchar(128) DEFAULT NULL COMMENT '参数',
   `cron_expression` text NOT NULL COMMENT 'cron表达式',
   `enabled` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是否启用（1：是，0：否）',
-  `remark` text NOT NULL COMMENT '备注',
+  `remark` text COMMENT '备注',
   `deleted` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除（1：是，0：否）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of quartz_job
 -- ----------------------------
-INSERT INTO `quartz_job` VALUES ('1', '测试', 'testTask', 'run1', 'test', '*/20 * * * * ?', '1', '测试', '0');
+INSERT INTO `quartz_job` VALUES ('1', '有参定时任务', 'testTask', 'run', 'test', '*/20 * * * * ?', '1', null, '0');
+INSERT INTO `quartz_job` VALUES ('2', '无参定时任务', 'testTask1', 'run', null, '*/20 * * * * ?', '1', null, '0');
 
 -- ----------------------------
 -- Table structure for quartz_job_log
@@ -316,18 +349,22 @@ CREATE TABLE `quartz_job_log` (
   `job_name` varchar(64) NOT NULL COMMENT '定时器名称',
   `bean_name` varchar(64) NOT NULL COMMENT 'Bean名称',
   `method_name` varchar(64) NOT NULL COMMENT '方法名称',
-  `params` varchar(128) NOT NULL COMMENT '参数',
+  `param` varchar(128) DEFAULT NULL COMMENT '参数',
   `cron_expression` text NOT NULL COMMENT 'cron表达式',
   `state` int(11) NOT NULL COMMENT '任务状态 （1：成功，0：失败）',
   `error` text COMMENT '失败信息',
   `millis` bigint(20) NOT NULL COMMENT '执行时间（单位：毫秒）',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_log_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of quartz_job_log
 -- ----------------------------
+INSERT INTO `quartz_job_log` VALUES ('1', '2', '测试', 'testTask1', 'run', null, '*/20 * * * * ?', '1', null, '0', '2020-07-14 15:42:40');
+INSERT INTO `quartz_job_log` VALUES ('2', '1', '测试', 'testTask', 'run', 'test', '*/20 * * * * ?', '1', null, '0', '2020-07-14 15:42:40');
+INSERT INTO `quartz_job_log` VALUES ('3', '1', '测试', 'testTask', 'run', 'test', '*/20 * * * * ?', '1', null, '1', '2020-07-14 15:42:40');
+INSERT INTO `quartz_job_log` VALUES ('4', '2', '测试', 'testTask1', 'run', null, '*/20 * * * * ?', '1', null, '0', '2020-07-14 15:42:40');
 
 -- ----------------------------
 -- Table structure for recommendsps
@@ -1244,17 +1281,20 @@ CREATE TABLE `role_menu` (
 -- ----------------------------
 DROP TABLE IF EXISTS `to`;
 CREATE TABLE `to` (
-  `msg_id` int(11) unsigned NOT NULL COMMENT '消息id',
-  `msg_to` int(11) unsigned NOT NULL COMMENT '消息接收人',
-  `read_state` int(11) NOT NULL DEFAULT '0' COMMENT '消息阅读状态（0：未读，1：已读）',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '消息接收id',
+  `msg_id` int(11) unsigned DEFAULT NULL COMMENT '消息id',
+  `to` int(11) unsigned NOT NULL COMMENT '消息接收人',
+  `read_state` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '消息阅读状态（0：未读，1：已读）',
   `read_time` datetime DEFAULT NULL COMMENT '阅读时间',
   `deleted` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除（1：是，0：否）',
-  UNIQUE KEY `uni_user_msg` (`msg_id`,`msg_to`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色';
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uni_user_msg` (`id`,`to`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of to
 -- ----------------------------
+INSERT INTO `to` VALUES ('1', '2', '1', '0', null, '0');
 
 -- ----------------------------
 -- Table structure for user

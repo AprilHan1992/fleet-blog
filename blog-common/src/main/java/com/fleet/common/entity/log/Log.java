@@ -163,7 +163,7 @@ public class Log implements Serializable {
         return params;
     }
 
-    public void setParams(String params) {
+    public void setParam(String params) {
         this.params = params;
     }
 
