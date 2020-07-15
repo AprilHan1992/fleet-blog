@@ -28,8 +28,8 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole> implements Us
     }
 
     @Override
-    public List<Integer> idList(UserRole userRole) {
-        return userRoleDao.idList(userRole);
+    public List<Integer> roleIdList(Integer userId) {
+        return userRoleDao.roleIdList(userId);
     }
 
     @Override

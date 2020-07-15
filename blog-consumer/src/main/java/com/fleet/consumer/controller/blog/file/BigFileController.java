@@ -1,4 +1,4 @@
-package com.fleet.consumer.controller.blog.sys.file;
+package com.fleet.consumer.controller.blog.file;
 
 import com.fleet.common.enums.ResultState;
 import com.fleet.common.json.R;
@@ -18,8 +18,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController("OpenBigFileController")
-@RequestMapping(value = "/open/bigFile")
+@RestController("BlogBigFileController")
+@RequestMapping(value = "/blog/bigFile")
 public class BigFileController {
 
     private Logger logger = LoggerFactory.getLogger(BigFileController.class);

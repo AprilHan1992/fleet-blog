@@ -90,15 +90,13 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         if (menuIdList != null) {
             List<Integer> midList = roleMenuDao.menuIdList(role.getId());
             for (Integer menuId : menuIdList) {
-                if (midList != null) {
-                    if (midList.contains(menuId)) {
-                        midList.remove(menuId);
-                    } else {
-                        RoleMenu roleMenu = new RoleMenu();
-                        roleMenu.setRoleId(role.getId());
-                        roleMenu.setMenuId(menuId);
-                        roleMenuDao.insert(roleMenu);
-                    }
+                if (midList != null && midList.contains(menuId)) {
+                    midList.remove(menuId);
+                } else {
+                    RoleMenu roleMenu = new RoleMenu();
+                    roleMenu.setRoleId(role.getId());
+                    roleMenu.setMenuId(menuId);
+                    roleMenuDao.insert(roleMenu);
                 }
             }
             if (midList != null) {

@@ -61,7 +61,11 @@ public class User extends Base {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date regTime;
 
+    private Integer deptId;
+
     private Dept dept;
+
+    private List<Integer> roleIdList;
 
     private List<Role> roleList;
 
@@ -129,12 +133,28 @@ public class User extends Base {
         this.regTime = regTime;
     }
 
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
     public Dept getDept() {
         return dept;
     }
 
     public void setDept(Dept dept) {
         this.dept = dept;
+    }
+
+    public List<Integer> getRoleIdList() {
+        return roleIdList;
+    }
+
+    public void setRoleIdList(List<Integer> roleIdList) {
+        this.roleIdList = roleIdList;
     }
 
     public List<Role> getRoleList() {

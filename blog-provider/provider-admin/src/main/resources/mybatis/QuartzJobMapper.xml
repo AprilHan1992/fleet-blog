@@ -55,6 +55,7 @@
             <if test="cronExpression != null">and `cron_expression` = #{cronExpression}</if>
             <if test="enabled != null">and `enabled` = #{enabled}</if>
             <if test="remark != null">and `remark` = #{remark}</if>
+            and `deleted` = 0
         </where>
     </update>
 
@@ -64,6 +65,7 @@
             <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
                 #{id}
             </foreach>
+            and `deleted` = 0
         </where>
     </update>
 

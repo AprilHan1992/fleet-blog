@@ -39,11 +39,59 @@ public class UserRoleController extends BaseController<UserRole> {
         return userRoleService;
     }
 
+    @Override
+    @PostMapping("/insert")
+    public R insert(@RequestBody UserRole userRole) {
+        UserRole ur = new UserRole();
+        ur.setUserId(userRole.getUserId());
+        ur.setRoleId(userRole.getRoleId());
+        ur = userRoleService.get(ur);
+        if (ur != null) {
+            return R.error("角色已存在");
+        }
+        if (!userRoleService.insert(userRole)) {
+            return R.error();
+        }
+        return R.ok();
+    }
+
+    @Override
+    @PostMapping("/update")
+    public R update(@RequestBody UserRole userRole) {
+        UserRole ur = new UserRole();
+        ur.setUserId(userRole.getUserId());
+        ur.setRoleId(userRole.getRoleId());
+        ur = userRoleService.get(ur);
+        if (ur != null && !ur.getId().equals(userRole.getId())) {
+            return R.error("角色已存在");
+        }
+        if (!userRoleService.update(userRole)) {
+            return R.error();
+        }
+        return R.ok();
+    }
+
     @RequestMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         UserRole userRole = new UserRole();
         userRole.setId(id);
         return get(userRole);
+    }
+
+    @Override
+    @RequestMapping("/get")
+    public R get(@RequestBody UserRole userRole) {
+        userRole = userRoleService.get(userRole);
+        if (userRole != null) {
+            User user = new User();
+            user.setId(userRole.getUserId());
+            userRole.setUser(userService.get(user));
+
+            Role role = new Role();
+            role.setId(userRole.getRoleId());
+            userRole.setRole(roleService.get(role));
+        }
+        return R.ok(userRole);
     }
 
     @Override

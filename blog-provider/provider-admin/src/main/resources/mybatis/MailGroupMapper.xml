@@ -35,6 +35,7 @@
             <if test="id != null">and `id` = #{id}</if>
             <if test="name != null">and `name` = #{name}</if>
             <if test="tos != null">and `tos` = #{tos}</if>
+            and `deleted` = 0
         </where>
     </update>
 
@@ -44,6 +45,7 @@
             <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
                 #{id}
             </foreach>
+            and `deleted` = 0
         </where>
     </update>
 

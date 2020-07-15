@@ -5,7 +5,9 @@ import com.fleet.common.entity.role.Role;
 import com.fleet.common.util.jdbc.entity.Page;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RoleControllerTests extends BaseTests {
@@ -15,6 +17,11 @@ public class RoleControllerTests extends BaseTests {
         Role role = new Role();
         role.setName("超级管理员");
         role.setUpperId(0);
+        List<Integer> menuIdList = new ArrayList<>();
+        menuIdList.add(1);
+        menuIdList.add(2);
+        menuIdList.add(3);
+        role.setMenuIdList(menuIdList);
         super.post("/role/insert", JSONObject.toJSONString(role));
     }
 
@@ -43,7 +50,13 @@ public class RoleControllerTests extends BaseTests {
     public void update() {
         Role role = new Role();
         role.setId(1);
-        role.setName("管理员");
+        role.setName("超级管理员");
+        role.setUpperId(0);
+        List<Integer> menuIdList = new ArrayList<>();
+        menuIdList.add(1);
+        menuIdList.add(2);
+        menuIdList.add(5);
+        role.setMenuIdList(menuIdList);
         super.post("/role/update", JSONObject.toJSONString(role));
     }
 

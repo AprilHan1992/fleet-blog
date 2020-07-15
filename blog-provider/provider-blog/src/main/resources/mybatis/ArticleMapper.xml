@@ -80,6 +80,7 @@
             <if test="createTime != null">and `create_time` = #{createTime}</if>
             <if test="editorId != null">and `editor_id` = #{editorId}</if>
             <if test="editTime != null">and `edit_time` = #{editTime}</if>
+            and `deleted` = 0
         </where>
     </update>
 
@@ -89,6 +90,7 @@
             <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
                 #{id}
             </foreach>
+            and `deleted` = 0
         </where>
     </update>
 

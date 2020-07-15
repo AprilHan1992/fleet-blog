@@ -54,6 +54,7 @@
             <if test="id != null">and `id` = #{id}</if>
             <if test="roleId != null">and `role_id` = #{roleId}</if>
             <if test="menuId != null">and `menu_id` = #{menuId}</if>
+            and `deleted` = 0
         </where>
     </update>
 
@@ -63,6 +64,7 @@
             <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
                 #{id}
             </foreach>
+            and `deleted` = 0
         </where>
     </update>
 
@@ -103,19 +105,8 @@
         </where>
     </select>
 
-    <select id="idList" resultType="java.lang.Integer">
-        select `id` from `role_menu`
-        <where>
-            <if test="id != null">and `id` = #{id}</if>
-            <if test="roleId != null">and `role_id` = #{roleId}</if>
-            <if test="menuId != null">and `menu_id` = #{menuId}</if>
-            <if test="deleted != null">and `deleted` = #{deleted}</if>
-            <if test="deleted == null">and `deleted` = 0</if>
-        </where>
-    </select>
-
     <select id="menuIdList" resultType="java.lang.Integer">
-        select `id` from `role_menu`
+        select `menu_id` from `role_menu`
         where `role_id` = #{roleId} and `deleted` = 0
     </select>
 

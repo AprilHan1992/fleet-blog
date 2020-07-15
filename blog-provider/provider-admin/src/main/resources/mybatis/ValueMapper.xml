@@ -52,6 +52,7 @@
             <if test="sort != null">and `sort` = #{sort}</if>
             <if test="remark != null">and `remark` = #{remark}</if>
             <if test="isDefault != null">and `is_default` = #{isDefault}</if>
+            and `deleted` = 0
         </where>
     </update>
 
@@ -61,6 +62,7 @@
             <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
                 #{id}
             </foreach>
+            and `deleted` = 0
         </where>
     </update>
 

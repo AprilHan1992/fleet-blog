@@ -38,7 +38,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public List<String> excludePathPatterns() {
         List<String> patterns = new ArrayList<>();
         patterns.add("/login");
-        patterns.add("/open/**");
+        patterns.add("/blog/**");
         return patterns;
     }
 }

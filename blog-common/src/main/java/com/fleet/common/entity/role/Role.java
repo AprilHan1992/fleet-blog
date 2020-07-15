@@ -1,6 +1,7 @@
 package com.fleet.common.entity.role;
 
 import com.fleet.common.entity.Base;
+import com.fleet.common.entity.menu.Menu;
 
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class Role extends Base {
     private Integer upperId;
 
     private List<Integer> menuIdList;
+
+    private List<Menu> menuList;
 
     private List<Role> children;
 
@@ -73,6 +76,14 @@ public class Role extends Base {
 
     public void setMenuIdList(List<Integer> menuIdList) {
         this.menuIdList = menuIdList;
+    }
+
+    public List<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
     }
 
     public List<Role> getChildren() {

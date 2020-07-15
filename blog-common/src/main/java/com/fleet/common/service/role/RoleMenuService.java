@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RoleMenuService extends BaseService<RoleMenu> {
 
-    List<Integer> idList(Integer roleId);
+    List<Integer> menuIdList(Integer roleId);
 
     List<Menu> menuList(Integer roleId);
 

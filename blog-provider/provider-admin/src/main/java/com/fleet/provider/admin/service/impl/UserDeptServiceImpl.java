@@ -30,10 +30,7 @@ public class UserDeptServiceImpl extends BaseServiceImpl<UserDept> implements Us
     public Boolean insert(UserDept userDept) {
         UserDept ud = new UserDept();
         ud.setUserId(userDept.getUserId());
-        ud = userDeptDao.get(ud);
-        if (ud != null) {
-            userDeptDao.delete(ud);
-        }
+        userDeptDao.delete(ud);
         return userDeptDao.insert(userDept) != 0;
     }
 

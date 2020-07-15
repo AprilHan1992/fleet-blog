@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface UserRoleService extends BaseService<UserRole> {
 
-    List<Integer> idList(UserRole userRole);
+    List<Integer> roleIdList(Integer userId);
 
     List<Role> roleList(Integer userId);
 

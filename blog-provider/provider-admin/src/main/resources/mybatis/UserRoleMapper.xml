@@ -62,6 +62,7 @@
             <if test="id != null">and `id` = #{id}</if>
             <if test="userId != null">and `user_id` = #{userId}</if>
             <if test="roleId != null">and `role_id` = #{roleId}</if>
+            and `deleted` = 0
         </where>
     </update>
 
@@ -71,6 +72,7 @@
             <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
                 #{id}
             </foreach>
+            and `deleted` = 0
         </where>
     </update>
 
@@ -111,22 +113,16 @@
         </where>
     </select>
 
-    <select id="idList" resultType="java.lang.Integer">
-        select `id` from `user_role`
-        <where>
-            <if test="id != null">and `id` = #{id}</if>
-            <if test="userId != null">and `user_id` = #{userId}</if>
-            <if test="roleId != null">and `role_id` = #{roleId}</if>
-            <if test="deleted != null">and `deleted` = #{deleted}</if>
-            <if test="deleted == null">and `deleted` = 0</if>
-        </where>
+    <select id="roleIdList" resultType="java.lang.Integer">
+        select `role_id` from `user_role`
+        where `user_id` = #{userId} and `deleted` = 0
     </select>
 
     <select id="roleList" parameterType="java.lang.Integer" resultMap="RoleResultMap">
 		select r.`id`, r.`name`, r.`sort`, r.`upper_id`, r.`deleted`
 		from `user_role` as ur
-		left join `role` as r on r.id = ur.role_id
-		where ur.user_id = #{userId} and ur.deleted = 0 and r.deleted = 0
+		left join `role` as r on r.`id` = ur.`role_id`
+		where ur.`user_id` = #{userId} and ur.`deleted` = 0 and r.`deleted` = 0
 	</select>
 
     <select id="roleNameList" parameterType="java.lang.Integer" resultType="java.lang.String">

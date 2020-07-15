@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@RestController("OpenArticleController")
-@RequestMapping("/open/article")
+@RestController("BlogArticleController")
+@RequestMapping("/blog/article")
 public class ArticleController {
 
     @Reference
     private ArticleService articleService;
 
     @GetMapping("/get")
-    public R get(@RequestParam("articleId") Integer articleId) {
+    public R get(@RequestParam("id") Integer id) {
         Article article = new Article();
-        article.setId(articleId);
+        article.setId(id);
         return R.ok(articleService.get(article));
     }
 
@@ -32,7 +32,7 @@ public class ArticleController {
     }
 
     @PostMapping("/listPage")
-    public PageUtil<Article> listPage(@RequestBody(required = false) Page page) {
+    public PageUtil<Article> listPage(@RequestBody Page page) {
         return articleService.listPage(page);
     }
 

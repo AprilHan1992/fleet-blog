@@ -15,8 +15,6 @@ import java.util.List;
 @Repository
 public interface RoleMenuDao extends BaseDao<RoleMenu> {
 
-    List<Integer> idList(RoleMenu roleMenu);
-
     List<Integer> menuIdList(Integer roleId);
 
     List<Menu> menuList(Integer roleId);

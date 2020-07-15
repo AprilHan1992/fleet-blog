@@ -6,8 +6,6 @@ import com.fleet.common.entity.user.UserDept;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * @author April Han
  */
@@ -15,7 +13,7 @@ import java.util.List;
 @Repository
 public interface UserDeptDao extends BaseDao<UserDept> {
 
-    List<Integer> idList(UserDept userDept);
+    Integer deptId(Integer userId);
 
     Dept dept(Integer userId);
 }

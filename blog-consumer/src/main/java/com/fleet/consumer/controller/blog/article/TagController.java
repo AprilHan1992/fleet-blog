@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@RestController("OpenTagController")
-@RequestMapping("/open/tag")
+@RestController("BlogTagController")
+@RequestMapping("/blog/tag")
 public class TagController {
 
     @Reference
@@ -35,5 +35,4 @@ public class TagController {
     public PageUtil<Tag> listPage(@RequestBody Page page) {
         return tagService.listPage(page);
     }
-
 }

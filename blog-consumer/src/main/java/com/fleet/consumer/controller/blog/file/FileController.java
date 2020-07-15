@@ -1,4 +1,4 @@
-package com.fleet.consumer.controller.blog.sys.file;
+package com.fleet.consumer.controller.blog.file;
 
 import com.fleet.common.json.R;
 import com.fleet.common.util.file.FileUtil;
@@ -10,8 +10,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 
-@RestController("OpenFileController")
-@RequestMapping("/open/file")
+@RestController("BlogFileController")
+@RequestMapping("/blog/file")
 public class FileController {
 
     @Resource

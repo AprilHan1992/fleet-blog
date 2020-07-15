@@ -85,6 +85,7 @@
             <if test="state != null">and `state` = #{state}</if>
             <if test="error != null">and `error` = #{error}</if>
             <if test="createTime != null">and `create_time` = #{createTime}</if>
+            and `deleted` = 0
         </where>
     </update>
 
@@ -94,6 +95,7 @@
             <foreach collection="array" item="id" open="`id` in (" separator="," close=")">
                 #{id}
             </foreach>
+            and `deleted` = 0
         </where>
     </update>
 

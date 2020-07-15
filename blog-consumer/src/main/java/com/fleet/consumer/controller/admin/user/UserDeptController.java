@@ -47,6 +47,22 @@ public class UserDeptController extends BaseController<UserDept> {
     }
 
     @Override
+    @RequestMapping("/get")
+    public R get(@RequestBody UserDept userDept) {
+        userDept = userDeptService.get(userDept);
+        if (userDept != null) {
+            User user = new User();
+            user.setId(userDept.getUserId());
+            userDept.setUser(userService.get(user));
+
+            Dept dept = new Dept();
+            dept.setId(userDept.getDeptId());
+            userDept.setDept(deptService.get(dept));
+        }
+        return R.ok(userDept);
+    }
+
+    @Override
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
