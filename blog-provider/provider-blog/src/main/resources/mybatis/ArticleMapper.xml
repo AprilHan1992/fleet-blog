@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.fleet.common.entity.article.Article">
         <id column="id" property="id"/>
         <result column="title" property="title"/>
-        <result column="title" property="cover"/>
+        <result column="cover" property="cover"/>
         <result column="tag_id" property="tagId"/>
         <result column="tag" property="tag"/>
         <result column="tags" property="tags"/>
@@ -29,7 +29,7 @@
         insert into `article` (
         <trim suffixOverrides=",">
             <if test="title != null">`title`,</if>
-            <if test="cover != null">`title`,</if>
+            <if test="cover != null">`cover`,</if>
             <if test="tagId != null">`tag_id`,</if>
             <if test="tags != null">`tags`,</if>
             <if test="content != null">`content`,</if>
@@ -68,7 +68,7 @@
         <where>
             <if test="id != null">and `id` = #{id}</if>
             <if test="title != null">and `title` = #{title}</if>
-            <if test="cover != null">and `title` = #{cover}</if>
+            <if test="cover != null">and `cover` = #{cover}</if>
             <if test="tagId != null">and `tag_id` = #{tagId}</if>
             <if test="tags != null">and `tags` = #{tags}</if>
             <if test="content != null">and `content` = #{content}</if>
@@ -98,7 +98,7 @@
         update `article`
         <set>
             <if test="title != null">`title` = #{title},</if>
-            <if test="cover != null">`title` = #{cover},</if>
+            <if test="cover != null">`cover` = #{cover},</if>
             <if test="tagId != null">`tag_id` = #{tagId},</if>
             <if test="tags != null">`tags` = #{tags},</if>
             <if test="content != null">`content` = #{content},</if>
@@ -124,7 +124,7 @@
         <where>
             <if test="id != null">and a.`id` = #{id}</if>
             <if test="title != null">and a.`title` = #{title}</if>
-            <if test="cover != null">and a.`title` = #{cover}</if>
+            <if test="cover != null">and a.`cover` = #{cover}</if>
             <if test="tagId != null">and a.`tag_id` = #{tagId}</if>
             <if test="tags != null">and a.`tags` = #{tags}</if>
             <if test="content != null">and a.`content` = #{content}</if>
@@ -151,7 +151,7 @@
         <where>
             <if test="id != null">and a.`id` = #{id}</if>
             <if test="title != null">and a.`title` = #{title}</if>
-            <if test="cover != null">and a.`title` = #{cover}</if>
+            <if test="cover != null">and a.`cover` = #{cover}</if>
             <if test="tagId != null">and a.`tag_id` = #{tagId}</if>
             <if test="content != null">and a.`content` = #{content}</if>
             <if test="tags != null">and find_in_set(#{tags}, a.`tags`)</if>

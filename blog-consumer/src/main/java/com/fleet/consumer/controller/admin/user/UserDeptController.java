@@ -39,7 +39,7 @@ public class UserDeptController extends BaseController<UserDept> {
         return userDeptService;
     }
 
-    @RequestMapping("/get")
+    @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         UserDept userDept = new UserDept();
         userDept.setId(id);
@@ -47,7 +47,7 @@ public class UserDeptController extends BaseController<UserDept> {
     }
 
     @Override
-    @RequestMapping("/get")
+    @PostMapping("/get")
     public R get(@RequestBody UserDept userDept) {
         userDept = userDeptService.get(userDept);
         if (userDept != null) {
@@ -63,7 +63,7 @@ public class UserDeptController extends BaseController<UserDept> {
     }
 
     @Override
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
         List<UserDept> list = userDeptService.list(map);

@@ -57,7 +57,7 @@ public class FileController {
     /**
      * 查看图片
      */
-    @RequestMapping("/image/view/{fileName:.+}")
+    @GetMapping("/image/view/{fileName:.+}")
     public void imageView(@PathVariable("fileName") String fileName, HttpServletResponse response) throws Exception {
         if (fileName == null) {
             return;
@@ -68,7 +68,7 @@ public class FileController {
     /**
      * 下载文件
      */
-    @RequestMapping("/download/{fileName:.+}")
+    @GetMapping("/download/{fileName:.+}")
     public void downLoadFile(@PathVariable("fileName") String fileName, HttpServletResponse response) throws Exception {
         FileUtil.download(fileConfig.getFilePath(), fileName, response);
     }
@@ -76,7 +76,7 @@ public class FileController {
     /**
      * 下载图片文件
      */
-    @RequestMapping("/image/download/{fileName:.+}")
+    @GetMapping("/image/download/{fileName:.+}")
     public void imageDownLoad(@PathVariable("fileName") String fileName, HttpServletResponse response) throws Exception {
         FileUtil.download(fileConfig.getImgPath(), fileName, response);
     }

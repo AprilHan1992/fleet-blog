@@ -48,7 +48,7 @@ public class RoleController extends BaseController<Role> {
     }
 
     @Override
-    @GetMapping("/get")
+    @PostMapping("/get")
     public R get(@RequestBody Role role) {
         role = roleService.get(role);
         if (role != null) {

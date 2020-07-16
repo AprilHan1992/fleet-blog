@@ -71,7 +71,7 @@ public class UserRoleController extends BaseController<UserRole> {
         return R.ok();
     }
 
-    @RequestMapping("/get")
+    @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         UserRole userRole = new UserRole();
         userRole.setId(id);
@@ -79,7 +79,7 @@ public class UserRoleController extends BaseController<UserRole> {
     }
 
     @Override
-    @RequestMapping("/get")
+    @PostMapping("/get")
     public R get(@RequestBody UserRole userRole) {
         userRole = userRoleService.get(userRole);
         if (userRole != null) {
@@ -95,7 +95,7 @@ public class UserRoleController extends BaseController<UserRole> {
     }
 
     @Override
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
         List<UserRole> list = userRoleService.list(map);

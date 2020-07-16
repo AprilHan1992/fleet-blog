@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController("BlogBigFileController")
-@RequestMapping(value = "/blog/bigFile")
+@RequestMapping("/blog/bigFile")
 public class BigFileController {
 
     private Logger logger = LoggerFactory.getLogger(BigFileController.class);

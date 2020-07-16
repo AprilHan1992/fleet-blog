@@ -73,7 +73,7 @@ public class RoleMenuController extends BaseController<RoleMenu> {
         return R.ok();
     }
 
-    @RequestMapping("/get")
+    @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         RoleMenu roleMenu = new RoleMenu();
         roleMenu.setId(id);
@@ -81,7 +81,7 @@ public class RoleMenuController extends BaseController<RoleMenu> {
     }
 
     @Override
-    @GetMapping("/get")
+    @PostMapping("/get")
     public R get(@RequestBody RoleMenu roleMenu) {
         roleMenu = roleMenuService.get(roleMenu);
         if (roleMenu != null) {
@@ -97,7 +97,7 @@ public class RoleMenuController extends BaseController<RoleMenu> {
     }
 
     @Override
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> map) {
         map.put("deleted", Deleted.NO);
         List<RoleMenu> list = roleMenuService.list(map);
@@ -134,12 +134,12 @@ public class RoleMenuController extends BaseController<RoleMenu> {
         return pageUtil;
     }
 
-    @RequestMapping("/menuList")
+    @GetMapping("/menuList")
     public R menuList(@RequestParam Integer roleId) {
         return R.ok(roleMenuService.menuList(roleId));
     }
 
-    @RequestMapping("/permitList")
+    @GetMapping("/permitList")
     public R permitList(@RequestParam Integer roleId) {
         return R.ok(roleMenuService.permitList(roleId));
     }
