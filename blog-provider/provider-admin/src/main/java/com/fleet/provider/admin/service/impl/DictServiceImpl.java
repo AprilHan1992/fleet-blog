@@ -191,7 +191,14 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
 
     @Override
     public String getDefaultValue(String group) {
-        return dictDao.getDefaultValue(group);
+        String defaultValue = dictDao.getDefaultValue(group);
+        if (defaultValue == null) {
+            List<String> valueList = dictDao.getValueList(group);
+            if (valueList != null && valueList.size() == 1) {
+                defaultValue = valueList.get(0);
+            }
+        }
+        return defaultValue;
     }
 
     @Override

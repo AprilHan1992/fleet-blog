@@ -20,4 +20,6 @@ public interface DictDao extends BaseDao<Dict> {
     String getDefaultValue(String group);
 
     String getValue(@Param("group") String group, @Param("code") String code);
+
+    List<String> getValueList(@Param("group") String group);
 }

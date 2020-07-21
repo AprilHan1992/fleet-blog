@@ -111,4 +111,11 @@
 		where d.`group` = #{group} and d.`deleted` = 0 and v.`code` = #{code} and v.`deleted` = 0
 		limit 1
 	</select>
+
+    <select id="getValueList" parameterType="java.lang.String" resultType="java.lang.String">
+		select v.`value`
+		from `dict` as d
+		left join `value` as v on v.`dict_id` = d.`id`
+		where d.`group` = #{group} and d.`deleted` = 0 and v.`deleted` = 0
+	</select>
 </mapper>
