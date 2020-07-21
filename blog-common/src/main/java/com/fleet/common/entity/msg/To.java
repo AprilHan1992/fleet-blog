@@ -24,7 +24,7 @@ public class To extends Base {
     /**
      * 消息接收人
      */
-    private Integer to;
+    private Integer toId;
 
     /**
      * 消息阅读状态（0：未读，1：已读）
@@ -52,12 +52,12 @@ public class To extends Base {
         this.msgId = msgId;
     }
 
-    public Integer getTo() {
-        return to;
+    public Integer getToId() {
+        return toId;
     }
 
-    public void setTo(Integer to) {
-        this.to = to;
+    public void setToId(Integer toId) {
+        this.toId = toId;
     }
 
     public Integer getReadState() {

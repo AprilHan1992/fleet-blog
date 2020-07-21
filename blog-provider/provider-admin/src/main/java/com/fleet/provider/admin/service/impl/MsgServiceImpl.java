@@ -6,10 +6,11 @@ import com.fleet.common.entity.msg.To;
 import com.fleet.common.enums.Deleted;
 import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.service.msg.MsgService;
+import com.fleet.common.service.msg.ToService;
 import com.fleet.common.util.jdbc.PageUtil;
 import com.fleet.common.util.jdbc.entity.Page;
 import com.fleet.provider.admin.dao.MsgDao;
-import com.fleet.provider.admin.dao.ToDao;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 
 import javax.annotation.Resource;
@@ -26,8 +27,8 @@ public class MsgServiceImpl extends BaseServiceImpl<Msg> implements MsgService {
     @Resource
     private MsgDao msgDao;
 
-    @Resource
-    private ToDao toDao;
+    @Reference
+    private ToService toService;
 
     @Override
     public BaseDao<Msg> baseDao() {
@@ -43,7 +44,7 @@ public class MsgServiceImpl extends BaseServiceImpl<Msg> implements MsgService {
         if (toList != null) {
             for (To to : toList) {
                 to.setMsgId(msg.getId());
-                toDao.insert(to);
+                toService.insert(to);
             }
         }
         return true;
@@ -56,22 +57,21 @@ public class MsgServiceImpl extends BaseServiceImpl<Msg> implements MsgService {
         }
         List<To> toList = msg.getToList();
         if (toList != null) {
-            To to = new To();
-            to.setMsgId(msg.getId());
-            List<Integer> idList = toDao.idList(to);
-            for (To t : toList) {
-                t.setMsgId(msg.getId());
-                if (t.getId() != null) {
-                    if (idList != null) {
-                        idList.remove(t.getId());
-                    }
-                    toDao.update(t);
-                } else {
-                    toDao.insert(t);
+            List<Integer> toIdList = toService.toIdList(msg.getId());
+            for (To to : toList) {
+                if (toIdList != null) {
+                    toIdList.remove(to.getToId());
                 }
+                to.setMsgId(msg.getId());
+                toService.update(to);
             }
-            if (idList != null && idList.size() != 0) {
-                toDao.deletes(idList.toArray(new Integer[0]));
+            if (toIdList != null) {
+                for (Integer toId : toIdList) {
+                    To to = new To();
+                    to.setMsgId(msg.getId());
+                    to.setToId(toId);
+                    toService.delete(to);
+                }
             }
         }
         return true;
@@ -84,7 +84,7 @@ public class MsgServiceImpl extends BaseServiceImpl<Msg> implements MsgService {
             Map<String, Object> map = new HashMap<>();
             map.put("deleted", Deleted.NO);
             map.put("msgId", msg.getId());
-            msg.setToList(toDao.list(map));
+            msg.setToList(toService.list(map));
         }
         return msg;
     }
@@ -98,7 +98,7 @@ public class MsgServiceImpl extends BaseServiceImpl<Msg> implements MsgService {
                 Map<String, Object> map = new HashMap<>();
                 map.put("deleted", Deleted.NO);
                 map.put("msgId", msg.getId());
-                msg.setToList(toDao.list(map));
+                msg.setToList(toService.list(map));
             }
         }
         pageUtil.setList(list);

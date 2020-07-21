@@ -4,14 +4,13 @@ import com.fleet.common.dao.BaseDao;
 import com.fleet.common.entity.dict.Dict;
 import com.fleet.common.entity.dict.Value;
 import com.fleet.common.enums.Deleted;
-import com.fleet.common.enums.IsDefault;
 import com.fleet.common.service.dict.DictService;
+import com.fleet.common.service.dict.ValueService;
 import com.fleet.common.service.impl.BaseServiceImpl;
 import com.fleet.common.util.jdbc.PageUtil;
 import com.fleet.common.util.jdbc.entity.Page;
 import com.fleet.provider.admin.dao.DictDao;
-import com.fleet.provider.admin.dao.ValueDao;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 
 import javax.annotation.Resource;
@@ -28,8 +27,8 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
     @Resource
     private DictDao dictDao;
 
-    @Resource
-    private ValueDao valueDao;
+    @Reference
+    private ValueService valueService;
 
     @Override
     public BaseDao<Dict> baseDao() {
@@ -44,31 +43,8 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
         List<Value> valueList = dict.getValueList();
         if (valueList != null) {
             for (Value value : valueList) {
-                Value v = new Value();
-                v.setDictId(dict.getId());
-                v.setCode(value.getCode());
-                v = valueDao.get(v);
-                if (v != null) {
-                    value.setId(v.getId());
-                }
-
-                if (value.getIsDefault().equals(IsDefault.YES)) {
-                    v = new Value();
-                    v.setDictId(dict.getId());
-                    v.setIsDefault(IsDefault.YES);
-                    v = valueDao.get(v);
-                    if (v != null) {
-                        v.setIsDefault(IsDefault.NO);
-                        valueDao.update(v);
-                    }
-                }
-
                 value.setDictId(dict.getId());
-                if (value.getId() != null) {
-                    valueDao.update(value);
-                } else {
-                    valueDao.insert(value);
-                }
+                valueService.insert(value);
             }
         }
         return true;
@@ -81,7 +57,7 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
             for (Integer id : idList) {
                 Value value = new Value();
                 value.setDictId(id);
-                valueDao.delete(value);
+                valueService.delete(value);
             }
         }
         return dictDao.delete(dict) != 0;
@@ -92,7 +68,7 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
         for (Integer id : ids) {
             Value value = new Value();
             value.setDictId(id);
-            valueDao.delete(value);
+            valueService.delete(value);
         }
         return dictDao.deletes(ids) != 0;
     }
@@ -103,44 +79,22 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
             return false;
         }
         List<Value> valueList = dict.getValueList();
-        Value v = new Value();
-        v.setDictId(dict.getId());
-        List<Integer> idList = valueDao.idList(v);
         if (valueList != null) {
+            List<String> codeList = valueService.codeList(dict.getId());
             for (Value value : valueList) {
-                if (StringUtils.isNotEmpty(value.getCode())) {
-                    v = new Value();
-                    v.setDictId(dict.getId());
-                    v.setCode(value.getCode());
-                    v = valueDao.get(v);
-                    if (v != null) {
-                        value.setId(v.getId());
-                    }
+                if (codeList != null) {
+                    codeList.remove(value.getCode());
                 }
-
-                if (value.getIsDefault().equals(IsDefault.YES)) {
-                    v = new Value();
-                    v.setDictId(dict.getId());
-                    v.setIsDefault(IsDefault.YES);
-                    v = valueDao.get(v);
-                    if (v != null) {
-                        v.setIsDefault(IsDefault.NO);
-                        valueDao.update(v);
-                    }
-                }
-
                 value.setDictId(dict.getId());
-                if (value.getId() != null) {
-                    if (idList != null) {
-                        idList.remove(value.getId());
-                    }
-                    valueDao.update(value);
-                } else {
-                    valueDao.insert(value);
-                }
+                valueService.update(value);
             }
-            if (idList != null && idList.size() != 0) {
-                valueDao.deletes(idList.toArray(new Integer[0]));
+            if (codeList != null) {
+                for (String code : codeList) {
+                    Value value = new Value();
+                    value.setDictId(dict.getId());
+                    value.setCode(code);
+                    valueService.delete(value);
+                }
             }
         }
         return true;
@@ -153,7 +107,7 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
             Map<String, Object> map = new HashMap<>();
             map.put("deleted", Deleted.NO);
             map.put("dictId", dict.getId());
-            dict.setValueList(valueDao.list(map));
+            dict.setValueList(valueService.list(map));
         }
         return dict;
     }
@@ -166,7 +120,7 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
                 Map<String, Object> m = new HashMap<>();
                 m.put("deleted", Deleted.NO);
                 m.put("dictId", dict.getId());
-                dict.setValueList(valueDao.list(m));
+                dict.setValueList(valueService.list(m));
             }
         }
         return list;
@@ -181,7 +135,7 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
                 Map<String, Object> m = new HashMap<>();
                 m.put("deleted", Deleted.NO);
                 m.put("dictId", dict.getId());
-                dict.setValueList(valueDao.list(m));
+                dict.setValueList(valueService.list(m));
             }
         }
         pageUtil.setList(list);

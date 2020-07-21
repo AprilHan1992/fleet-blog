@@ -116,18 +116,8 @@
         order by `sort` desc
     </select>
 
-    <select id="idList" resultType="java.lang.Integer">
-        select `id` from `value`
-        <where>
-            <if test="id != null">and `id` = #{id}</if>
-            <if test="dictId != null">and `dict_id` = #{dictId}</if>
-            <if test="code != null">and `code` = #{code}</if>
-            <if test="value != null">and `value` = #{value}</if>
-            <if test="remark != null">and `remark` = #{remark}</if>
-            <if test="sort != null">and `sort` = #{sort}</if>
-            <if test="isDefault != null">and `is_default` = #{isDefault}</if>
-            <if test="deleted != null">and `deleted` = #{deleted}</if>
-            <if test="deleted == null">and `deleted` = 0</if>
-        </where>
+    <select id="codeList" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select `code` from `value`
+        where `dict_id` = #{dictId} and `deleted` = 0
     </select>
 </mapper>

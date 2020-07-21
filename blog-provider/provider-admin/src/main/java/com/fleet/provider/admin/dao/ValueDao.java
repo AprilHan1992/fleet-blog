@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface ValueDao extends BaseDao<Value> {
 
-    List<Integer> idList(Value value);
+    List<String> codeList(Integer dictId);
 }

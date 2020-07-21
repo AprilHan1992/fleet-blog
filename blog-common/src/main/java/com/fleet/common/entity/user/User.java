@@ -3,8 +3,6 @@ package com.fleet.common.entity.user;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fleet.common.entity.Base;
-import com.fleet.common.entity.dept.Dept;
-import com.fleet.common.entity.role.Role;
 
 import java.util.Date;
 import java.util.List;
@@ -61,13 +59,9 @@ public class User extends Base {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date regTime;
 
-    private Integer deptId;
+    private UserDept userDept;
 
-    private Dept dept;
-
-    private List<Integer> roleIdList;
-
-    private List<Role> roleList;
+    private List<UserRole> userRoleList;
 
     public Integer getId() {
         return id;
@@ -133,35 +127,19 @@ public class User extends Base {
         this.regTime = regTime;
     }
 
-    public Integer getDeptId() {
-        return deptId;
+    public UserDept getUserDept() {
+        return userDept;
     }
 
-    public void setDeptId(Integer deptId) {
-        this.deptId = deptId;
+    public void setUserDept(UserDept userDept) {
+        this.userDept = userDept;
     }
 
-    public Dept getDept() {
-        return dept;
+    public List<UserRole> getUserRoleList() {
+        return userRoleList;
     }
 
-    public void setDept(Dept dept) {
-        this.dept = dept;
-    }
-
-    public List<Integer> getRoleIdList() {
-        return roleIdList;
-    }
-
-    public void setRoleIdList(List<Integer> roleIdList) {
-        this.roleIdList = roleIdList;
-    }
-
-    public List<Role> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
+    public void setUserRoleList(List<UserRole> userRoleList) {
+        this.userRoleList = userRoleList;
     }
 }

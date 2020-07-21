@@ -28,6 +28,40 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole> implements Us
     }
 
     @Override
+    public Boolean insert(UserRole userRole) {
+        UserRole ur = new UserRole();
+        ur.setUserId(userRole.getUserId());
+        ur.setRoleId(userRole.getRoleId());
+        ur = userRoleDao.get(ur);
+        if (ur != null) {
+            userRole.setId(ur.getId());
+        }
+        if (userRole.getId() != null) {
+            return userRoleDao.update(userRole) != 0;
+        } else {
+            return userRoleDao.insert(userRole) != 0;
+        }
+    }
+
+    @Override
+    public Boolean update(UserRole userRole) {
+        if (userRole.getRoleId() != null) {
+            UserRole ur = new UserRole();
+            ur.setUserId(userRole.getUserId());
+            ur.setRoleId(userRole.getRoleId());
+            ur = userRoleDao.get(ur);
+            if (ur != null) {
+                userRole.setId(ur.getId());
+            }
+        }
+        if (userRole.getId() != null) {
+            return userRoleDao.update(userRole) != 0;
+        } else {
+            return userRoleDao.insert(userRole) != 0;
+        }
+    }
+
+    @Override
     public List<Integer> roleIdList(Integer userId) {
         return userRoleDao.roleIdList(userId);
     }

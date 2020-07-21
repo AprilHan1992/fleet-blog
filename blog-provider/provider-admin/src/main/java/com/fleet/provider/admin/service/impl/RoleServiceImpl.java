@@ -37,20 +37,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         if (roleDao.insert(role) == 0) {
             return false;
         }
-        List<Integer> menuIdList = role.getMenuIdList();
-        if (menuIdList != null) {
-            for (Integer menuId : menuIdList) {
-                RoleMenu rm = new RoleMenu();
-                rm.setRoleId(role.getId());
-                rm.setMenuId(menuId);
-                rm = roleMenuDao.get(rm);
-                if (rm != null) {
-                    continue;
-                }
-
-                RoleMenu roleMenu = new RoleMenu();
+        List<RoleMenu> roleMenuList = role.getRoleMenuList();
+        if (roleMenuList != null) {
+            for (RoleMenu roleMenu : roleMenuList) {
                 roleMenu.setRoleId(role.getId());
-                roleMenu.setMenuId(menuId);
                 roleMenuDao.insert(roleMenu);
             }
         }
@@ -86,21 +76,18 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         if (roleDao.update(role) == 0) {
             return false;
         }
-        List<Integer> menuIdList = role.getMenuIdList();
-        if (menuIdList != null) {
-            List<Integer> midList = roleMenuDao.menuIdList(role.getId());
-            for (Integer menuId : menuIdList) {
-                if (midList != null && midList.contains(menuId)) {
-                    midList.remove(menuId);
-                } else {
-                    RoleMenu roleMenu = new RoleMenu();
-                    roleMenu.setRoleId(role.getId());
-                    roleMenu.setMenuId(menuId);
-                    roleMenuDao.insert(roleMenu);
+        List<RoleMenu> roleMenuList = role.getRoleMenuList();
+        if (roleMenuList != null) {
+            List<Integer> menuIdList = roleMenuDao.menuIdList(role.getId());
+            for (RoleMenu roleMenu : roleMenuList) {
+                if (menuIdList != null) {
+                    menuIdList.remove(roleMenu.getMenuId());
                 }
+                roleMenu.setRoleId(role.getId());
+                roleMenuDao.insert(roleMenu);
             }
-            if (midList != null) {
-                for (Integer menuId : midList) {
+            if (menuIdList != null) {
+                for (Integer menuId : menuIdList) {
                     RoleMenu roleMenu = new RoleMenu();
                     roleMenu.setRoleId(role.getId());
                     roleMenu.setMenuId(menuId);

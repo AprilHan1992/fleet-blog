@@ -5,6 +5,7 @@
         <id column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="dept_id" property="userId"/>
+        <result column="identity" property="identity"/>
         <result column="deleted" property="deleted"/>
     </resultMap>
 
@@ -22,7 +23,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		`id`, `user_id`, `dept_id`, `deleted`
+		`id`, `user_id`, `dept_id`, `identity`, `deleted`
 	</sql>
 
     <insert id="insert" parameterType="com.fleet.common.entity.user.UserDept" useGeneratedKeys="true" keyProperty="id">
@@ -30,12 +31,14 @@
         <trim suffixOverrides=",">
             <if test="userId != null">`user_id`,</if>
             <if test="deptId != null">`dept_id`,</if>
+            <if test="identity != null">`identity`,</if>
             <if test="deleted != null">`deleted`,</if>
         </trim>
         ) values (
         <trim suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
             <if test="deptId != null">#{deptId},</if>
+            <if test="identity != null">#{identity},</if>
             <if test="deleted != null">#{deleted},</if>
         </trim>
         )
@@ -47,6 +50,7 @@
             <if test="id != null">and `id` = #{id}</if>
             <if test="userId != null">and `user_id` = #{userId}</if>
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
+            <if test="identity != null">and `identity` = #{identity}</if>
             and `deleted` = 0
         </where>
     </update>
@@ -67,6 +71,7 @@
             <if test="id != null">and `id` = #{id}</if>
             <if test="userId != null">`user_id` = #{userId},</if>
             <if test="deptId != null">`dept_id` = #{deptId},</if>
+            <if test="identity != null">`identity` = #{identity},</if>
             <if test="deleted != null">`deleted` = #{deleted},</if>
         </set>
         where id = #{id}
@@ -80,6 +85,7 @@
             <if test="id != null">and `id` = #{id}</if>
             <if test="userId != null">and `user_id` = #{userId}</if>
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
+            <if test="identity != null">and `identity` = #{identity}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
         </where>
@@ -94,23 +100,10 @@
             <if test="id != null">and `id` = #{id}</if>
             <if test="userId != null">and `user_id` = #{userId}</if>
             <if test="deptId != null">and `dept_id` = #{deptId}</if>
+            <if test="identity != null">and `identity` = #{identity}</if>
             <if test="deleted != null">and `deleted` = #{deleted}</if>
             <if test="deleted == null">and `deleted` = 0</if>
         </where>
     </select>
-
-    <select id="deptId" resultType="java.lang.Integer">
-        select `dept_id` from `user_dept`
-        where `user_id` = #{userId} and `deleted` = 0
-        limit 1
-    </select>
-
-    <select id="dept" parameterType="java.lang.Integer" resultMap="DeptResultMap">
-		select d.`id`, d.`name`, d.`state`, d.`sort`, d.`creator_id`, d.`create_time`, d.`editor_id`, d.`edit_time`, d.`upper_id`, d.`deleted`
-		from `user_dept` as ud
-		left join `dept` as d on d.`id` = ud.`dept_id`
-		where ud.`user_id` = #{userId} and ud.`deleted` = 0 and d.`deleted` = 0
-		limit 1
-	</select>
 </mapper>
 

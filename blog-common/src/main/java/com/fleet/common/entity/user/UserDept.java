@@ -29,6 +29,11 @@ public class UserDept extends Base {
 
     private Dept dept;
 
+    /**
+     * 用户身份（普通，上级）
+     */
+    private String identity;
+
     public Integer getId() {
         return id;
     }
@@ -67,5 +72,13 @@ public class UserDept extends Base {
 
     public void setDept(Dept dept) {
         this.dept = dept;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 }

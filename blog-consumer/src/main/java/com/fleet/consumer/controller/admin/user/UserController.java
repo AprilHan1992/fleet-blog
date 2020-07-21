@@ -2,8 +2,8 @@ package com.fleet.consumer.controller.admin.user;
 
 import com.fleet.common.annotation.AuthCheck;
 import com.fleet.common.controller.BaseController;
-import com.fleet.common.entity.role.Role;
 import com.fleet.common.entity.user.User;
+import com.fleet.common.entity.user.UserDept;
 import com.fleet.common.json.R;
 import com.fleet.common.service.BaseService;
 import com.fleet.common.service.dept.DeptService;
@@ -22,9 +22,7 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/user")
@@ -116,12 +114,13 @@ public class UserController extends BaseController<User> {
     public R get(@RequestBody User user) {
         user = userService.get(user);
         if (user != null) {
-            user.setDept(userDeptService.dept(user.getId()));
+            UserDept userDept = new UserDept();
+            userDept.setUserId(user.getId());
+            user.setUserDept(userDeptService.get(userDept));
 
-            user.setRoleIdList(userRoleService.roleIdList(user.getId()));
-
-            List<Role> roleList = userRoleService.roleList(user.getId());
-            user.setRoleList(roleService.buildTree(roleList));
+            Map<String, Object> map = new HashMap<>();
+            map.put("userId", user.getId());
+            user.setUserRoleList(userRoleService.list(map));
         }
         return R.ok(user);
     }
@@ -138,12 +137,13 @@ public class UserController extends BaseController<User> {
         List<User> userList = pageUtil.getList();
         if (userList != null) {
             for (User user : userList) {
-                user.setDept(userDeptService.dept(user.getId()));
+                UserDept userDept = new UserDept();
+                userDept.setUserId(user.getId());
+                user.setUserDept(userDeptService.get(userDept));
 
-                user.setRoleIdList(userRoleService.roleIdList(user.getId()));
-
-                List<Role> roleList = userRoleService.roleList(user.getId());
-                user.setRoleList(roleService.buildTree(roleList));
+                Map<String, Object> map = new HashMap<>();
+                map.put("userId", user.getId());
+                user.setUserRoleList(userRoleService.list(map));
             }
         }
         return pageUtil;

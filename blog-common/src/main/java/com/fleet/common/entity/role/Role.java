@@ -32,7 +32,7 @@ public class Role extends Base {
      */
     private Integer upperId;
 
-    private List<Integer> menuIdList;
+    private List<RoleMenu> roleMenuList;
 
     private List<Menu> menuList;
 
@@ -70,12 +70,12 @@ public class Role extends Base {
         this.upperId = upperId;
     }
 
-    public List<Integer> getMenuIdList() {
-        return menuIdList;
+    public List<RoleMenu> getRoleMenuList() {
+        return roleMenuList;
     }
 
-    public void setMenuIdList(List<Integer> menuIdList) {
-        this.menuIdList = menuIdList;
+    public void setRoleMenuList(List<RoleMenu> roleMenuList) {
+        this.roleMenuList = roleMenuList;
     }
 
     public List<Menu> getMenuList() {
