@@ -2,13 +2,14 @@ package com.fleet.consumer.controller.admin.dict;
 
 import com.fleet.common.controller.BaseController;
 import com.fleet.common.entity.dict.Value;
-import com.fleet.common.enums.IsDefault;
 import com.fleet.common.json.R;
 import com.fleet.common.service.BaseService;
 import com.fleet.common.service.dict.ValueService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 字典值管理
@@ -25,60 +26,6 @@ public class ValueController extends BaseController<Value> {
     @Override
     public BaseService<Value> baseService() {
         return valueService;
-    }
-
-    @Override
-    @PostMapping("/insert")
-    public R insert(@RequestBody Value value) {
-        Value v = new Value();
-        v.setDictId(value.getDictId());
-        v.setCode(value.getCode());
-        v = valueService.get(v);
-        if (v != null) {
-            return R.error("字典标签已存在");
-        }
-        if (value.getIsDefault().equals(IsDefault.YES)) {
-            v = new Value();
-            v.setDictId(value.getDictId());
-            v.setIsDefault(IsDefault.YES);
-            v = valueService.get(v);
-            if (v != null) {
-                v.setIsDefault(IsDefault.NO);
-                valueService.update(v);
-            }
-        }
-        if (!valueService.insert(value)) {
-            return R.error();
-        }
-        return R.ok();
-    }
-
-    @Override
-    @PostMapping("/update")
-    public R update(@RequestBody Value value) {
-        if (StringUtils.isNotEmpty(value.getCode())) {
-            Value v = new Value();
-            v.setDictId(value.getDictId());
-            v.setCode(value.getCode());
-            v = valueService.get(v);
-            if (v != null && !v.getId().equals(value.getId())) {
-                return R.error("字典标签已存在");
-            }
-        }
-        if (value.getIsDefault().equals(IsDefault.YES)) {
-            Value v = new Value();
-            v.setDictId(value.getDictId());
-            v.setIsDefault(IsDefault.YES);
-            v = valueService.get(v);
-            if (v != null && !v.getId().equals(value.getId())) {
-                v.setIsDefault(IsDefault.NO);
-                valueService.update(v);
-            }
-        }
-        if (!valueService.update(value)) {
-            return R.error();
-        }
-        return R.ok();
     }
 
     @GetMapping("/get")

@@ -41,38 +41,6 @@ public class RoleMenuController extends BaseController<RoleMenu> {
         return roleMenuService;
     }
 
-    @Override
-    @PostMapping("/insert")
-    public R insert(@RequestBody RoleMenu roleMenu) {
-        RoleMenu rm = new RoleMenu();
-        rm.setRoleId(roleMenu.getRoleId());
-        rm.setMenuId(roleMenu.getMenuId());
-        rm = roleMenuService.get(rm);
-        if (rm != null) {
-            return R.error("菜单已存在");
-        }
-        if (!roleMenuService.insert(roleMenu)) {
-            return R.error();
-        }
-        return R.ok();
-    }
-
-    @Override
-    @PostMapping("/update")
-    public R update(@RequestBody RoleMenu roleMenu) {
-        RoleMenu rm = new RoleMenu();
-        rm.setRoleId(roleMenu.getRoleId());
-        rm.setMenuId(roleMenu.getMenuId());
-        rm = roleMenuService.get(rm);
-        if (rm != null && !rm.getId().equals(roleMenu.getId())) {
-            return R.error("菜单已存在");
-        }
-        if (!roleMenuService.update(roleMenu)) {
-            return R.error();
-        }
-        return R.ok();
-    }
-
     @GetMapping("/get")
     public R get(@RequestParam("id") Integer id) {
         RoleMenu roleMenu = new RoleMenu();

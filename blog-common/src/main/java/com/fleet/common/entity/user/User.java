@@ -3,6 +3,8 @@ package com.fleet.common.entity.user;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fleet.common.entity.Base;
+import com.fleet.common.entity.menu.Menu;
+import com.fleet.common.entity.role.Role;
 
 import java.util.Date;
 import java.util.List;
@@ -62,6 +64,10 @@ public class User extends Base {
     private UserDept userDept;
 
     private List<UserRole> userRoleList;
+
+    private List<Role> roleList;
+
+    private List<Menu> menuList;
 
     public Integer getId() {
         return id;
@@ -141,5 +147,21 @@ public class User extends Base {
 
     public void setUserRoleList(List<UserRole> userRoleList) {
         this.userRoleList = userRoleList;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+    public List<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
     }
 }

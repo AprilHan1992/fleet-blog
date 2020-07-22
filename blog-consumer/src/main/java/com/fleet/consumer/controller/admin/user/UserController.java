@@ -4,6 +4,7 @@ import com.fleet.common.annotation.AuthCheck;
 import com.fleet.common.controller.BaseController;
 import com.fleet.common.entity.user.User;
 import com.fleet.common.entity.user.UserDept;
+import com.fleet.common.enums.Deleted;
 import com.fleet.common.json.R;
 import com.fleet.common.service.BaseService;
 import com.fleet.common.service.dept.DeptService;
@@ -119,8 +120,13 @@ public class UserController extends BaseController<User> {
             user.setUserDept(userDeptService.get(userDept));
 
             Map<String, Object> map = new HashMap<>();
+            map.put("deleted", Deleted.NO);
             map.put("userId", user.getId());
             user.setUserRoleList(userRoleService.list(map));
+
+            user.setRoleList(userRoleService.roleList(user.getId()));
+
+            user.setMenuList(userRoleService.menuList(user.getId()));
         }
         return R.ok(user);
     }
@@ -142,8 +148,13 @@ public class UserController extends BaseController<User> {
                 user.setUserDept(userDeptService.get(userDept));
 
                 Map<String, Object> map = new HashMap<>();
+                map.put("deleted", Deleted.NO);
                 map.put("userId", user.getId());
                 user.setUserRoleList(userRoleService.list(map));
+
+                user.setRoleList(userRoleService.roleList(user.getId()));
+
+                user.setMenuList(userRoleService.menuList(user.getId()));
             }
         }
         return pageUtil;

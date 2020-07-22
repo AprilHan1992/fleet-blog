@@ -14,6 +14,7 @@ import com.fleet.common.util.jdbc.entity.Page;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +53,10 @@ public class RoleController extends BaseController<Role> {
     public R get(@RequestBody Role role) {
         role = roleService.get(role);
         if (role != null) {
-            role.setMenuIdList(roleMenuService.menuIdList(role.getId()));
+            Map<String, Object> map = new HashMap<>();
+            map.put("deleted", Deleted.NO);
+            map.put("roleId", role.getId());
+            role.setRoleMenuList(roleMenuService.list(map));
 
             List<Menu> menuList = roleMenuService.menuList(role.getId());
             role.setMenuList(menuService.buildTree(menuList));
@@ -68,7 +72,10 @@ public class RoleController extends BaseController<Role> {
         list = roleService.buildTree(list);
         if (list != null) {
             for (Role role : list) {
-                role.setMenuIdList(roleMenuService.menuIdList(role.getId()));
+                Map<String, Object> m = new HashMap<>();
+                m.put("deleted", Deleted.NO);
+                m.put("roleId", role.getId());
+                role.setRoleMenuList(roleMenuService.list(m));
 
                 List<Menu> menuList = roleMenuService.menuList(role.getId());
                 role.setMenuList(menuService.buildTree(menuList));
@@ -84,7 +91,10 @@ public class RoleController extends BaseController<Role> {
         List<Role> list = roleService.list(page);
         if (list != null) {
             for (Role role : list) {
-                role.setMenuIdList(roleMenuService.menuIdList(role.getId()));
+                Map<String, Object> map = new HashMap<>();
+                map.put("deleted", Deleted.NO);
+                map.put("roleId", role.getId());
+                role.setRoleMenuList(roleMenuService.list(map));
 
                 List<Menu> menuList = roleMenuService.menuList(role.getId());
                 role.setMenuList(menuService.buildTree(menuList));

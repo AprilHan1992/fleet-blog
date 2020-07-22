@@ -23,7 +23,7 @@ public class MsgControllerTests extends BaseTests {
 
         List<To> toList = new ArrayList<>();
         To to = new To();
-        to.setTo(1);
+        to.setToId(1);
         toList.add(to);
         msg.setToList(toList);
         super.post("/msg/insert", JSONObject.toJSONString(msg));
@@ -61,7 +61,7 @@ public class MsgControllerTests extends BaseTests {
 
         List<To> toList = new ArrayList<>();
         To to = new To();
-        to.setTo(1);
+        to.setToId(1);
         toList.add(to);
         msg.setToList(toList);
         super.post("/msg/update", JSONObject.toJSONString(msg));

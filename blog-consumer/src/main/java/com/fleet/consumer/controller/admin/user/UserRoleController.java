@@ -40,22 +40,6 @@ public class UserRoleController extends BaseController<UserRole> {
     }
 
     @Override
-    @PostMapping("/insert")
-    public R insert(@RequestBody UserRole userRole) {
-        UserRole ur = new UserRole();
-        ur.setUserId(userRole.getUserId());
-        ur.setRoleId(userRole.getRoleId());
-        ur = userRoleService.get(ur);
-        if (ur != null) {
-            return R.error("角色已存在");
-        }
-        if (!userRoleService.insert(userRole)) {
-            return R.error();
-        }
-        return R.ok();
-    }
-
-    @Override
     @PostMapping("/update")
     public R update(@RequestBody UserRole userRole) {
         UserRole ur = new UserRole();

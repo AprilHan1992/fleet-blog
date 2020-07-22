@@ -2,6 +2,7 @@ package com.fleet.consumer;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fleet.common.entity.role.Role;
+import com.fleet.common.entity.role.RoleMenu;
 import com.fleet.common.util.jdbc.entity.Page;
 import org.junit.Test;
 
@@ -17,11 +18,17 @@ public class RoleControllerTests extends BaseTests {
         Role role = new Role();
         role.setName("超级管理员");
         role.setUpperId(0);
-        List<Integer> menuIdList = new ArrayList<>();
-        menuIdList.add(1);
-        menuIdList.add(2);
-        menuIdList.add(3);
-        role.setMenuIdList(menuIdList);
+        List<RoleMenu> roleMenuList = new ArrayList<>();
+        RoleMenu roleMenu1 = new RoleMenu();
+        roleMenu1.setMenuId(1);
+        roleMenuList.add(roleMenu1);
+        RoleMenu roleMenu2 = new RoleMenu();
+        roleMenu1.setMenuId(2);
+        roleMenuList.add(roleMenu2);
+        RoleMenu roleMenu3 = new RoleMenu();
+        roleMenu1.setMenuId(3);
+        roleMenuList.add(roleMenu3);
+        role.setRoleMenuList(roleMenuList);
         super.post("/role/insert", JSONObject.toJSONString(role));
     }
 
@@ -52,11 +59,17 @@ public class RoleControllerTests extends BaseTests {
         role.setId(1);
         role.setName("超级管理员");
         role.setUpperId(0);
-        List<Integer> menuIdList = new ArrayList<>();
-        menuIdList.add(1);
-        menuIdList.add(2);
-        menuIdList.add(5);
-        role.setMenuIdList(menuIdList);
+        List<RoleMenu> roleMenuList = new ArrayList<>();
+        RoleMenu roleMenu1 = new RoleMenu();
+        roleMenu1.setMenuId(1);
+        roleMenuList.add(roleMenu1);
+        RoleMenu roleMenu2 = new RoleMenu();
+        roleMenu1.setMenuId(2);
+        roleMenuList.add(roleMenu2);
+        RoleMenu roleMenu3 = new RoleMenu();
+        roleMenu1.setMenuId(3);
+        roleMenuList.add(roleMenu3);
+        role.setRoleMenuList(roleMenuList);
         super.post("/role/update", JSONObject.toJSONString(role));
     }
 
