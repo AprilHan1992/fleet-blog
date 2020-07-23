@@ -27,6 +27,8 @@ public class LogAspect {
         Object object = pjp.proceed();
         long millis = System.currentTimeMillis() - times.get();
         times.remove();
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        RequestContextHolder.setRequestAttributes(servletRequestAttributes, true);
         logAsync.saveLog(pjp, millis, 1, null);
         return object;
     }
