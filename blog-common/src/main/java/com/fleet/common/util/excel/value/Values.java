@@ -17,6 +17,6 @@ public class Values {
                 return key;
             }
         }
-        return "";
+        return null;
     }
 }
