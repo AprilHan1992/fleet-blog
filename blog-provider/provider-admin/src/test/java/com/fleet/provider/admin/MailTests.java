@@ -101,5 +101,4 @@ public class MailTests {
         files.put("file", file);
         mailUtil.inlineMail("aprilhan1992@foxmail.com", "测试", "<body><p style='color:red;'>Hello Html Email</p><img src='cid:file'/></body>", files);
     }
-
 }

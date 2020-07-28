@@ -111,5 +111,4 @@ public class RoleMenuController extends BaseController<RoleMenu> {
     public R permitList(@RequestParam Integer roleId) {
         return R.ok(roleMenuService.permitList(roleId));
     }
-
 }
