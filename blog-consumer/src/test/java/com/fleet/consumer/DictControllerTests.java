@@ -40,7 +40,7 @@ public class DictControllerTests extends BaseTests {
     @Test
     public void delete() {
         Dict dict = new Dict();
-        dict.setId(1);
+        dict.setId(1L);
         super.post("/dict/delete", JSONObject.toJSONString(dict));
     }
 
@@ -61,7 +61,7 @@ public class DictControllerTests extends BaseTests {
     @Test
     public void update() {
         Dict dict = new Dict();
-        dict.setId(1);
+        dict.setId(1L);
         dict.setGroup("test");
         dict.setRemark("测试组");
         List<Value> valueList = new ArrayList<>();
@@ -86,7 +86,7 @@ public class DictControllerTests extends BaseTests {
     @Test
     public void get1() {
         Dict dict = new Dict();
-        dict.setId(1);
+        dict.setId(1L);
         super.post("/dict/get", JSONObject.toJSONString(dict));
     }
 

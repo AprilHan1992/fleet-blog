@@ -6,15 +6,15 @@ public class Test extends Base {
 
     private static final long serialVersionUID = 187371427260897374L;
 
-    private Integer id;
+    private Long id;
 
     private String test;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

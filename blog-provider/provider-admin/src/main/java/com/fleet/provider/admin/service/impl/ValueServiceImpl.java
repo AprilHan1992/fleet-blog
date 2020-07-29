@@ -89,7 +89,7 @@ public class ValueServiceImpl extends BaseServiceImpl<Value> implements ValueSer
     }
 
     @Override
-    public List<String> codeList(Integer dictId) {
+    public List<String> codeList(Long dictId) {
         return valueDao.codeList(dictId);
     }
 }

@@ -13,12 +13,12 @@ public class RoleMenu extends Base {
     /**
      * 角色对应菜单id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 角色id
      */
-    private Integer roleId;
+    private Long roleId;
 
     /**
      * 角色
@@ -28,26 +28,26 @@ public class RoleMenu extends Base {
     /**
      * 菜单id
      */
-    private Integer menuId;
+    private Long menuId;
 
     /**
      * 菜单
      */
     private Menu menu;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
@@ -59,11 +59,11 @@ public class RoleMenu extends Base {
         this.role = role;
     }
 
-    public Integer getMenuId() {
+    public Long getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(Integer menuId) {
+    public void setMenuId(Long menuId) {
         this.menuId = menuId;
     }
 

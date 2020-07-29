@@ -17,7 +17,7 @@ public class Article extends Base {
     /**
      * 文章id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 文章标题
@@ -32,7 +32,7 @@ public class Article extends Base {
     /**
      * 分类/标签id
      */
-    private Integer tagId;
+    private Long tagId;
 
     /**
      * 分类
@@ -72,7 +72,7 @@ public class Article extends Base {
     /**
      * 创建人
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建人
@@ -88,7 +88,7 @@ public class Article extends Base {
     /**
      * 修改人
      */
-    private Integer editorId;
+    private Long editorId;
 
     /**
      * 修改人
@@ -101,11 +101,11 @@ public class Article extends Base {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date editTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -125,11 +125,11 @@ public class Article extends Base {
         this.cover = cover;
     }
 
-    public Integer getTagId() {
+    public Long getTagId() {
         return tagId;
     }
 
-    public void setTagId(Integer tagId) {
+    public void setTagId(Long tagId) {
         this.tagId = tagId;
     }
 
@@ -189,11 +189,11 @@ public class Article extends Base {
         this.sort = sort;
     }
 
-    public Integer getCreatorId() {
+    public Long getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(Integer creatorId) {
+    public void setCreatorId(Long creatorId) {
         this.creatorId = creatorId;
     }
 
@@ -213,11 +213,11 @@ public class Article extends Base {
         this.createTime = createTime;
     }
 
-    public Integer getEditorId() {
+    public Long getEditorId() {
         return editorId;
     }
 
-    public void setEditorId(Integer editorId) {
+    public void setEditorId(Long editorId) {
         this.editorId = editorId;
     }
 

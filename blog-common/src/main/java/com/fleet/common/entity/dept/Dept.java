@@ -18,7 +18,7 @@ public class Dept extends Base {
     /**
      * 部门id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 部门名称
@@ -43,7 +43,7 @@ public class Dept extends Base {
     /**
      * 创建人
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建人
@@ -59,7 +59,7 @@ public class Dept extends Base {
     /**
      * 修改人
      */
-    private Integer editorId;
+    private Long editorId;
 
     /**
      * 修改人
@@ -75,16 +75,16 @@ public class Dept extends Base {
     /**
      * 上一级部门id
      */
-    private Integer upperId;
+    private Long upperId;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Dept> children;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -120,11 +120,11 @@ public class Dept extends Base {
         this.sort = sort;
     }
 
-    public Integer getCreatorId() {
+    public Long getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(Integer creatorId) {
+    public void setCreatorId(Long creatorId) {
         this.creatorId = creatorId;
     }
 
@@ -144,11 +144,11 @@ public class Dept extends Base {
         this.createTime = createTime;
     }
 
-    public Integer getEditorId() {
+    public Long getEditorId() {
         return editorId;
     }
 
-    public void setEditorId(Integer editorId) {
+    public void setEditorId(Long editorId) {
         this.editorId = editorId;
     }
 
@@ -168,11 +168,11 @@ public class Dept extends Base {
         this.editTime = editTime;
     }
 
-    public Integer getUpperId() {
+    public Long getUpperId() {
         return upperId;
     }
 
-    public void setUpperId(Integer upperId) {
+    public void setUpperId(Long upperId) {
         this.upperId = upperId;
     }
 

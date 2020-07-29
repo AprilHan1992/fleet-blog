@@ -27,8 +27,8 @@ public class DeptServiceTests {
     public void insert() {
         Dept dept = new Dept();
         dept.setName("项目一部");
-        dept.setUpperId(1);
-        dept.setCreatorId(1);
+        dept.setUpperId(1L);
+        dept.setCreatorId(1L);
         dept.setCreateTime(new Date());
         deptService.insert(dept);
     }
@@ -36,20 +36,20 @@ public class DeptServiceTests {
     @Test
     public void delete() {
         Dept dept = new Dept();
-        dept.setId(1);
+        dept.setId(1L);
         deptService.delete(dept);
     }
 
     @Test
     public void deletes() {
-        Integer[] ids = {1, 2, 3};
+        Long[] ids = {1L, 2L, 3L};
         deptService.deletes(ids);
     }
 
     @Test
     public void update() {
         Dept dept = new Dept();
-        dept.setId(1);
+        dept.setId(1L);
         dept.setName("修改项目部");
         deptService.update(dept);
     }
@@ -57,7 +57,7 @@ public class DeptServiceTests {
     @Test
     public void get() {
         Dept dept = new Dept();
-        dept.setId(3);
+        dept.setId(3L);
         dept = deptService.get(dept);
         System.out.println(JSON.toJSONString(dept));
     }
@@ -79,14 +79,14 @@ public class DeptServiceTests {
 
     @Test
     public void deptId() {
-        Integer deptId = deptService.getId("项目部/项目一部");
+        Long deptId = deptService.getId("项目部/项目一部");
         System.out.println(JSON.toJSONString(deptId));
     }
 
 
     @Test
     public void idList() {
-        List<Integer> list = deptService.idList(1);
+        List<Long> list = deptService.idList(1L);
         System.out.println(JSON.toJSONString(list));
     }
 }

@@ -36,7 +36,7 @@ public class DeptController extends BaseController<Dept> {
     @PostMapping("/insert")
     public R insert(@RequestBody Dept dept) {
         if (dept.getUpperId() == null) {
-            dept.setUpperId(0);
+            dept.setUpperId(0L);
         }
         dept.setCreatorId(getUserId());
         dept.setCreateTime(new Date());
@@ -58,7 +58,7 @@ public class DeptController extends BaseController<Dept> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Dept dept = new Dept();
         dept.setId(id);
         return get(dept);

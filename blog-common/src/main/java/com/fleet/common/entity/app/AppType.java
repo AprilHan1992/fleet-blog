@@ -10,7 +10,7 @@ public class AppType implements Serializable {
 	/**
 	 * 应用分类标识
 	 */
-	private Integer appTypeId;
+	private Long appTypeId;
 
 	/**
 	 * 应用分类
@@ -20,15 +20,15 @@ public class AppType implements Serializable {
 	/**
 	 * 上一级应用分类标识
 	 */
-	private Integer upperAppTypeId;
+	private Long upperAppTypeId;
 
 	private List<AppType> appTypeList;
 
-	public Integer getAppTypeId() {
+	public Long getAppTypeId() {
 		return appTypeId;
 	}
 
-	public void setAppTypeId(Integer appTypeId) {
+	public void setAppTypeId(Long appTypeId) {
 		this.appTypeId = appTypeId;
 	}
 
@@ -40,11 +40,11 @@ public class AppType implements Serializable {
 		this.appType = appType;
 	}
 
-	public Integer getUpperAppTypeId() {
+	public Long getUpperAppTypeId() {
 		return upperAppTypeId;
 	}
 
-	public void setUpperAppTypeId(Integer upperAppTypeId) {
+	public void setUpperAppTypeId(Long upperAppTypeId) {
 		this.upperAppTypeId = upperAppTypeId;
 	}
 

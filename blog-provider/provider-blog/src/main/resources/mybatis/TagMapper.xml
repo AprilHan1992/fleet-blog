@@ -89,7 +89,7 @@
         order by `sort` desc
     </select>
 
-    <select id="idList" resultType="java.lang.Integer">
+    <select id="idList" resultType="java.lang.Long">
         select `id` from `tag`
         <where>
             <if test="id != null">and `id` = #{id}</if>

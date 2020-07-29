@@ -68,12 +68,12 @@ public class QuartzJobServiceImpl extends BaseServiceImpl<QuartzJob> implements 
 
     @Override
     public Boolean delete(QuartzJob quartzJob) {
-        List<Integer> idList = quartzJobDao.idList(quartzJob);
+        List<Long> idList = quartzJobDao.idList(quartzJob);
         if (idList != null && idList.size() != 0) {
             if (quartzJobDao.delete(quartzJob) == 0) {
                 return false;
             }
-            for (Integer id : idList) {
+            for (Long id : idList) {
                 QuartzUtil.delete(scheduler, id);
             }
         }
@@ -81,11 +81,11 @@ public class QuartzJobServiceImpl extends BaseServiceImpl<QuartzJob> implements 
     }
 
     @Override
-    public Boolean deletes(Integer[] ids) {
+    public Boolean deletes(Long[] ids) {
         if (quartzJobDao.deletes(ids) == 0) {
             return false;
         }
-        for (Integer id : ids) {
+        for (Long id : ids) {
             QuartzUtil.delete(scheduler, id);
         }
         return true;
@@ -101,17 +101,17 @@ public class QuartzJobServiceImpl extends BaseServiceImpl<QuartzJob> implements 
     }
 
     @Override
-    public void run(Integer id) {
+    public void run(Long id) {
         QuartzUtil.run(scheduler, id);
     }
 
     @Override
-    public void pause(Integer id) {
+    public void pause(Long id) {
         QuartzUtil.pause(scheduler, id);
     }
 
     @Override
-    public void resume(Integer id) {
+    public void resume(Long id) {
         QuartzUtil.resume(scheduler, id);
     }
 }

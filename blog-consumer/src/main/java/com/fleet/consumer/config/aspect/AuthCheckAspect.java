@@ -36,7 +36,7 @@ public class AuthCheckAspect {
             throw new BaseException(ResultState.ERROR);
         }
 
-        Integer userId = user.getId();
+        Long userId = user.getId();
         String[] roles = authCheck.roles();
         if (roles.length != 0) {
             Boolean hasRoles = userRoleService.hasRoles(userId, roles);

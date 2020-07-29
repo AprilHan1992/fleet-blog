@@ -17,16 +17,16 @@ public class RoleControllerTests extends BaseTests {
     public void insert() {
         Role role = new Role();
         role.setName("超级管理员");
-        role.setUpperId(0);
+        role.setUpperId(0L);
         List<RoleMenu> roleMenuList = new ArrayList<>();
         RoleMenu roleMenu1 = new RoleMenu();
-        roleMenu1.setMenuId(1);
+        roleMenu1.setMenuId(1L);
         roleMenuList.add(roleMenu1);
         RoleMenu roleMenu2 = new RoleMenu();
-        roleMenu1.setMenuId(2);
+        roleMenu1.setMenuId(2L);
         roleMenuList.add(roleMenu2);
         RoleMenu roleMenu3 = new RoleMenu();
-        roleMenu1.setMenuId(3);
+        roleMenu1.setMenuId(3L);
         roleMenuList.add(roleMenu3);
         role.setRoleMenuList(roleMenuList);
         super.post("/role/insert", JSONObject.toJSONString(role));
@@ -35,7 +35,7 @@ public class RoleControllerTests extends BaseTests {
     @Test
     public void delete() {
         Role role = new Role();
-        role.setId(1);
+        role.setId(1L);
         super.post("/role/delete", JSONObject.toJSONString(role));
     }
 
@@ -56,18 +56,18 @@ public class RoleControllerTests extends BaseTests {
     @Test
     public void update() {
         Role role = new Role();
-        role.setId(1);
+        role.setId(1L);
         role.setName("超级管理员");
-        role.setUpperId(0);
+        role.setUpperId(0L);
         List<RoleMenu> roleMenuList = new ArrayList<>();
         RoleMenu roleMenu1 = new RoleMenu();
-        roleMenu1.setMenuId(1);
+        roleMenu1.setMenuId(1L);
         roleMenuList.add(roleMenu1);
         RoleMenu roleMenu2 = new RoleMenu();
-        roleMenu1.setMenuId(2);
+        roleMenu1.setMenuId(2L);
         roleMenuList.add(roleMenu2);
         RoleMenu roleMenu3 = new RoleMenu();
-        roleMenu1.setMenuId(3);
+        roleMenu1.setMenuId(3L);
         roleMenuList.add(roleMenu3);
         role.setRoleMenuList(roleMenuList);
         super.post("/role/update", JSONObject.toJSONString(role));
@@ -76,7 +76,7 @@ public class RoleControllerTests extends BaseTests {
     @Test
     public void get1() {
         Role role = new Role();
-        role.setId(1);
+        role.setId(1L);
         super.post("/role/get", JSONObject.toJSONString(role));
     }
 

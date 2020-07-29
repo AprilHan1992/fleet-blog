@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface ValueService extends BaseService<Value> {
 
-    List<String> codeList(Integer dictId);
+    List<String> codeList(Long dictId);
 }

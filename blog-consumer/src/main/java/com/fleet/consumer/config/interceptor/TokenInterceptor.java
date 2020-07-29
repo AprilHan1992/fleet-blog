@@ -61,7 +61,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                     throw new BaseException(ResultState.ERROR, "缺少 refreshToken");
                 }
 
-                Integer userId = (Integer) redisUtil.get("refreshToken:user:" + refreshToken);
+                Long userId = (Long) redisUtil.get("refreshToken:user:" + refreshToken);
                 if (userId != null) {
                     if (CurUser.getUser() == null) {
                         User user = new User();
@@ -84,7 +84,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             throw new BaseException(ResultState.ERROR, "缺少 accessToken");
         }
 
-        Integer userId = (Integer) redisUtil.get("accessToken:user:" + accessToken);
+        Long userId = (Long) redisUtil.get("accessToken:user:" + accessToken);
         if (userId != null) {
             if (CurUser.getUser() == null) {
                 User user = new User();

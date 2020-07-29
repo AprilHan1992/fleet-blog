@@ -68,13 +68,13 @@ public class LoginController {
             return R.error("用户名被锁定");
         }
 
-        Integer userId = user.getId();
+        Long userId = user.getId();
         clearToken(userId);
         Map<String, Object> tokenMap = initToken(userId);
         return R.ok(tokenMap);
     }
 
-    public void clearToken(Integer userId) {
+    public void clearToken(Long userId) {
         String refreshToken = (String) redisUtil.get("user:refreshToken:" + userId);
         if (StringUtils.isNotEmpty(refreshToken)) {
             redisUtil.delete("refreshToken:user:" + refreshToken);
@@ -87,7 +87,7 @@ public class LoginController {
         redisUtil.delete("user:refreshToken:" + userId);
     }
 
-    public Map<String, Object> initToken(Integer userId) {
+    public Map<String, Object> initToken(Long userId) {
         Map<String, Object> tokenMap = new HashMap<>();
         String refreshToken = UUIDUtil.getUUID();
         String accessToken = UUIDUtil.getUUID();

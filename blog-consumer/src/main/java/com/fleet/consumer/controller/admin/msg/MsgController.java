@@ -41,7 +41,7 @@ public class MsgController extends BaseController<Msg> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Msg msg = new Msg();
         msg.setId(id);
         return get(msg);

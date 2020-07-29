@@ -6,26 +6,44 @@ import java.util.HashMap;
 
 /**
  * 分页信息（可以设置查询条件）
+ *
+ * @author April Han
  */
 public class Page extends HashMap<String, Object> {
 
     private static final long serialVersionUID = 8139795323126696426L;
 
-    // 请求的页数（从1开始），不设则默认为1
+    /**
+     * 请求的页数（从1开始），不设则默认为1
+     */
     public static final int PAGE_INDEX = 1;
-    // 请求的每页行数，不设则默认为20
+    /**
+     * 请求的每页行数，不设则默认为20
+     */
     public static final int PAGE_ROWS = 20;
-    // 总行数
+    /**
+     * 总行数
+     */
     public static final int TOTAL_ROWS = 0;
-    // 总页数
+    /**
+     * 总页数
+     */
     public static final int TOTAL_PAGES = 1;
-    // 是否有上一页
-    public static final boolean HAS_PREV_PAGE = false;
-    // 是否有下一页
-    public static final boolean HAS_NEXT_PAGE = false;
-    // 请求的页数的开始偏移量（从0开始），不设则默认为0
+    /**
+     * 是否有上一页
+     */
+    public static final Boolean HAS_PREV_PAGE = false;
+    /**
+     * 是否有下一页
+     */
+    public static final Boolean HAS_NEXT_PAGE = false;
+    /**
+     * 请求的页数的开始偏移量（从0开始），不设则默认为0
+     */
     public static final int FROM_PAGE_INDEX = 0;
-    // 请求的页数的结束偏移量（到0结束），不设则默认为0
+    /**
+     * 请求的页数的结束偏移量（到0结束），不设则默认为0
+     */
     public static final int TO_PAGE_INDEX = 0;
 
     public Page() {
@@ -37,7 +55,6 @@ public class Page extends HashMap<String, Object> {
         super.put("hasNextPage", HAS_NEXT_PAGE);
         super.put("fromPageIndex", FROM_PAGE_INDEX);
         super.put("toPageIndex", TO_PAGE_INDEX);
-        // 是否删除
         super.put("deleted", Deleted.NO);
     }
 

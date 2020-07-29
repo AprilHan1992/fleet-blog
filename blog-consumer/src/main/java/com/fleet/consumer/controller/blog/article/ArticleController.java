@@ -19,7 +19,7 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Article article = new Article();
         article.setId(id);
         return R.ok(articleService.get(article));

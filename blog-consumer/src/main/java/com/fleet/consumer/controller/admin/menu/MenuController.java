@@ -36,7 +36,7 @@ public class MenuController extends BaseController<Menu> {
     @PostMapping("/insert")
     public R insert(@RequestBody Menu menu) {
         if (menu.getUpperId() == null) {
-            menu.setUpperId(0);
+            menu.setUpperId(0L);
         }
         menu.setCreatorId(getUserId());
         menu.setCreateTime(new Date());
@@ -58,7 +58,7 @@ public class MenuController extends BaseController<Menu> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Menu menu = new Menu();
         menu.setId(id);
         return get(menu);

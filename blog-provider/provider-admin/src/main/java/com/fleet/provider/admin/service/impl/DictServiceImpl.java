@@ -52,9 +52,9 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
 
     @Override
     public Boolean delete(Dict dict) {
-        List<Integer> idList = dictDao.idList(dict);
+        List<Long> idList = dictDao.idList(dict);
         if (idList != null) {
-            for (Integer id : idList) {
+            for (Long id : idList) {
                 Value value = new Value();
                 value.setDictId(id);
                 valueService.delete(value);
@@ -64,8 +64,8 @@ public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictServic
     }
 
     @Override
-    public Boolean deletes(Integer[] ids) {
-        for (Integer id : ids) {
+    public Boolean deletes(Long[] ids) {
+        for (Long id : ids) {
             Value value = new Value();
             value.setDictId(id);
             valueService.delete(value);

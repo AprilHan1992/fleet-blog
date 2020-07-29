@@ -38,7 +38,7 @@ public class LogoutController {
         if (user == null) {
             return R.error("当前用户不存在");
         }
-        Integer userId = user.getId();
+        Long userId = user.getId();
         if (userId == null) {
             return R.error("当前用户不存在");
         }
@@ -46,7 +46,7 @@ public class LogoutController {
         return R.ok();
     }
 
-    public void clearToken(Integer userId) {
+    public void clearToken(Long userId) {
         String refreshToken = (String) redisUtil.get("user:refreshToken:" + userId);
         if (StringUtils.isNotEmpty(refreshToken)) {
             redisUtil.delete("refreshToken:user:" + refreshToken);

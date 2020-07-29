@@ -18,7 +18,7 @@ public class Menu extends Base {
     /**
      * 菜单id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 菜单类型（1：目录，2：菜单，3：权限标识）
@@ -73,7 +73,7 @@ public class Menu extends Base {
     /**
      * 创建人
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建人
@@ -89,7 +89,7 @@ public class Menu extends Base {
     /**
      * 修改人
      */
-    private Integer editorId;
+    private Long editorId;
 
     /**
      * 修改人
@@ -105,16 +105,16 @@ public class Menu extends Base {
     /**
      * 上一级菜单id
      */
-    private Integer upperId;
+    private Long upperId;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Menu> children;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -198,11 +198,11 @@ public class Menu extends Base {
         this.enabled = enabled;
     }
 
-    public Integer getCreatorId() {
+    public Long getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(Integer creatorId) {
+    public void setCreatorId(Long creatorId) {
         this.creatorId = creatorId;
     }
 
@@ -222,11 +222,11 @@ public class Menu extends Base {
         this.createTime = createTime;
     }
 
-    public Integer getEditorId() {
+    public Long getEditorId() {
         return editorId;
     }
 
-    public void setEditorId(Integer editorId) {
+    public void setEditorId(Long editorId) {
         this.editorId = editorId;
     }
 
@@ -246,11 +246,11 @@ public class Menu extends Base {
         this.editTime = editTime;
     }
 
-    public Integer getUpperId() {
+    public Long getUpperId() {
         return upperId;
     }
 
-    public void setUpperId(Integer upperId) {
+    public void setUpperId(Long upperId) {
         this.upperId = upperId;
     }
 

@@ -17,7 +17,7 @@ public class Msg extends Base {
     /**
      * 消息id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 消息标题
@@ -42,7 +42,7 @@ public class Msg extends Base {
     /**
      * 创建人
      */
-    private Integer creatorId;
+    private Long creatorId;
 
     /**
      * 创建人
@@ -57,11 +57,11 @@ public class Msg extends Base {
 
     private List<To> toList;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -97,11 +97,11 @@ public class Msg extends Base {
         this.state = state;
     }
 
-    public Integer getCreatorId() {
+    public Long getCreatorId() {
         return creatorId;
     }
 
-    public void setCreatorId(Integer creatorId) {
+    public void setCreatorId(Long creatorId) {
         this.creatorId = creatorId;
     }
 

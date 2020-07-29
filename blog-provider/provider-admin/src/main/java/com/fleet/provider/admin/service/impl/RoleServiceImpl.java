@@ -49,10 +49,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
     @Override
     public Boolean delete(Role role) {
-        List<Integer> idList = roleDao.idList(role);
+        List<Long> idList = roleDao.idList(role);
         if (idList != null) {
             roleDao.delete(role);
-            for (Integer id : idList) {
+            for (Long id : idList) {
                 Role r = new Role();
                 r.setUpperId(id);
                 delete(r);
@@ -62,8 +62,8 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
     }
 
     @Override
-    public Boolean deletes(Integer[] ids) {
-        for (Integer id : ids) {
+    public Boolean deletes(Long[] ids) {
+        for (Long id : ids) {
             Role role = new Role();
             role.setId(id);
             delete(role);
@@ -78,7 +78,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
         }
         List<RoleMenu> roleMenuList = role.getRoleMenuList();
         if (roleMenuList != null) {
-            List<Integer> menuIdList = roleMenuDao.menuIdList(role.getId());
+            List<Long> menuIdList = roleMenuDao.menuIdList(role.getId());
             for (RoleMenu roleMenu : roleMenuList) {
                 if (menuIdList != null) {
                     menuIdList.remove(roleMenu.getMenuId());
@@ -87,7 +87,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
                 roleMenuDao.insert(roleMenu);
             }
             if (menuIdList != null) {
-                for (Integer menuId : menuIdList) {
+                for (Long menuId : menuIdList) {
                     RoleMenu roleMenu = new RoleMenu();
                     roleMenu.setRoleId(role.getId());
                     roleMenu.setMenuId(menuId);
@@ -99,15 +99,15 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
     }
 
     @Override
-    public List<Integer> idList(Integer id) {
-        List<Integer> rList = new ArrayList<>();
+    public List<Long> idList(Long id) {
+        List<Long> rList = new ArrayList<>();
         rList.add(id);
 
         Role role = new Role();
         role.setUpperId(id);
-        List<Integer> idList = roleDao.idList(role);
+        List<Long> idList = roleDao.idList(role);
         if (idList != null) {
-            for (Integer i : idList) {
+            for (Long i : idList) {
                 rList.addAll(idList(i));
             }
         }
@@ -121,12 +121,12 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
             return tree;
         }
 
-        Map<Integer, Role> map = new HashMap<>();
+        Map<Long, Role> map = new HashMap<>();
         for (Role role : roleList) {
             map.put(role.getId(), role);
         }
 
-        for (Integer id : map.keySet()) {
+        for (Long id : map.keySet()) {
             Role role = map.get(id);
             if (map.containsKey(role.getUpperId())) {
                 Role upper = map.get(role.getUpperId());

@@ -29,10 +29,10 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 
     @Override
     public Boolean delete(Menu menu) {
-        List<Integer> idList = menuDao.idList(menu);
+        List<Long> idList = menuDao.idList(menu);
         if (idList != null && idList.size() != 0) {
             menuDao.delete(menu);
-            for (Integer id : idList) {
+            for (Long id : idList) {
                 Menu m = new Menu();
                 m.setUpperId(id);
                 delete(m);
@@ -42,8 +42,8 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
     }
 
     @Override
-    public Boolean deletes(Integer[] ids) {
-        for (Integer id : ids) {
+    public Boolean deletes(Long[] ids) {
+        for (Long id : ids) {
             Menu menu = new Menu();
             menu.setId(id);
             delete(menu);
@@ -52,15 +52,15 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
     }
 
     @Override
-    public List<Integer> idList(Integer id) {
-        List<Integer> rList = new ArrayList<>();
+    public List<Long> idList(Long id) {
+        List<Long> rList = new ArrayList<>();
         rList.add(id);
 
         Menu menu = new Menu();
         menu.setUpperId(id);
-        List<Integer> idList = menuDao.idList(menu);
+        List<Long> idList = menuDao.idList(menu);
         if (idList != null) {
-            for (Integer i : idList) {
+            for (Long i : idList) {
                 rList.addAll(idList(i));
             }
         }
@@ -74,12 +74,12 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
             return tree;
         }
 
-        Map<Integer, Menu> map = new HashMap<>();
+        Map<Long, Menu> map = new HashMap<>();
         for (Menu menu : menuList) {
             map.put(menu.getId(), menu);
         }
 
-        for (Integer id : map.keySet()) {
+        for (Long id : map.keySet()) {
             Menu menu = map.get(id);
             if (map.containsKey(menu.getUpperId())) {
                 Menu upper = map.get(menu.getUpperId());

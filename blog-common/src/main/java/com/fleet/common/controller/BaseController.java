@@ -25,7 +25,7 @@ public abstract class BaseController<T> {
         return CurUser.getUser();
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         User user = getUser();
         if (user == null) {
             return null;
@@ -50,7 +50,7 @@ public abstract class BaseController<T> {
     }
 
     @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deletes(@RequestParam Integer[] ids) {
+    public R deletes(@RequestParam Long[] ids) {
         if (!baseService().deletes(ids)) {
             return R.error();
         }

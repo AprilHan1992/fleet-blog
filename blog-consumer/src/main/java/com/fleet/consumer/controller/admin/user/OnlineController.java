@@ -40,7 +40,7 @@ public class OnlineController {
             page.setTotalRows(keyList.size());
             keyList = keyList.subList(page.getFromPageIndex(), page.getToPageIndex());
             for (String key : keyList) {
-                Integer id = (Integer) redisUtil.get(key);
+                Long id = (Long) redisUtil.get(key);
                 User user = new User();
                 user.setId(id);
                 list.add(userService.get(user));
@@ -55,7 +55,7 @@ public class OnlineController {
      * 强制退出
      */
     @GetMapping("/delete")
-    public R delete(@RequestParam("id") Integer id) {
+    public R delete(@RequestParam("id") Long id) {
         String refreshToken = (String) redisUtil.get("user:refreshToken:" + id);
         if (StringUtils.isNotEmpty(refreshToken)) {
             redisUtil.delete("refreshToken:user:" + refreshToken);
@@ -73,8 +73,8 @@ public class OnlineController {
      * 批量强制退出
      */
     @RequestMapping(value = "/deletes", method = {RequestMethod.GET, RequestMethod.POST})
-    public R deletes(@RequestParam Integer[] ids) {
-        for (Integer id : ids) {
+    public R deletes(@RequestParam Long[] ids) {
+        for (Long id : ids) {
             String refreshToken = (String) redisUtil.get("user:refreshToken:" + id);
             if (StringUtils.isNotEmpty(refreshToken)) {
                 redisUtil.delete("refreshToken:user:" + refreshToken);

@@ -116,7 +116,7 @@
         order by `sort` desc
     </select>
 
-    <select id="codeList" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="codeList" parameterType="java.lang.Long" resultType="java.lang.String">
         select `code` from `value`
         where `dict_id` = #{dictId} and `deleted` = 0
     </select>

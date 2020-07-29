@@ -16,14 +16,14 @@ public class TagControllerTests extends BaseTests {
         tag.setType(2);
         tag.setTag("测试");
         tag.setSort(0);
-        tag.setUpperId(0);
+        tag.setUpperId(0L);
         super.post("/tag/insert", JSONObject.toJSONString(tag));
     }
 
     @Test
     public void delete() {
         Tag tag = new Tag();
-        tag.setId(1);
+        tag.setId(1L);
         super.post("/tag/delete", JSONObject.toJSONString(tag));
     }
 
@@ -44,7 +44,7 @@ public class TagControllerTests extends BaseTests {
     @Test
     public void update() {
         Tag tag = new Tag();
-        tag.setId(1);
+        tag.setId(1L);
         tag.setType(2);
         tag.setTag("测试");
         super.post("/tag/update", JSONObject.toJSONString(tag));
@@ -53,7 +53,7 @@ public class TagControllerTests extends BaseTests {
     @Test
     public void get1() {
         Tag tag = new Tag();
-        tag.setId(1);
+        tag.setId(1L);
         super.post("/tag/get", JSONObject.toJSONString(tag));
     }
 

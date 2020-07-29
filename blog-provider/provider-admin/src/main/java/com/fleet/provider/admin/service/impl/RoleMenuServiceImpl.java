@@ -60,17 +60,17 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
     }
 
     @Override
-    public List<Integer> menuIdList(Integer roleId) {
+    public List<Long> menuIdList(Long roleId) {
         return roleMenuDao.menuIdList(roleId);
     }
 
     @Override
-    public List<Menu> menuList(Integer roleId) {
+    public List<Menu> menuList(Long roleId) {
         return roleMenuDao.menuList(roleId);
     }
 
     @Override
-    public List<String> permitList(Integer roleId) {
+    public List<String> permitList(Long roleId) {
         return roleMenuDao.permitList(roleId);
     }
 }

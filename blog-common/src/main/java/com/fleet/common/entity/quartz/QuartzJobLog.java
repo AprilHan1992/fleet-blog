@@ -15,12 +15,12 @@ public class QuartzJobLog extends Base {
     /**
      * 日志id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 任务id
      */
-    private Integer jobId;
+    private Long jobId;
 
     /**
      * 定时器名称
@@ -68,19 +68,19 @@ public class QuartzJobLog extends Base {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getJobId() {
+    public Long getJobId() {
         return jobId;
     }
 
-    public void setJobId(Integer jobId) {
+    public void setJobId(Long jobId) {
         this.jobId = jobId;
     }
 

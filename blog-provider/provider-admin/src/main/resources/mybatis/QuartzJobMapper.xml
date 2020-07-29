@@ -121,7 +121,7 @@
         </where>
     </select>
 
-    <select id="idList" resultType="java.lang.Integer">
+    <select id="idList" resultType="java.lang.Long">
         select `id` from `quartz_job`
         <where>
             <if test="id != null">and `id` = #{id}</if>

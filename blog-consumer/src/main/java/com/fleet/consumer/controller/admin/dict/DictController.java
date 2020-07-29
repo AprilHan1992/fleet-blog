@@ -62,7 +62,7 @@ public class DictController extends BaseController<Dict> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Dict dict = new Dict();
         dict.setId(id);
         return get(dict);

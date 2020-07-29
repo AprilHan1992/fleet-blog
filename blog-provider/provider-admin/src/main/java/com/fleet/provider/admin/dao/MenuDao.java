@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface MenuDao extends BaseDao<Menu> {
 
-    List<Integer> idList(Menu menu);
+    List<Long> idList(Menu menu);
 }

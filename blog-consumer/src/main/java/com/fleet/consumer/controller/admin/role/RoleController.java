@@ -42,7 +42,7 @@ public class RoleController extends BaseController<Role> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Role role = new Role();
         role.setId(id);
         return get(role);

@@ -30,7 +30,7 @@ public class UserInterceptor implements HandlerInterceptor {
             refreshToken = request.getParameter("refreshToken");
         }
         if (StringUtils.isNotEmpty(refreshToken)) {
-            Integer userId = (Integer) redisUtil.get("refreshToken:user:" + refreshToken);
+            Long userId = (Long) redisUtil.get("refreshToken:user:" + refreshToken);
             if (userId != null) {
                 if (CurUser.getUser() == null) {
                     User user = new User();
@@ -45,7 +45,7 @@ public class UserInterceptor implements HandlerInterceptor {
                 accessToken = request.getParameter("accessToken");
             }
             if (StringUtils.isNotEmpty(accessToken)) {
-                Integer userId = (Integer) redisUtil.get("accessToken:user:" + accessToken);
+                Long userId = (Long) redisUtil.get("accessToken:user:" + accessToken);
                 if (userId != null) {
                     if (CurUser.getUser() == null) {
                         User user = new User();

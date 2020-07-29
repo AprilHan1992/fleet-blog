@@ -47,7 +47,7 @@ public class BaseTests {
     @Resource
     private RedisUtil redisUtil;
 
-    private Integer userId;
+    private Long userId;
 
     private String accessToken;
 
@@ -146,7 +146,7 @@ public class BaseTests {
             throw new BaseException("test fail：测试用户名不存在");
         }
 
-        Integer userId = user.getId();
+        Long userId = user.getId();
         String refreshToken = (String) redisUtil.get("user:refreshToken:" + userId);
         String accessToken;
         if (StringUtils.isNotEmpty(refreshToken)) {

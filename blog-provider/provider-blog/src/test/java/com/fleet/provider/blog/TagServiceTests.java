@@ -33,28 +33,28 @@ public class TagServiceTests {
     @Test
     public void delete() {
         Tag tag = new Tag();
-        tag.setId(1);
+        tag.setId(1L);
         tagService.delete(tag);
     }
 
     @Test
     public void deletes() {
         Tag tag = new Tag();
-        tag.setId(1);
+        tag.setId(1L);
         tag.setTag("修改类型");
         tagService.update(tag);
     }
 
     @Test
     public void update() {
-        Integer[] ids = {1, 2, 3};
+        Long[] ids = {1L, 2L, 3L};
         tagService.deletes(ids);
     }
 
     @Test
     public void get() {
         Tag tag = new Tag();
-        tag.setId(1);
+        tag.setId(1L);
         tag = tagService.get(tag);
         System.out.println(JSON.toJSONString(tag));
     }

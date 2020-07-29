@@ -29,7 +29,7 @@ public class MailGroupController extends BaseController<MailGroup> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         MailGroup mailGroup = new MailGroup();
         mailGroup.setId(id);
         return R.ok(mailGroupService.get(mailGroup));

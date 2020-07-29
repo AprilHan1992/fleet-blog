@@ -10,5 +10,5 @@ public interface TagService extends BaseService<Tag> {
     /**
      * 获取所有 tagId 集合（包括）
      */
-    List<Integer> idList(Integer id);
+    List<Long> idList(Long id);
 }

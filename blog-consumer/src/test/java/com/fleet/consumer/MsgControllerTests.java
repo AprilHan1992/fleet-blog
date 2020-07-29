@@ -32,7 +32,7 @@ public class MsgControllerTests extends BaseTests {
     @Test
     public void delete() {
         Msg msg = new Msg();
-        msg.setId(1);
+        msg.setId(1L);
         super.post("/msg/delete", JSONObject.toJSONString(msg));
     }
 
@@ -53,7 +53,7 @@ public class MsgControllerTests extends BaseTests {
     @Test
     public void update() {
         Msg msg = new Msg();
-        msg.setId(1);
+        msg.setId(1L);
         msg.setTitle("消息标题");
         msg.setExcerpt("消息摘要");
         msg.setUrl("http://www.fleetsoft.com");
@@ -70,7 +70,7 @@ public class MsgControllerTests extends BaseTests {
     @Test
     public void get1() {
         Msg msg = new Msg();
-        msg.setId(1);
+        msg.setId(1L);
         super.post("/msg/get", JSONObject.toJSONString(msg));
     }
 

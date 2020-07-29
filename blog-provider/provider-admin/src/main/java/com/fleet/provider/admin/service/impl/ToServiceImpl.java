@@ -59,7 +59,7 @@ public class ToServiceImpl extends BaseServiceImpl<To> implements ToService {
     }
 
     @Override
-    public List<Integer> toIdList(Integer msgId) {
+    public List<Integer> toIdList(Long msgId) {
         return toDao.toIdList(msgId);
     }
 }

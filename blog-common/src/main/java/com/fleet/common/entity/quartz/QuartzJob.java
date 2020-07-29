@@ -17,7 +17,7 @@ public class QuartzJob extends Base {
     /**
      * 定时器id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 定时器名称
@@ -54,11 +54,11 @@ public class QuartzJob extends Base {
      */
     private String remark;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

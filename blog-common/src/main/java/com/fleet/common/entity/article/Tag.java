@@ -12,7 +12,7 @@ public class Tag extends Base {
     /**
      * 分类/标签id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 类型（1：分类，2：标签）
@@ -32,13 +32,13 @@ public class Tag extends Base {
     /**
      * 上一级分类/标签id
      */
-    private Integer upperId;
+    private Long upperId;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -66,11 +66,11 @@ public class Tag extends Base {
         this.sort = sort;
     }
 
-    public Integer getUpperId() {
+    public Long getUpperId() {
         return upperId;
     }
 
-    public void setUpperId(Integer upperId) {
+    public void setUpperId(Long upperId) {
         this.upperId = upperId;
     }
 }

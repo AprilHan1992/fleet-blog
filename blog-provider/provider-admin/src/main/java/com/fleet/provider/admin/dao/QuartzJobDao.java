@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface QuartzJobDao extends BaseDao<QuartzJob> {
 
-    List<Integer> idList(QuartzJob quartzJob);
+    List<Long> idList(QuartzJob quartzJob);
 }

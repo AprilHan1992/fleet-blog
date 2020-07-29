@@ -14,12 +14,12 @@ public class To extends Base {
     /**
      * 消息接收id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 消息id
      */
-    private Integer msgId;
+    private Long msgId;
 
     /**
      * 消息接收人
@@ -36,19 +36,19 @@ public class To extends Base {
      */
     private Date readTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getMsgId() {
+    public Long getMsgId() {
         return msgId;
     }
 
-    public void setMsgId(Integer msgId) {
+    public void setMsgId(Long msgId) {
         this.msgId = msgId;
     }
 

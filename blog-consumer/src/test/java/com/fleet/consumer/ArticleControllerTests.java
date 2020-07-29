@@ -14,7 +14,7 @@ public class ArticleControllerTests extends BaseTests {
     public void insert() {
         Article article = new Article();
         article.setTitle("测试文章标题");
-        article.setTagId(1);
+        article.setTagId(1L);
         article.setTags("测试，文章");
         article.setContent("测试文章内容");
         article.setState(1);
@@ -24,7 +24,7 @@ public class ArticleControllerTests extends BaseTests {
     @Test
     public void delete() {
         Article article = new Article();
-        article.setId(1);
+        article.setId(1L);
         super.post("/article/delete", JSONObject.toJSONString(article));
     }
 
@@ -45,9 +45,9 @@ public class ArticleControllerTests extends BaseTests {
     @Test
     public void update() {
         Article article = new Article();
-        article.setId(1);
+        article.setId(1L);
         article.setTitle("测试文章标题");
-        article.setTagId(1);
+        article.setTagId(1L);
         article.setTags("测试，文章");
         article.setContent("测试，文章");
         article.setState(1);
@@ -57,7 +57,7 @@ public class ArticleControllerTests extends BaseTests {
     @Test
     public void get1() {
         Article article = new Article();
-        article.setId(1);
+        article.setId(1L);
         super.post("/article/get", JSONObject.toJSONString(article));
     }
 

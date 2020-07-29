@@ -29,7 +29,7 @@ public class QuartzJobLogController extends BaseController<QuartzJobLog> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         QuartzJobLog quartzJobLog = new QuartzJobLog();
         quartzJobLog.setId(id);
         return get(quartzJobLog);

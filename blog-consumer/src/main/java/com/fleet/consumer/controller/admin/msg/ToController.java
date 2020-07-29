@@ -29,7 +29,7 @@ public class ToController extends BaseController<To> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         To to = new To();
         to.setId(id);
         return get(to);

@@ -99,7 +99,7 @@
         </where>
     </select>
 
-    <select id="toIdList" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    <select id="toIdList" parameterType="java.lang.Long" resultType="java.lang.Long">
         select `to` from `to_id`
         where `msg_id` = #{msgId} and `deleted` = 0
     </select>

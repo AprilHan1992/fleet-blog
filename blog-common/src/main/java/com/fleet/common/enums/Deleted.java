@@ -1,5 +1,10 @@
 package com.fleet.common.enums;
 
+/**
+ * 是否删除
+ *
+ * @author April Han
+ */
 public final class Deleted {
 
     /**

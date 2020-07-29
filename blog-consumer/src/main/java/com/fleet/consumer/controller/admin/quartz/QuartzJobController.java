@@ -51,7 +51,7 @@ public class QuartzJobController extends BaseController<QuartzJob> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         QuartzJob quartzJob = new QuartzJob();
         quartzJob.setId(id);
         return R.ok(get(quartzJob));
@@ -64,7 +64,7 @@ public class QuartzJobController extends BaseController<QuartzJob> {
      * @return
      */
     @GetMapping("/run/{id}")
-    public R run(@PathVariable("id") Integer id) {
+    public R run(@PathVariable("id") Long id) {
         quartzJobService.run(id);
         return R.ok();
     }
@@ -76,7 +76,7 @@ public class QuartzJobController extends BaseController<QuartzJob> {
      * @return
      */
     @GetMapping("/pause/{id}")
-    public R pause(@PathVariable("id") Integer id) {
+    public R pause(@PathVariable("id") Long id) {
         QuartzJob quartzJob = new QuartzJob();
         quartzJob.setId(id);
         quartzJob = quartzJobService.get(quartzJob);
@@ -94,7 +94,7 @@ public class QuartzJobController extends BaseController<QuartzJob> {
      * @return
      */
     @GetMapping("/resume/{id}")
-    public R resume(@PathVariable("id") Integer id) {
+    public R resume(@PathVariable("id") Long id) {
         QuartzJob quartzJob = new QuartzJob();
         quartzJob.setId(id);
         quartzJob = quartzJobService.get(quartzJob);

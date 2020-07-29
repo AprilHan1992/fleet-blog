@@ -27,11 +27,11 @@ public class ArticleServiceTests {
     public void insert() {
         Article article = new Article();
         article.setTitle("测试标题");
-        article.setTagId(1);
+        article.setTagId(1L);
         article.setContent("测试内容");
         article.setTags("测试,内容");
         article.setState(1);
-        article.setCreatorId(1);
+        article.setCreatorId(1L);
         article.setCreateTime(new Date());
         articleService.insert(article);
     }
@@ -39,20 +39,20 @@ public class ArticleServiceTests {
     @Test
     public void delete() {
         Article article = new Article();
-        article.setId(1);
+        article.setId(1L);
         articleService.delete(article);
     }
 
     @Test
     public void deletes() {
-        Integer[] ids = {1, 2, 3};
+        Long[] ids = {1L, 2L, 3L};
         articleService.deletes(ids);
     }
 
     @Test
     public void update() {
         Article article = new Article();
-        article.setId(1);
+        article.setId(1L);
         article.setTitle("修改标题");
         articleService.update(article);
     }
@@ -60,7 +60,7 @@ public class ArticleServiceTests {
     @Test
     public void get() {
         Article article = new Article();
-        article.setId(1);
+        article.setId(1L);
         article = articleService.get(article);
         System.out.println(JSON.toJSONString(article));
     }

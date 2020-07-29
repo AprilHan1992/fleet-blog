@@ -40,7 +40,7 @@ public class UserDeptController extends BaseController<UserDept> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         UserDept userDept = new UserDept();
         userDept.setId(id);
         return get(userDept);

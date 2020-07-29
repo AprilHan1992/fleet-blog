@@ -56,7 +56,7 @@ public class UserRoleController extends BaseController<UserRole> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         UserRole userRole = new UserRole();
         userRole.setId(id);
         return get(userRole);

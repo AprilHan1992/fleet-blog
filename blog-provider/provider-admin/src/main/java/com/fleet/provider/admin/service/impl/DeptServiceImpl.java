@@ -42,10 +42,10 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
 
     @Override
     public Boolean delete(Dept dept) {
-        List<Integer> idList = deptDao.idList(dept);
+        List<Long> idList = deptDao.idList(dept);
         if (idList != null && idList.size() != 0) {
             deptDao.delete(dept);
-            for (Integer id : idList) {
+            for (Long id : idList) {
                 Dept d = new Dept();
                 d.setUpperId(id);
                 delete(d);
@@ -55,8 +55,8 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     }
 
     @Override
-    public Boolean deletes(Integer[] ids) {
-        for (Integer id : ids) {
+    public Boolean deletes(Long[] ids) {
+        for (Long id : ids) {
             Dept dept = new Dept();
             dept.setId(id);
             delete(dept);
@@ -65,15 +65,15 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     }
 
     @Override
-    public List<Integer> idList(Integer id) {
-        List<Integer> rList = new ArrayList<>();
+    public List<Long> idList(Long id) {
+        List<Long> rList = new ArrayList<>();
         rList.add(id);
 
         Dept dept = new Dept();
         dept.setUpperId(id);
-        List<Integer> idList = deptDao.idList(dept);
+        List<Long> idList = deptDao.idList(dept);
         if (idList != null) {
-            for (Integer i : idList) {
+            for (Long i : idList) {
                 rList.addAll(idList(i));
             }
         }
@@ -81,16 +81,16 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     }
 
     @Override
-    public Integer getId(String names) {
+    public Long getId(String names) {
         if (StringUtils.isEmpty(names)) {
             return null;
         }
         String[] ns = names.split("/");
-        List<Integer> upperIds = new ArrayList<>();
-        upperIds.add(0);
+        List<Long> upperIds = new ArrayList<>();
+        upperIds.add(0L);
         for (String n : ns) {
-            List<Integer> newUpperIds = new ArrayList<>();
-            for (Integer upperId : upperIds) {
+            List<Long> newUpperIds = new ArrayList<>();
+            for (Long upperId : upperIds) {
                 Map<String, Object> map = new HashMap<>();
                 map.put("deleted", Deleted.NO);
                 map.put("upperId", upperId);
@@ -114,7 +114,7 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     }
 
     @Override
-    public String getNames(Integer id) {
+    public String getNames(Long id) {
         String names = "";
         if (id == 0) {
             return names;
@@ -140,12 +140,12 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
             return tree;
         }
 
-        Map<Integer, Dept> map = new HashMap<>();
+        Map<Long, Dept> map = new HashMap<>();
         for (Dept dept : deptList) {
             map.put(dept.getId(), dept);
         }
 
-        for (Integer id : map.keySet()) {
+        for (Long id : map.keySet()) {
             Dept dept = map.get(id);
             if (map.containsKey(dept.getUpperId())) {
                 Dept upper = map.get(dept.getUpperId());

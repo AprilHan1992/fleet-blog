@@ -14,5 +14,5 @@ import java.util.List;
 @Repository
 public interface ToDao extends BaseDao<To> {
 
-    List<Integer> toIdList(Integer msgId);
+    List<Integer> toIdList(Long msgId);
 }

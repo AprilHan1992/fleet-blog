@@ -62,27 +62,27 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole> implements Us
     }
 
     @Override
-    public List<Integer> roleIdList(Integer userId) {
+    public List<Long> roleIdList(Long userId) {
         return userRoleDao.roleIdList(userId);
     }
 
     @Override
-    public List<Role> roleList(Integer userId) {
+    public List<Role> roleList(Long userId) {
         return userRoleDao.roleList(userId);
     }
 
     @Override
-    public List<Menu> menuList(Integer userId) {
+    public List<Menu> menuList(Long userId) {
         return userRoleDao.menuList(userId);
     }
 
     @Override
-    public List<String> permitList(Integer userId) {
+    public List<String> permitList(Long userId) {
         return userRoleDao.permitList(userId);
     }
 
     @Override
-    public Boolean hasRoles(Integer userId, String[] roles) {
+    public Boolean hasRoles(Long userId, String[] roles) {
         if (roles != null && roles.length != 0) {
             List<String> roleNameList = userRoleDao.roleNameList(userId);
             if (roleNameList != null && roleNameList.size() != 0) {
@@ -96,7 +96,7 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole> implements Us
     }
 
     @Override
-    public Boolean hasPermits(Integer userId, String[] permits) {
+    public Boolean hasPermits(Long userId, String[] permits) {
         if (permits != null && permits.length != 0) {
             List<String> permitList = userRoleDao.permitList(userId);
             if (permitList != null && permitList.size() != 0) {

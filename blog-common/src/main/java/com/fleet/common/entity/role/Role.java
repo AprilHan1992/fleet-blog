@@ -15,7 +15,7 @@ public class Role extends Base {
     /**
      * 角色id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 角色名称
@@ -30,7 +30,7 @@ public class Role extends Base {
     /**
      * 上一级角色id
      */
-    private Integer upperId;
+    private Long upperId;
 
     private List<RoleMenu> roleMenuList;
 
@@ -38,11 +38,11 @@ public class Role extends Base {
 
     private List<Role> children;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -62,11 +62,11 @@ public class Role extends Base {
         this.sort = sort;
     }
 
-    public Integer getUpperId() {
+    public Long getUpperId() {
         return upperId;
     }
 
-    public void setUpperId(Integer upperId) {
+    public void setUpperId(Long upperId) {
         this.upperId = upperId;
     }
 

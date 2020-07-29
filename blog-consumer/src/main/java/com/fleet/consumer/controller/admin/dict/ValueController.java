@@ -29,7 +29,7 @@ public class ValueController extends BaseController<Value> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Value value = new Value();
         value.setId(id);
         return get(value);

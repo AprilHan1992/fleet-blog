@@ -19,7 +19,7 @@ public class TagController {
     private TagService tagService;
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Tag tag = new Tag();
         tag.setId(id);
         return R.ok(tagService.get(tag));

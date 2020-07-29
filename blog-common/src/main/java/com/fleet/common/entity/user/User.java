@@ -21,7 +21,7 @@ public class User extends Base {
     /**
      * 用户id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 用户名（登录使用）
@@ -69,11 +69,11 @@ public class User extends Base {
 
     private List<Menu> menuList;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

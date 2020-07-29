@@ -21,7 +21,7 @@ public class MailGroupControllerTests extends BaseTests {
     @Test
     public void delete() {
         MailGroup mailGroup = new MailGroup();
-        mailGroup.setId(1);
+        mailGroup.setId(1L);
         super.post("/mail/group/delete", JSONObject.toJSONString(mailGroup));
     }
 
@@ -42,7 +42,7 @@ public class MailGroupControllerTests extends BaseTests {
     @Test
     public void update() {
         MailGroup mailGroup = new MailGroup();
-        mailGroup.setId(1);
+        mailGroup.setId(1L);
         mailGroup.setName("项目部");
         super.post("/mail/group/update", JSONObject.toJSONString(mailGroup));
     }
@@ -50,7 +50,7 @@ public class MailGroupControllerTests extends BaseTests {
     @Test
     public void get1() {
         MailGroup mailGroup = new MailGroup();
-        mailGroup.setId(1);
+        mailGroup.setId(1L);
         super.post("/mail/group/get", JSONObject.toJSONString(mailGroup));
     }
 

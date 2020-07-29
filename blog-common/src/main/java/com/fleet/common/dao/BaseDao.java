@@ -30,7 +30,7 @@ public interface BaseDao<T> {
      * @param ids
      * @return
      */
-    Integer deletes(Integer[] ids);
+    Integer deletes(Long[] ids);
 
     /**
      * 修改

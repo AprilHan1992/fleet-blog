@@ -52,7 +52,7 @@ public class ArticleController extends BaseController<Article> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Article article = new Article();
         article.setId(id);
         return get(article);

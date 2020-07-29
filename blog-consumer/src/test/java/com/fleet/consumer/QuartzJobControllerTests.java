@@ -35,7 +35,7 @@ public class QuartzJobControllerTests extends BaseTests {
     @Test
     public void delete() {
         QuartzJob quartzJob = new QuartzJob();
-        quartzJob.setId(1);
+        quartzJob.setId(1L);
         super.post("/quartz/job/delete", JSONObject.toJSONString(quartzJob));
     }
 
@@ -56,7 +56,7 @@ public class QuartzJobControllerTests extends BaseTests {
     @Test
     public void update() {
         QuartzJob quartzJob = new QuartzJob();
-        quartzJob.setId(1);
+        quartzJob.setId(1L);
         quartzJob.setJobName("测试");
         quartzJob.setBeanName("testTask");
         quartzJob.setMethodName("run");
@@ -69,7 +69,7 @@ public class QuartzJobControllerTests extends BaseTests {
     @Test
     public void get1() {
         QuartzJob quartzJob = new QuartzJob();
-        quartzJob.setId(1);
+        quartzJob.setId(1L);
         super.post("/quartz/job/get", JSONObject.toJSONString(quartzJob));
     }
 

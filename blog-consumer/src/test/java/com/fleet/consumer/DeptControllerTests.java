@@ -14,14 +14,14 @@ public class DeptControllerTests extends BaseTests {
     public void insert() {
         Dept dept = new Dept();
         dept.setName("项目一部一科");
-        dept.setUpperId(2);
+        dept.setUpperId(2L);
         super.post("/dept/insert", JSONObject.toJSONString(dept));
     }
 
     @Test
     public void delete() {
         Dept dept = new Dept();
-        dept.setId(1);
+        dept.setId(1L);
         super.post("/dept/delete", JSONObject.toJSONString(dept));
     }
 
@@ -42,7 +42,7 @@ public class DeptControllerTests extends BaseTests {
     @Test
     public void update() {
         Dept dept = new Dept();
-        dept.setId(1);
+        dept.setId(1L);
         dept.setName("项目部");
         super.post("/dept/update", JSONObject.toJSONString(dept));
     }
@@ -50,7 +50,7 @@ public class DeptControllerTests extends BaseTests {
     @Test
     public void get1() {
         Dept dept = new Dept();
-        dept.setId(1);
+        dept.setId(1L);
         super.post("/dept/get", JSONObject.toJSONString(dept));
     }
 

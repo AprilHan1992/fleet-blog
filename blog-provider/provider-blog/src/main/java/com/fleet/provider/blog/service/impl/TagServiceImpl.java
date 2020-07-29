@@ -27,10 +27,10 @@ public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
 
     @Override
     public Boolean delete(Tag tag) {
-        List<Integer> idList = tagDao.idList(tag);
+        List<Long> idList = tagDao.idList(tag);
         if (idList != null && idList.size() != 0) {
             tagDao.delete(tag);
-            for (Integer id : idList) {
+            for (Long id : idList) {
                 Tag t = new Tag();
                 t.setUpperId(id);
                 delete(t);
@@ -40,8 +40,8 @@ public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
     }
 
     @Override
-    public Boolean deletes(Integer[] ids) {
-        for (Integer id : ids) {
+    public Boolean deletes(Long[] ids) {
+        for (Long id : ids) {
             Tag tag = new Tag();
             tag.setId(id);
             delete(tag);
@@ -50,15 +50,15 @@ public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
     }
 
     @Override
-    public List<Integer> idList(Integer id) {
-        List<Integer> rList = new ArrayList<>();
+    public List<Long> idList(Long id) {
+        List<Long> rList = new ArrayList<>();
         rList.add(id);
 
         Tag tag = new Tag();
         tag.setUpperId(id);
-        List<Integer> idList = tagDao.idList(tag);
+        List<Long> idList = tagDao.idList(tag);
         if (idList != null) {
-            for (Integer i : idList) {
+            for (Long i : idList) {
                 rList.addAll(idList(i));
             }
         }

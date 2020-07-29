@@ -42,7 +42,7 @@ public class RoleMenuController extends BaseController<RoleMenu> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         RoleMenu roleMenu = new RoleMenu();
         roleMenu.setId(id);
         return get(roleMenu);
@@ -103,12 +103,12 @@ public class RoleMenuController extends BaseController<RoleMenu> {
     }
 
     @GetMapping("/menuList")
-    public R menuList(@RequestParam Integer roleId) {
+    public R menuList(@RequestParam Long roleId) {
         return R.ok(roleMenuService.menuList(roleId));
     }
 
     @GetMapping("/permitList")
-    public R permitList(@RequestParam Integer roleId) {
+    public R permitList(@RequestParam Long roleId) {
         return R.ok(roleMenuService.permitList(roleId));
     }
 }

@@ -113,26 +113,26 @@
         </where>
     </select>
 
-    <select id="roleIdList" resultType="java.lang.Integer">
+    <select id="roleIdList" resultType="java.lang.Long">
         select `role_id` from `user_role`
         where `user_id` = #{userId} and `deleted` = 0
     </select>
 
-    <select id="roleList" parameterType="java.lang.Integer" resultMap="RoleResultMap">
+    <select id="roleList" parameterType="java.lang.Long" resultMap="RoleResultMap">
 		select r.`id`, r.`name`, r.`sort`, r.`upper_id`, r.`deleted`
 		from `user_role` as ur
 		left join `role` as r on r.`id` = ur.`role_id`
 		where ur.`user_id` = #{userId} and ur.`deleted` = 0 and r.`deleted` = 0
 	</select>
 
-    <select id="roleNameList" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="roleNameList" parameterType="java.lang.Long" resultType="java.lang.String">
 		select r.`name`
 		from `user_role` as ur
 		left join `role` as r on r.`id` = ur.`role_id`
 		where ur.`user_id` = #{userId} and ur.`deleted` = 0 and r.`deleted` = 0
 	</select>
 
-    <select id="menuList" parameterType="java.lang.Integer" resultMap="MenuResultMap">
+    <select id="menuList" parameterType="java.lang.Long" resultMap="MenuResultMap">
 		select m.`id`, m.`type`, m.`name`, m.`icon`, m.`desc`, m.`href`, m.`target`, m.`permit`, m.`sort`, m.`opened`, m.`enabled`, m.`creator_id`, m.`create_time`, m.`editor_id`, m.`edit_time`, m.`upper_id`, m.`deleted`
 		from `menu` as m
 		left join `role_menu` as rm on rm.`menu_id` = m.`id`
@@ -140,7 +140,7 @@
 		where m.`deleted` = 0 and m.`enabled` = 1 and (m.`type` = 1 or m.`type` = 2) and ((ur.user_id = #{userId} and ur.deleted = 0 and rm.deleted = 0) or m.opened = 1)
 	</select>
 
-    <select id="permitList" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="permitList" parameterType="java.lang.Long" resultType="java.lang.String">
 		select m.`permit`
 		from `menu` as m
 		left join `role_menu` as rm on rm.`menu_id` = m.`id`

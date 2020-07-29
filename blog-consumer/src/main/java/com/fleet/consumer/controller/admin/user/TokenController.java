@@ -37,7 +37,7 @@ public class TokenController {
             return R.error("缺少 refreshToken");
         }
 
-        Integer userId = (Integer) redisUtil.get("refreshToken:user:" + refreshToken);
+        Long userId = (Long) redisUtil.get("refreshToken:user:" + refreshToken);
         if (userId == null) {
             throw new BaseException("refreshToken 无效或已过期");
         }

@@ -16,13 +16,13 @@ import java.util.List;
 @Repository
 public interface UserRoleDao extends BaseDao<UserRole> {
 
-    List<Integer> roleIdList(Integer userId);
+    List<Long> roleIdList(Long userId);
 
-    List<Role> roleList(Integer userId);
+    List<Role> roleList(Long userId);
 
-    List<String> roleNameList(Integer userId);
+    List<String> roleNameList(Long userId);
 
-    List<Menu> menuList(Integer userId);
+    List<Menu> menuList(Long userId);
 
-    List<String> permitList(Integer userId);
+    List<String> permitList(Long userId);
 }

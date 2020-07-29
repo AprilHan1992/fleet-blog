@@ -28,7 +28,7 @@
 //        Dict dict = new Dict();
 //        dict.setName("项目一部");
 //        dict.setUpperId(1);
-//        dict.setCreatorId(1);
+//        dict.setCreatorId(1L);
 //        dict.setCreateTime(new Date());
 //        dictService.insert(dict);
 //    }
@@ -36,20 +36,20 @@
 //    @Test
 //    public void delete() {
 //        Dict dict = new Dict();
-//        dict.setId(1);
+//        dict.setId(1L);
 //        dictService.delete(dict);
 //    }
 //
 //    @Test
 //    public void deletes() {
-//        Integer[] ids = {1, 2, 3};
+//        Long[] ids = {1L, 2L, 3L};
 //        dictService.deletes(ids);
 //    }
 //
 //    @Test
 //    public void update() {
 //        Dict dict = new Dict();
-//        dict.setId(1);
+//        dict.setId(1L);
 //        dict.setName("修改项目部");
 //        dictService.update(dict);
 //    }
@@ -57,7 +57,7 @@
 //    @Test
 //    public void get() {
 //        Dict dict = new Dict();
-//        dict.setId(3);
+//        dict.setId(3L);
 //        dict = dictService.get(dict);
 //        System.out.println(JSON.toJSONString(dict));
 //    }
@@ -79,14 +79,14 @@
 //
 //    @Test
 //    public void dictId() {
-//        Integer dictId = dictService.getId("项目部/项目一部");
+//        Long dictId = dictService.getId("项目部/项目一部");
 //        System.out.println(JSON.toJSONString(dictId));
 //    }
 //
 //
 //    @Test
 //    public void dictIdList() {
-//        List<Integer> list = dictService.idList(1);
+//        List<Integer> list = dictService.idList(1L);
 //        System.out.println(JSON.toJSONString(list));
 //    }
 //}

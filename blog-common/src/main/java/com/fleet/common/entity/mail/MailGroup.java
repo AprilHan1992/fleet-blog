@@ -9,7 +9,7 @@ public class MailGroup extends Base {
     /**
      * 邮箱组id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 邮箱组名称
@@ -21,11 +21,11 @@ public class MailGroup extends Base {
      */
     private String tos;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

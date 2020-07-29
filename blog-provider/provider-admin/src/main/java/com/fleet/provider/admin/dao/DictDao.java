@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface DictDao extends BaseDao<Dict> {
 
-    List<Integer> idList(Dict dict);
+    List<Long> idList(Dict dict);
 
     String getDefaultValue(String group);
 

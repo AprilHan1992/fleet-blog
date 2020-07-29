@@ -19,14 +19,14 @@ public class MenuControllerTests extends BaseTests {
         menu.setName("工具");
         menu.setOpened(Opened.YES);
         menu.setEnabled(Enabled.YES);
-        menu.setUpperId(0);
+        menu.setUpperId(0L);
         super.post("/menu/insert", JSONObject.toJSONString(menu));
     }
 
     @Test
     public void delete() {
         Menu menu = new Menu();
-        menu.setId(1);
+        menu.setId(1L);
         super.post("/menu/delete", JSONObject.toJSONString(menu));
     }
 
@@ -47,19 +47,19 @@ public class MenuControllerTests extends BaseTests {
     @Test
     public void update() {
         Menu menu = new Menu();
-        menu.setId(1);
+        menu.setId(1L);
         menu.setType(1);
         menu.setName("工具");
         menu.setOpened(Opened.YES);
         menu.setEnabled(Enabled.YES);
-        menu.setUpperId(0);
+        menu.setUpperId(0L);
         super.post("/menu/update", JSONObject.toJSONString(menu));
     }
 
     @Test
     public void get1() {
         Menu menu = new Menu();
-        menu.setId(1);
+        menu.setId(1L);
         super.post("/menu/get", JSONObject.toJSONString(menu));
     }
 

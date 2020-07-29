@@ -12,12 +12,12 @@ public class Value extends Base {
     /**
      * 字典值id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 字典id
      */
-    private Integer dictId;
+    private Long dictId;
 
     /**
      * 字典标签
@@ -44,19 +44,19 @@ public class Value extends Base {
      */
     private Integer isDefault;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getDictId() {
+    public Long getDictId() {
         return dictId;
     }
 
-    public void setDictId(Integer dictId) {
+    public void setDictId(Long dictId) {
         this.dictId = dictId;
     }
 

@@ -104,7 +104,7 @@ public class UserController extends BaseController<User> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         User user = new User();
         user.setId(id);
         return get(user);
@@ -135,7 +135,7 @@ public class UserController extends BaseController<User> {
     @PostMapping("/listPage")
     public PageUtil<User> listPage(@RequestBody Page page) {
         if (page.containsKey("deptId") && page.get("deptId") != null) {
-            List<Integer> deptIdList = deptService.idList((Integer) page.get("deptId"));
+            List<Long> deptIdList = deptService.idList((Long) page.get("deptId"));
             page.remove("deptId");
             page.put("deptIdList", deptIdList);
         }
@@ -162,7 +162,7 @@ public class UserController extends BaseController<User> {
 
     @RequestMapping("/roleList")
     public R roleList() {
-        Integer userId = getUserId();
+        Long userId = getUserId();
         if (userId == null) {
             return R.ok(new ArrayList<>());
         }
@@ -171,7 +171,7 @@ public class UserController extends BaseController<User> {
 
     @RequestMapping("/menuList")
     public R menuList() {
-        Integer userId = getUserId();
+        Long userId = getUserId();
         if (userId == null) {
             return R.ok(new ArrayList<>());
         }
@@ -180,7 +180,7 @@ public class UserController extends BaseController<User> {
 
     @RequestMapping("/permitList")
     public R permitList() {
-        Integer id = getUserId();
+        Long id = getUserId();
         if (id == null) {
             return R.ok(new ArrayList<>());
         }
@@ -188,12 +188,12 @@ public class UserController extends BaseController<User> {
     }
 
     @RequestMapping("/hasRoles")
-    public Boolean hasRoles(Integer id, String[] roles) {
+    public Boolean hasRoles(Long id, String[] roles) {
         return userRoleService.hasRoles(id, roles);
     }
 
     @RequestMapping("/hasPermits")
-    public Boolean hasPermits(Integer id, String[] permits) {
+    public Boolean hasPermits(Long id, String[] permits) {
         return userRoleService.hasPermits(id, permits);
     }
 }

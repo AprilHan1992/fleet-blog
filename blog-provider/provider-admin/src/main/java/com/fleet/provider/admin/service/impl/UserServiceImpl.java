@@ -67,7 +67,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         }
         List<UserRole> userRoleList = user.getUserRoleList();
         if (userRoleList != null) {
-            List<Integer> roleIdList = userRoleService.roleIdList(user.getId());
+            List<Long> roleIdList = userRoleService.roleIdList(user.getId());
             for (UserRole userRole : userRoleList) {
                 if (roleIdList != null) {
                     roleIdList.remove(userRole.getRoleId());
@@ -76,7 +76,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
                 userRoleService.update(userRole);
             }
             if (roleIdList != null) {
-                for (Integer roleId : roleIdList) {
+                for (Long roleId : roleIdList) {
                     UserRole userRole = new UserRole();
                     userRole.setUserId(user.getId());
                     userRole.setRoleId(roleId);

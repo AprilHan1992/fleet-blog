@@ -10,12 +10,12 @@ public class UserDept extends Base {
     /**
      * 用户对应部门id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 用户id
      */
-    private Integer userId;
+    private Long userId;
 
     /**
      * 用户
@@ -25,7 +25,7 @@ public class UserDept extends Base {
     /**
      * 部门id
      */
-    private Integer deptId;
+    private Long deptId;
 
     private Dept dept;
 
@@ -34,19 +34,19 @@ public class UserDept extends Base {
      */
     private String identity;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -58,11 +58,11 @@ public class UserDept extends Base {
         this.user = user;
     }
 
-    public Integer getDeptId() {
+    public Long getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Integer deptId) {
+    public void setDeptId(Long deptId) {
         this.deptId = deptId;
     }
 

@@ -12,15 +12,15 @@ import java.util.List;
  */
 public interface UserRoleService extends BaseService<UserRole> {
 
-    List<Integer> roleIdList(Integer userId);
+    List<Long> roleIdList(Long userId);
 
-    List<Role> roleList(Integer userId);
+    List<Role> roleList(Long userId);
 
-    List<Menu> menuList(Integer userId);
+    List<Menu> menuList(Long userId);
 
-    List<String> permitList(Integer userId);
+    List<String> permitList(Long userId);
 
-    Boolean hasRoles(Integer userId, String[] roles);
+    Boolean hasRoles(Long userId, String[] roles);
 
-    Boolean hasPermits(Integer userId, String[] permits);
+    Boolean hasPermits(Long userId, String[] permits);
 }

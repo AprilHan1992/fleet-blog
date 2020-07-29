@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface ToService extends BaseService<To> {
 
-    List<Integer> toIdList(Integer msgId);
+    List<Integer> toIdList(Long msgId);
 }

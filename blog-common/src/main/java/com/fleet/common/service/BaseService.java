@@ -33,7 +33,7 @@ public interface BaseService<T> {
      * @param ids
      * @return
      */
-    Boolean deletes(Integer[] ids);
+    Boolean deletes(Long[] ids);
 
     /**
      * 修改

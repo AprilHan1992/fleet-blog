@@ -5,22 +5,25 @@ import com.fleet.common.service.BaseService;
 
 import java.util.List;
 
+/**
+ * @author April Han
+ */
 public interface DeptService extends BaseService<Dept> {
 
     /**
      * 获取所有 deptId 集合（包括）
      */
-    List<Integer> idList(Integer id);
+    List<Long> idList(Long id);
 
     /**
      * 根据级联名称查询子项id（包括带‘/’名称），查询出多个返回null
      */
-    Integer getId(String names);
+    Long getId(String names);
 
     /**
      * 查询级联名称
      */
-    String getNames(Integer id);
+    String getNames(Long id);
 
     List<Dept> buildTree(List<Dept> deptList);
 }

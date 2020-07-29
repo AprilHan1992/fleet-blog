@@ -53,7 +53,7 @@ public class QuartzUtil {
     /**
      * 删除定时任务
      */
-    public static void delete(Scheduler scheduler, Integer id) {
+    public static void delete(Scheduler scheduler, Long id) {
         try {
             JobKey jobKey = getJobKey(id);
             TriggerKey triggerKey = getTriggerKey(id);
@@ -115,7 +115,7 @@ public class QuartzUtil {
     /**
      * 更新定时任务 cron 表达式
      */
-    public static void update(Scheduler scheduler, Integer id, String cronExpression) {
+    public static void update(Scheduler scheduler, Long id, String cronExpression) {
         try {
             TriggerKey triggerKey = getTriggerKey(id);
             // 表达式调度构建器
@@ -133,7 +133,7 @@ public class QuartzUtil {
     /**
      * 立即执行定时任务
      */
-    public static void run(Scheduler scheduler, Integer id) {
+    public static void run(Scheduler scheduler, Long id) {
         try {
             JobKey jobKey = getJobKey(id);
             scheduler.triggerJob(jobKey);
@@ -145,7 +145,7 @@ public class QuartzUtil {
     /**
      * 暂停定时任务
      */
-    public static void pause(Scheduler scheduler, Integer id) {
+    public static void pause(Scheduler scheduler, Long id) {
         try {
             JobKey jobKey = getJobKey(id);
             TriggerKey triggerKey = getTriggerKey(id);
@@ -159,7 +159,7 @@ public class QuartzUtil {
     /**
      * 恢复定时任务
      */
-    public static void resume(Scheduler scheduler, Integer id) {
+    public static void resume(Scheduler scheduler, Long id) {
         try {
             JobKey jobKey = getJobKey(id);
             TriggerKey triggerKey = getTriggerKey(id);
@@ -197,21 +197,21 @@ public class QuartzUtil {
     /**
      * 获取 jobKey
      */
-    public static JobKey getJobKey(Integer id) {
+    public static JobKey getJobKey(Long id) {
         return new JobKey(JOB_KEY + id, JOB_GROUP);
     }
 
     /**
      * 获取触发器 key
      */
-    public static TriggerKey getTriggerKey(Integer id) {
+    public static TriggerKey getTriggerKey(Long id) {
         return new TriggerKey(TRIGGER_KEY + id, TRIGGER_GROUP);
     }
 
     /**
      * 获取表达式触发器
      */
-    public static CronTrigger getCronTrigger(Scheduler scheduler, Integer id) {
+    public static CronTrigger getCronTrigger(Scheduler scheduler, Long id) {
         try {
             return (CronTrigger) scheduler.getTrigger(getTriggerKey(id));
         } catch (SchedulerException e) {

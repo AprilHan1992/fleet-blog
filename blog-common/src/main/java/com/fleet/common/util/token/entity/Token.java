@@ -9,7 +9,7 @@ public class Token implements Serializable {
     /**
      * 用户id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * token
@@ -26,11 +26,11 @@ public class Token implements Serializable {
      */
     private Long expiresIn;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -13,15 +13,15 @@ public class RoleMenuControllerTests extends BaseTests {
     @Test
     public void insert() {
         RoleMenu roleMenu = new RoleMenu();
-        roleMenu.setRoleId(1);
-        roleMenu.setMenuId(1);
+        roleMenu.setRoleId(1L);
+        roleMenu.setMenuId(1L);
         super.post("/role/menu/insert", JSONObject.toJSONString(roleMenu));
     }
 
     @Test
     public void delete() {
         RoleMenu roleMenu = new RoleMenu();
-        roleMenu.setId(1);
+        roleMenu.setId(1L);
         super.post("/role/menu/delete", JSONObject.toJSONString(roleMenu));
     }
 
@@ -42,16 +42,16 @@ public class RoleMenuControllerTests extends BaseTests {
     @Test
     public void update() {
         RoleMenu roleMenu = new RoleMenu();
-        roleMenu.setId(1);
-        roleMenu.setRoleId(1);
-        roleMenu.setMenuId(1);
+        roleMenu.setId(1L);
+        roleMenu.setRoleId(1L);
+        roleMenu.setMenuId(1L);
         super.post("/role/menu/update", JSONObject.toJSONString(roleMenu));
     }
 
     @Test
     public void get1() {
         RoleMenu roleMenu = new RoleMenu();
-        roleMenu.setId(1);
+        roleMenu.setId(1L);
         super.post("/role/menu/get", JSONObject.toJSONString(roleMenu));
     }
 

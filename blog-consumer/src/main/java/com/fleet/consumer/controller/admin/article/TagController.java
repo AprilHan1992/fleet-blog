@@ -29,7 +29,7 @@ public class TagController extends BaseController<Tag> {
     }
 
     @GetMapping("/get")
-    public R get(@RequestParam("id") Integer id) {
+    public R get(@RequestParam("id") Long id) {
         Tag tag = new Tag();
         tag.setId(id);
         return get(tag);
